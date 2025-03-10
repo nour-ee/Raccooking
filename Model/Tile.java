@@ -1,6 +1,6 @@
 package Model;
 
-public class Case {
+public class Tile {
 
     /****************
      *  ATTRIBUTES  *
@@ -35,14 +35,14 @@ public class Case {
      *************************************/
 
     //Par défaut : une case traversable
-    public Case(int x, int y) {
+    public Tile(int x, int y) {
         this.traversable = true;
         this.pain = false;
         this.x = x; this.y = y;
     }
 
     //A voir si on change la surcharge ou pas idk
-    public Case(int x, int y, boolean traversable, boolean pain) {
+    public Tile(int x, int y, boolean traversable, boolean pain) {
         this.traversable = traversable;
         this.pain = pain;
         this.x = x; this.y = y;
