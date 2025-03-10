@@ -12,6 +12,7 @@ public class Bakery {
     *  CONSTANTS   *
     ****************/
     public static final int SIZE = 8; //size of the grid
+    public static final int NB_RACCOONS = 5; //number of raccoons
 
 
     private Tile[][] carte;
@@ -45,6 +46,12 @@ public class Bakery {
         }
         //Initialisation of the player, placed for the moment at (0,0) i.e the top left corner
         this.joueur = new Baker(carte[0][0]);
+        //Initialisation of the raccoons
+        this.raccoons = new Raccoon[NB_RACCOONS];
+        for(int i = 0; i<NB_RACCOONS; i++){
+            raccoons[i] = new Raccoon(carte[7][7], this);
+            raccoons[i].setAge(i);
+        }
     }
 
 
