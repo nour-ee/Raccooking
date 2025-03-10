@@ -19,12 +19,13 @@ public class Baker extends Entity {
      ****************/
     public Tile getPosition() { return position; }
     public int getMoney() { return money; }
+    public int getSoldBread(){ return soldBread; }
 
     /********************
      *    CONSTRUCTOR   *
      ********************/
     public Baker(Tile c){
-        this.position = c; this.money = 0;
+        this.position = c; this.money = 50;
         this.ressources = new int[4];
         this.soldBread = 0;
     }

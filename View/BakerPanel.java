@@ -1,6 +1,8 @@
 package View;
 
 import Controller.BakerControl;
+import Model.Baker;
+import Model.Bakery;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,17 +10,21 @@ import java.awt.*;
 
 /** Manage interaction with the baker panel */
 public class BakerPanel extends JPanel {
-    private BakerControl bakerControl;
+    private BakerControl bakerControl; // manage buttons actions
+
+    private JLabel moneyLabel;
+    private JLabel breadLabel;
+
 
     public static final int HEIGHT = 600;
     public static final int WIDTH = 300;
 
     public static final int BUTTON_HEIGHT = 50;
     public static final int BUTTON_WIDTH = 200;
-    public static final String[] RESSOURCES = {"Flour", "Egg", "Baker's yeast", "Butter"};
+    public static final String[] RESSOURCES = {"flour", "egg", "yeast", "butter"};
 
-    public BakerPanel() {
-        this.bakerControl = new BakerControl(this);
+    public BakerPanel(Bakery bakery) {
+        this.bakerControl = new BakerControl(this,bakery);
         this.setLayout(new BorderLayout());
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.setBackground(new Color( 182, 179, 175 ));
@@ -43,7 +49,7 @@ public class BakerPanel extends JPanel {
     }
 
     // private methods to create the ressources panel and the buttons panel
-    private void createRessourcesPanel() {
+    public void createRessourcesPanel() {
         // === Panel ressources ===
         JPanel ressourcesPanel = new JPanel();
         ressourcesPanel.setLayout(new GridBagLayout());
@@ -52,14 +58,15 @@ public class BakerPanel extends JPanel {
         GridBagConstraints gbc2 = new GridBagConstraints();
 
         // money label
-        JLabel moneyLabel = new JLabel("Money: 1000$");
+        moneyLabel = new JLabel("Money:  " + bakerControl.getBakery().getPlayer().getMoney()+"$");
+        System.out.println(bakerControl.getBakery().getPlayer().getMoney());
         gbc2.gridx = 0;
         gbc2.gridy = 0;
         gbc2.insets = new Insets(2, 2, 10, 10);
         ressourcesPanel.add(moneyLabel, gbc2);
 
         // bread label
-        JLabel breadLabel = new JLabel("Bread: 50");
+        breadLabel = new JLabel("Bread: 50");
         gbc2.gridx = 0;
         gbc2.gridy = 1;
         gbc2.insets = new Insets(2, 2, 10, 10);
@@ -95,5 +102,9 @@ public class BakerPanel extends JPanel {
 
         // Add the buttonPanel to the Bakerpanel
         this.add(buttonPanel, BorderLayout.SOUTH);
+    }
+    public void update(){
+        moneyLabel.setText("Money:  " + bakerControl.getBakery().getPlayer().getMoney()+"$");
+        //breadLabel.setText("Bread: " + bakerControl.getBakery().getPlayer().getSoldBread());
     }
 }

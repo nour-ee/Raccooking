@@ -18,6 +18,9 @@ public class Bakery {
     //private Raccoon array raccoons
     private int lostBread; // number of breads stolen by raccoons
 
+    public static final int BAKERY_H = 10;
+    public static final int BAKERY_W = 10;
+
     /****************
      *    GETTERS   *
      ****************/
@@ -31,7 +34,7 @@ public class Bakery {
     public Bakery(){
         //Pour l'instant, on crée une carte de 5x5 avec un joueur en haut à gauche
         // CHANGER POUR PLUS TARD MAIS LA JE VEUX PAS QUE CA FASSE DES ERREURS
-        this.map = new Tile[5][5];
+        this.map = new Tile[BAKERY_H][BAKERY_W];
         for (int i = 0; i < 5; i++){
             for (int j = 0; j < 5; j++){
                 this.map[i][j] = new Tile(i, j);
