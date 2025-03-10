@@ -56,7 +56,7 @@ public class Display extends JFrame {
         ImageIcon scaledRaccoonIcon = new ImageIcon(scaledImageRaccoon);
         raccoonLabel = new JLabel(scaledRaccoonIcon);
         add(raccoonLabel, BorderLayout.CENTER);
-        raccoonLabel.setLocation(coord(bakery.getRaccoon().getX(), bakery.getRaccoon().getY()));
+        //raccoonLabel.setLocation(coord(bakery.getRaccoon().getX(), bakery.getRaccoon().getY()));
 
 
         // Manage interaction with bakery elements
