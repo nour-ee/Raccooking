@@ -12,16 +12,17 @@ public class Bakery {
     /****************
      *  ATTRIBUTES  *
      ****************/
-    private Tile[][] carte;
-    private Player joueur;
+    private Tile[][] map;
+    private Player player;
 
     //private Raccoon array raccoons
+    private int lostBread; // number of breads stolen by raccoons
 
     /****************
      *    GETTERS   *
      ****************/
-    public Tile[][] getCarte() { return carte; }
-    public Player getJoueur() { return joueur; }
+    public Tile[][] getMap() { return map; }
+    public Player getPlayer() { return player; }
 
     /********************
      *    CONSTRUCTOR   *
@@ -30,13 +31,13 @@ public class Bakery {
     public Bakery(){
         //Pour l'instant, on crée une carte de 5x5 avec un joueur en haut à gauche
         // CHANGER POUR PLUS TARD MAIS LA JE VEUX PAS QUE CA FASSE DES ERREURS
-        this.carte = new Tile[5][5];
+        this.map = new Tile[5][5];
         for (int i = 0; i < 5; i++){
             for (int j = 0; j < 5; j++){
-                this.carte[i][j] = new Tile(i, j);
+                this.map[i][j] = new Tile(i, j);
             }
         }
-        this.joueur = new Player(carte[0][0]);
+        this.player = new Player(map[0][0]);
     }
 
 }
