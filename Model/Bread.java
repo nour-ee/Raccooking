@@ -23,13 +23,7 @@ public class Bread {
         cooking.start();
     }
 
-    public void changeState(){
-        if (state == State.COOKING){
-            state = State.COOKED;
-        } else if (state == State.COOKED){
-            state = State.BURNT;
-        }
-    }
+    public void setState(State s){ state = s;}
 
     public State getState() {
         return state;
