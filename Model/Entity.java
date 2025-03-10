@@ -7,5 +7,5 @@ package Model;
  */
 abstract class Entity {
     Tile position;
-    public abstract void move(Tile t);
+    public abstract void move(Tile T);
 }

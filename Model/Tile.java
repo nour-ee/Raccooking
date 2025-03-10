@@ -6,47 +6,43 @@ public class Tile {
      *  ATTRIBUTES  *
      ****************/
 
-    //Pour stocker les coordonnées de la case
-    private int x;
-    private int y;
+    //Indicates the indexes of the tile in its array 
+    protected int x;
+    protected int y;
 
-    private boolean traversable; //indique si la case est traversable (donc ni mur ni table)
-    private boolean pain;        //indique si la case contient un pain (pour le prendre et le vendre)
-    //ça c'était juste pour mes tests individuels, je sais pas si on va le garder
-    //à tous les coups ça dégage mais just in case i'm keeping it its not that hard to delete anw
-
+    protected boolean accesible; //indicates if the tile is traversable/accesible
+    protected boolean hasBaker; //indicates if the tile has a baker on it
+    protected boolean hasRacoon; //indicates if the tile has a racoon on it
 
     /*************************************
      *              GETTERS
      *************************************/
-    public boolean isTraversable(){ return this.traversable; }
-    public boolean isPain() { return pain; }
+    public boolean isAccessible(){ return this.accesible; }
     public int getX() { return x; }
     public int getY() { return y; }
+
+    public boolean hasBaker() { return hasBaker; }
+    public boolean hasRacoon() { return hasRacoon;}
 
     /*************************************
      *              SETTERS
      *************************************/
-    public void setTraversable(boolean traversable) { this.traversable = traversable; }
-    public void setPain(boolean pain) { this.pain = pain; }
+    public void setTraversable(boolean traversable) { this.accesible = traversable; }
+    public void BakerArrived() { this.hasBaker = true; }
+    public void BakerLeft() { this.hasBaker = false; }
+    public void RacoonArrived() { this.hasRacoon = true; }
+    public void RacoonLeft() { this.hasRacoon = false; }
 
     /*************************************
      *              CONSTRUCTORS
      *************************************/
 
-    //Par défaut : une case traversable
+    //By default, a tile is accessible
     public Tile(int x, int y) {
-        this.traversable = true;
-        this.pain = false;
+        this.accesible = true;
+        this.hasBaker = false;
+        this.hasRacoon = false;
         this.x = x; this.y = y;
     }
-
-    //A voir si on change la surcharge ou pas idk
-    public Tile(int x, int y, boolean traversable, boolean pain) {
-        this.traversable = traversable;
-        this.pain = pain;
-        this.x = x; this.y = y;
-    }
-
 
 }
