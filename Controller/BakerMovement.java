@@ -12,11 +12,11 @@ import Model.Bakery;
  *
  * RETAPER EN PLUS JOLI LA C'EST MOCHE MAIS JE SUIS CREVEE FLEMME
  */
-public class PlayerMovement implements KeyListener {
+public class BakerMovement implements KeyListener {
 
     private Bakery bakery;
 
-    public PlayerMovement(Bakery m) {
+    public BakerMovement(Bakery m) {
         bakery = m;
     }
 
