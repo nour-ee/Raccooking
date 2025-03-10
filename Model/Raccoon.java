@@ -11,9 +11,6 @@ public class Raccoon extends Entity {
     public int getAge() {
         return age;
     }
-    public void increment(){
-        age ++;
-    }
 
     /********************
     *    CONSTRUCTOR   *
@@ -38,6 +35,13 @@ public class Raccoon extends Entity {
         this.position = c;
         this.position.RacoonArrived();
     }
+
+    /**
+     * Method that increments the age of the raccoon (i.e the number of move it has done)
+     */
+    public void increment(){
+        this.age++;
+    }   
 
     /** 
      * Function that returns the tile to which the raccoon will move

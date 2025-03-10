@@ -111,4 +111,17 @@ public class Bakery {
         }
         return t;
     }
+
+
+    /**
+     * Method that goes through the raccoons checks if any have died (age>20)
+     * if yes they are removed from the array and replaced by a new raccoon
+     */
+    public void checkRaccoons(){
+        for(int i = 0; i<raccoons.length; i++){
+            if(raccoons[i].getAge() > 20){
+                raccoons[i] = new Raccoon(carte[7][7], this);
+            }
+        }
+    }
 }
