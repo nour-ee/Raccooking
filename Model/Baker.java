@@ -39,7 +39,9 @@ public class Baker extends Entity {
      */
     public void move(Tile c){
         if(c.isAccessible()){
+            this.position.BakerLeft();
             this.position = c;
+            this.position.BakerArrived();
             System.out.println("Position du joueur : "+position.getX()+" "+position.getY());
     
         }

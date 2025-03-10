@@ -29,15 +29,17 @@ public class Raccoon extends Entity {
     ********************/
 
 
-    /*
+    /**
      * Method that changes the position of the raccoon
      * @param c the tile to move to
      */
     public void move(Tile c){
+        this.position.RacoonLeft();
         this.position = c;
+        this.position.RacoonArrived();
     }
 
-    /* 
+    /** 
      * Function that returns the tile to which the raccoon will move
      */
     public Tile nextMove(){
