@@ -39,15 +39,20 @@ public class Baker extends Entity {
      * @param c the tile to move to
      */
     public void move(Tile c){
-        if(c.isTraversable()){
+        if(c.isAccessible()){
+            this.position.BakerLeft();
             this.position = c;
+            this.position.BakerArrived();
             System.out.println("Position du joueur : "+position.getX()+" "+position.getY());
-            if(c.isPain()){
-                c.setPain(false);
-                money += 10;
-                System.out.println("Argent du joueur : "+ money);
-            }
+    
         }
+    }
+
+     /*
+     * Method that increments breads sold
+     */
+    public void sellBread(){
+        soldBread++;
     }
 
     /**
