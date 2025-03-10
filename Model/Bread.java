@@ -7,12 +7,18 @@ public class Bread {
         COOKING, COOKED, BURNT
     }
     private State state ;
+
     private Cooking cooking;
+
+    private int time;
+    public static final int COOKED=100;
+    public static final int BURNT=150;
 
     public static final int PRICE = 20;
 
     public Bread() {
         this.state = State.COOKING;
+        time=0;
         cooking= new Cooking(this);
         cooking.start();
     }
@@ -30,8 +36,10 @@ public class Bread {
     }
 
     public int getTime() {
-        return cooking.getTime();
+        return time;
     }
+
+    public void incrTime(){time++;}
 
     public boolean isCooked(){return state== State.COOKED;}
 

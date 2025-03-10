@@ -4,6 +4,9 @@ package Model;
 import java.awt.*;
 import java.util.ArrayList;
 
+import static Model.Bread.BURNT;
+import static Model.Bread.COOKED;
+
 public class Cooking extends Thread{
     private Bread bread;
 
@@ -11,40 +14,28 @@ public class Cooking extends Thread{
         this.bread = b;
     }
 
-    private int time ;
-
-    public static final int COOKED=100;
-    public static final int BURNT=150;
-
-    public int getTime() {
-        return time;
-    }
 
     @Override
     public void run() {
-        while (time<=BURNT) {
+        while (bread.getTime()<=BURNT) {
             try {
                 Thread.sleep(100);
             } catch (Exception e) {
 
             }
-            if (time == 0) {
+            if (bread.getTime() == 0) {
                 System.out.println("Bread is cooking");}
-            if (time == COOKED) {
+            if (bread.getTime() == COOKED) {
                 bread.changeState();
                 System.out.println("Bread is cooked");
-            } else if (time == BURNT) {
+            } else if (bread.getTime() == BURNT) {
                 bread.changeState();
                 System.out.println("Bread is burnt");
             }
-            time++;
+            bread.incrTime();
         }
     }
 
-    public Bread getBread() {
-        return bread;
-    }
 
 
 }
-
