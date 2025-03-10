@@ -19,7 +19,7 @@ public class Baker extends Entity {
      ****************/
     public Tile getPosition() { return position; }
     public int getMoney() { return money; }
-    public int getSoldBread(){ return soldBread; }
+    public int getSoldBread() { return soldBread; }
 
     /********************
      *    CONSTRUCTOR   *

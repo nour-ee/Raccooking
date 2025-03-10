@@ -13,6 +13,8 @@ public class Bakery {
     ****************/
     public static final int SIZE = 8; //size of the grid
     public static final int NB_RACCOONS = 5; //number of raccoons
+    public static final int BAKERY_H = 10;
+    public static final int BAKERY_W = 10;
 
 
     private Tile[][] carte;
@@ -32,9 +34,9 @@ public class Bakery {
 
     public Bakery(){
         // Initialisation of the bakery
-        this.carte = new Tile[SIZE][SIZE];
-        for (int i = 0; i < SIZE; i++){
-            for (int j = 0; j < SIZE; j++){
+        this.carte = new Tile[BAKERY_H][BAKERY_W];
+        for (int i = 0; i < BAKERY_H; i++){
+            for (int j = 0; j < BAKERY_W; j++){
                 //Ovens are placed betwen (0,0) and (0,5) as well as (3,0) and (3,5)
                 if(i==0 || i==3){
                     if(j<6){
@@ -49,7 +51,7 @@ public class Bakery {
         //Initialisation of the raccoons
         this.raccoons = new Raccoon[NB_RACCOONS];
         for(int i = 0; i<NB_RACCOONS; i++){
-            raccoons[i] = new Raccoon(carte[7][7], this);
+            raccoons[i] = new Raccoon(carte[BAKERY_H-1][BAKERY_W-1], this);
             raccoons[i].setAge(i);
         }
     }
