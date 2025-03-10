@@ -13,7 +13,7 @@ public class Bakery {
      *  ATTRIBUTES  *
      ****************/
     private Tile[][] map;
-    private Player player;
+    private Baker player;
 
     //private Raccoon array raccoons
     private int lostBread; // number of breads stolen by raccoons
@@ -22,7 +22,7 @@ public class Bakery {
      *    GETTERS   *
      ****************/
     public Tile[][] getMap() { return map; }
-    public Player getPlayer() { return player; }
+    public Baker getPlayer() { return player; }
 
     /********************
      *    CONSTRUCTOR   *
@@ -37,7 +37,7 @@ public class Bakery {
                 this.map[i][j] = new Tile(i, j);
             }
         }
-        this.player = new Player(map[0][0]);
+        this.player = new Baker(map[0][0]);
     }
 
 }

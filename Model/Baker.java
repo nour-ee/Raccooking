@@ -4,13 +4,13 @@ package Model;
  * Classe Joueur : à voir si elle hérite d'une classe Entité ou pas
  * Le joueur connait sa position actuelle, il est posé sur une carte
  */
-public class Player extends Entity {
+public class Baker extends Entity {
     private int money; // current money of the player
     //TO DO : array with ingredients inventory
     private int[] ressources; //0 flour, 1 egg, 2 yeast, 3 butter
     private int soldBread; // number of breads sold
 
-    public Player(Tile c){
+    public Baker(Tile c){
         this.position = c; this.money = 0;
     }
 
