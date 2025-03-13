@@ -60,7 +60,7 @@ public class RaccoonPanel extends JPanel {
 
         // Progress bar
         progressBar = new JProgressBar();
-        progressBar.setPreferredSize(new Dimension(150, 20)); // Ajustez la taille selon vos besoins
+        progressBar.setPreferredSize(new Dimension(150, 20));
         progressBar.setValue(100); // Valeur initiale
         timeLabel.add(progressBar);
 

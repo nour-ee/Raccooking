@@ -18,9 +18,8 @@ public class Display extends JFrame {
     private Bakery bakery ;
 
     private JLabel bakerLabel;
-    //private JLabel raccoonLabel;
-
     private ArrayList<JLabel> raccoonLabels = new ArrayList<JLabel>();
+    private ArrayList<RaccoonPanel> raccoonPanels = new ArrayList<RaccoonPanel>();
     public static final int FRAME_H = Bakery.BAKERY_H*TILE_SIZE + 2*MARGIN;
     public static final int FRAME_W = Bakery.BAKERY_W*TILE_SIZE + 2*MARGIN;
     public Display() {
@@ -46,20 +45,20 @@ public class Display extends JFrame {
         bakerLabel = new JLabel(scaledBakerIcon);
         bakerLabel.setBounds(coord(bakery.getPlayer().getPosition().getX(), bakery.getPlayer().getPosition().getY()).x, coord(bakery.getPlayer().getPosition().getX(), bakery.getPlayer().getPosition().getY()).y, newWidth, newHeight);
         add(bakerLabel);
+
         // Add the RaccoonPanel to the Bakery frame
         rcPanel = new RaccoonPanel();
         rcPanel.setVisible(false);
 
+        // Manage interaction with bakery elements
+        entityControl = new EntityControl(rcPanel, bkPanel, this);
 
         //Add raccoons to the Bakery frame
         placeRaccoons();
 
-        // Manage interaction with bakery elements
-        entityControl = new EntityControl(rcPanel, bkPanel, this);
+
         // bakerpanel appears on the right when I click on bakerlabel
         bakerLabel.addMouseListener(entityControl);
-        // raccoonpanel appears on the right when I click on raccoonlabel
-        //raccoonLabel.addMouseListener(entityControl);
 
         //set frame visible
         setVisible(true);
@@ -71,9 +70,6 @@ public class Display extends JFrame {
     public JLabel getBakerLabel() {
         return bakerLabel;
     }
-    /*public JLabel getRaccoonLabel() {
-        return raccoonLabel;
-    }*/
 
 
     public BakerPanel getBakerPanel() {
@@ -102,9 +98,18 @@ public class Display extends JFrame {
 
             JLabel raccoonLabel = new JLabel(scaledRaccoonIcon);
             raccoonLabel.setBounds(coord(x, y).x, coord(x, y).y, newWidth, newHeight);
+
+            //create raccoon panel for each raccoon
+            RaccoonPanel raccoonPanel = new RaccoonPanel();
+            raccoonPanel.setVisible(false);
+
+            // raccoonpanel appears on the right when I click on raccoonlabel
             raccoonLabel.addMouseListener(entityControl);
+
             raccoonLabels.add(raccoonLabel);
+            raccoonPanels.add(raccoonPanel);
             add(raccoonLabel);
+            add(raccoonPanel);
         }
     }
 }

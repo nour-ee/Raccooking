@@ -1,12 +1,15 @@
 package Model;
 
 
+import java.util.Collection;
+
 public class Raccoon extends Entity {
     /****************
      *  ATTRIBUTES  *
      ****************/
     private Bakery map ;
     private int age = 0; // correspons to the life of the raccoon
+    private int nb_bread; // number of bread stolen by the raccoon
 
     public int getAge() {
         return age;
@@ -18,6 +21,7 @@ public class Raccoon extends Entity {
     public Tile getPosition() {
         return position;
     }
+    public int getBread() { return nb_bread;}
     /********************
     *    CONSTRUCTOR   *
     ********************/
@@ -25,6 +29,7 @@ public class Raccoon extends Entity {
         this.position = c;
         this.age = 0;
         this.map = b;
+        this.nb_bread = 0;
     }
 
     /********************
@@ -61,6 +66,7 @@ public class Raccoon extends Entity {
             return map.randomNeighbour(position);
         }
     }
+
 
 
 }
