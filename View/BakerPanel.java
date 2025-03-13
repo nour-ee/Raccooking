@@ -99,6 +99,12 @@ public class BakerPanel extends JPanel {
         buyButton.addActionListener(bakerControl);
         buttonPanel.add(buyButton, gbc);
 
+        JButton AddButton = new JButton("Add Bread");
+        AddButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        gbc.gridy++;
+        AddButton.addActionListener(bakerControl);
+        buttonPanel.add(AddButton, gbc);
+
 
         // Add the buttonPanel to the Bakerpanel
         this.add(buttonPanel, BorderLayout.SOUTH);

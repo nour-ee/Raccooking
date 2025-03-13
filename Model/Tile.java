@@ -24,7 +24,8 @@ public class Tile {
 
     public boolean hasBaker() { return hasBaker; }
     public boolean hasRacoon() { return hasRacoon;}
-    public boolean hasOven() { return hasOven; }
+    public boolean hasOven() { //if(hasOven){System.out.println("oven found");}
+        return hasOven; }
 
     /*************************************
      *              SETTERS

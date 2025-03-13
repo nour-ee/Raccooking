@@ -1,11 +1,14 @@
 package Controller;
 
+import Model.Baker;
 import Model.Bakery;
+import Model.Oven;
 import View.BakerPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Optional;
 
 /** Control the baker panel in particular buttons */
 public class BakerControl implements ActionListener {
@@ -35,6 +38,23 @@ public class BakerControl implements ActionListener {
                 bakery.getPlayer().buy(input);
                 System.out.println("Money: " + bakery.getPlayer().getMoney());
                 ;break;}
+            case "Add Bread" -> {System.out.println("Add Bread");
+                Baker b= bakery.getPlayer();
+                if(b.canBake()){
+                    Optional<Oven> o= bakery.hasFreeOven();
+                    if(o.isPresent()){
+                        o.get().addBread();
+                    }
+                    else{
+                        System.out.println("No free oven");
+                    }
+                    b.spendRessources();
+
+                }
+                else{
+                    System.out.println("Not enough ressources to bake bread");
+                }
+                break;}
         }
 
     }

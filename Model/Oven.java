@@ -33,8 +33,20 @@ public class Oven extends Tile {
     public Oven(int x, int y) {
         super(x, y);
         this.accesible = false;
-        this.occupied = false;
+        this.occupied = true;
+        this.bread = new Bread(); //TODO : change this to null quand on en aura plus besoin
+        this.hasOven=true;
+        //System.out.println("Oven created at (" + x + ", " + y + ")"+hasOven+hasOven());
+    }
+
+    public void removeBread(){
         this.bread = null;
+        this.occupied = false;
+    }
+
+    public void addBread(){
+        this.bread = new Bread();
+        this.occupied = true;
     }
 
 }

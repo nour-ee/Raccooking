@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.Optional;
+
 /**
  * Classe qui représente la boulangerie
  * aka la carte du jeu :
@@ -17,14 +19,14 @@ public class Bakery {
     public static final int BAKERY_W = 10;
 
 
-    private Tile[][] carte;
+    private Tile[][] map;
     private Baker joueur;
     private Raccoon[] raccoons;
 
     /****************
      *    GETTERS   *
      ****************/
-    public Tile[][] getCarte() { return carte; }
+    public Tile[][] getMap() { return map; }
     public Baker getPlayer() { return joueur; }
     public Raccoon[] getRaccoons() { return raccoons; }
 
@@ -34,28 +36,37 @@ public class Bakery {
 
     public Bakery(){
         // Initialisation of the bakery
-        this.carte = new Tile[BAKERY_W][BAKERY_H];
+        this.map = new Tile[BAKERY_H][BAKERY_W];
         for (int i = 0; i < BAKERY_H; i++){
             for (int j = 0; j < BAKERY_W; j++){
                 //Ovens are placed betwen (0,0) and (0,5) as well as (3,0) and (3,5)
                 if(i==0 || i==3){
                     if(j<6){
-                        this.carte[i][j] = new Oven(i, j);
+                        this.map[i][j] = new Oven(j,i);
                     }
+                    else this.map[i][j] = new Tile(j, i);
                 }
-                this.carte[i][j] = new Tile(i, j);
+                else this.map[i][j] = new Tile(j, i);
+
             }
         }
         //Initialisation of the player, placed for the moment at (0,0) i.e the top left corner
-        this.joueur = new Baker(carte[0][0]);
+        this.joueur = new Baker(map[0][0]);
         //Initialisation of the raccoons
         this.raccoons = new Raccoon[NB_RACCOONS];
         for(int i = 0; i<NB_RACCOONS; i++){
             //raccoons[i] = new Raccoon(carte[BAKERY_H-1][BAKERY_W-1], this); //ils sont tous au même endroit ???
             //proposition de placement des raccoons pour tester leur affichage
             int p = (int)(Math.random()*5);
-            raccoons[i] = new Raccoon(carte[i+p][i+1], this);
+            raccoons[i] = new Raccoon(map[i+p][i+1], this);
             raccoons[i].setAge(i);
+        }
+
+        for (Tile[] lig : map) {
+            for (Tile t : lig) {
+                System.out.print(t.hasOven() + " ");
+            }
+            System.out.println();
         }
     }
 
@@ -67,8 +78,8 @@ public class Bakery {
     public Oven OvenEmpty(){
         for (int i = 0; i < 4; i+=3){
             for (int j = 0; j < 6; j++){
-                if(carte[i][j] instanceof Oven){
-                    Oven o = (Oven)carte[i][j];
+                if(map[i][j] instanceof Oven){
+                    Oven o = (Oven) map[i][j];
                     if(o.isOccupied()){
                         return o;
                     }
@@ -91,8 +102,8 @@ public class Bakery {
         Oven oven = null;
         for (int i = 0; i < 4; i+=3){
             for (int j = 0; j < 6; j++){
-                if(carte[i][j] instanceof Oven){
-                    Oven o = (Oven)carte[i][j];
+                if(map[i][j] instanceof Oven){
+                    Oven o = (Oven) map[i][j];
                     if(o.isOccupied() && o.getBread().isCooked()){
                         int dist = Math.abs(x-i) + Math.abs(y-j);
                         if(dist < min){
@@ -116,8 +127,8 @@ public class Bakery {
         int y = t.getY();
         for(int i = -1; i<2 ;i++){
             for(int j=-1; j<2; j++){
-                if(x+i<8 && y+j<8 && carte[(x+i)][(y+j)].isAccessible()){
-                    return carte[(x+i)][(y+j)];
+                if(x+i<8 && y+j<8 && map[(x+i)][(y+j)].isAccessible()){
+                    return map[(x+i)][(y+j)];
                 }
             }
         }
@@ -132,8 +143,22 @@ public class Bakery {
     public void checkRaccoons(){
         for(int i = 0; i<raccoons.length; i++){
             if(raccoons[i].getAge() > 20){
-                raccoons[i] = new Raccoon(carte[7][7], this);
+                raccoons[i] = new Raccoon(map[7][7], this);
             }
         }
+    }
+
+    public Optional<Oven> hasFreeOven(){
+        for (int i = 0; i < 4; i+=3){
+            for (int j = 0; j < 6; j++){
+                if(map[i][j] instanceof Oven){
+                    Oven o = (Oven) map[i][j];
+                    if(!o.isOccupied()){
+                        return Optional.of(o);
+                    }
+                }
+            }
+        }
+        return Optional.empty();
     }
 }

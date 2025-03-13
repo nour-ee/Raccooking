@@ -71,5 +71,13 @@ public class Baker extends Entity {
         }
     }
 
+    public boolean canBake(){
+        return ressources[0] > 0 && ressources[1] > 0 && ressources[2] > 0 && ressources[3] > 0;
+    }
+
+    public void spendRessources(){
+        ressources[0]--; ressources[1]--; ressources[2]--; ressources[3]--;
+    }
+
 
 }

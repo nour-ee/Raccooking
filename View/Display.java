@@ -114,14 +114,14 @@ public class Display extends JFrame {
     }
 
         private void placeBread(){
-            Tile[][] map = bakery.getCarte();
-            for (int i = 0; i < Bakery.BAKERY_W; i++) {
-                for (int j = 0; j < Bakery.BAKERY_H; j++) {
+            Tile[][] map = bakery.getMap();
+            for (int i = 0; i < Bakery.BAKERY_H; i++) {
+                for (int j = 0; j < Bakery.BAKERY_W; j++) {
                     if (map[i][j].hasOven()) {
                         Oven o = (Oven) map[i][j];
                         if (o.isOccupied()) {
                             Bread b = o.getBread();
-                            if (b.isCooked()) {
+                            if (true) { //il y avait b.isCooked() avant ici mais c'est pas très logique donc en attendant
                                 ImageIcon breadIcon = new ImageIcon(getClass().getResource("/img/bread.png"));
                                 int newWidth = TILE_SIZE;
                                 int newHeight = TILE_SIZE;
@@ -129,7 +129,8 @@ public class Display extends JFrame {
                                 ImageIcon scaledBreadIcon = new ImageIcon(scaledImage);
 
                                 JLabel breadLabel = new JLabel(scaledBreadIcon);
-                                breadLabel.setBounds(coord(i, j).x, coord(i, j).y, newWidth, newHeight);
+                                Point coord = coord(o.getX(),o.getY());
+                                breadLabel.setBounds(coord.x, coord.y, newWidth, newHeight);
                                 add(breadLabel);
                             }
                         }
