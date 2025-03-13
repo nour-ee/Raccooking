@@ -13,6 +13,7 @@ public class Tile {
     protected boolean accesible; //indicates if the tile is traversable/accesible
     protected boolean hasBaker; //indicates if the tile has a baker on it
     protected boolean hasRacoon; //indicates if the tile has a racoon on it
+    protected boolean hasOven; //indicates if the tile has a bread on it
 
     /*************************************
      *              GETTERS
@@ -23,6 +24,7 @@ public class Tile {
 
     public boolean hasBaker() { return hasBaker; }
     public boolean hasRacoon() { return hasRacoon;}
+    public boolean hasOven() { return hasOven; }
 
     /*************************************
      *              SETTERS
@@ -42,6 +44,7 @@ public class Tile {
         this.accesible = true;
         this.hasBaker = false;
         this.hasRacoon = false;
+        this.hasOven = false;
         this.x = x; this.y = y;
     }
 

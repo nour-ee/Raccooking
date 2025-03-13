@@ -1,7 +1,6 @@
 package View;
 import Controller.EntityControl;
-import Model.Bakery;
-import Model.Raccoon;
+import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -59,6 +58,7 @@ public class Display extends JFrame {
 
         // bakerpanel appears on the right when I click on bakerlabel
         bakerLabel.addMouseListener(entityControl);
+        placeBread();
 
         //set frame visible
         setVisible(true);
@@ -110,6 +110,31 @@ public class Display extends JFrame {
             raccoonPanels.add(raccoonPanel);
             add(raccoonLabel);
             add(raccoonPanel);
+        }
+    }
+
+        private void placeBread(){
+            Tile[][] map = bakery.getCarte();
+            for (int i = 0; i < Bakery.BAKERY_W; i++) {
+                for (int j = 0; j < Bakery.BAKERY_H; j++) {
+                    if (map[i][j].hasOven()) {
+                        Oven o = (Oven) map[i][j];
+                        if (o.isOccupied()) {
+                            Bread b = o.getBread();
+                            if (b.isCooked()) {
+                                ImageIcon breadIcon = new ImageIcon(getClass().getResource("/img/bread.png"));
+                                int newWidth = TILE_SIZE;
+                                int newHeight = TILE_SIZE;
+                                Image scaledImage = breadIcon.getImage().getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+                                ImageIcon scaledBreadIcon = new ImageIcon(scaledImage);
+
+                                JLabel breadLabel = new JLabel(scaledBreadIcon);
+                                breadLabel.setBounds(coord(i, j).x, coord(i, j).y, newWidth, newHeight);
+                                add(breadLabel);
+                            }
+                        }
+                    }
+                }
         }
     }
 }

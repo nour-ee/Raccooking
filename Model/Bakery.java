@@ -34,7 +34,7 @@ public class Bakery {
 
     public Bakery(){
         // Initialisation of the bakery
-        this.carte = new Tile[BAKERY_H][BAKERY_W];
+        this.carte = new Tile[BAKERY_W][BAKERY_H];
         for (int i = 0; i < BAKERY_H; i++){
             for (int j = 0; j < BAKERY_W; j++){
                 //Ovens are placed betwen (0,0) and (0,5) as well as (3,0) and (3,5)
