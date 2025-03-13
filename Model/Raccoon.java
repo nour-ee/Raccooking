@@ -15,6 +15,9 @@ public class Raccoon extends Entity {
         this.age = age;
     }
 
+    public Tile getPosition() {
+        return position;
+    }
     /********************
     *    CONSTRUCTOR   *
     ********************/

@@ -4,9 +4,9 @@ import View.Display;
 import View.RaccoonPanel;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 /** Control the visibility of panel entities  */
 public class EntityControl extends MouseAdapter {
@@ -25,18 +25,24 @@ public class EntityControl extends MouseAdapter {
     public void mouseClicked(MouseEvent e) {
         Object source = e.getSource();
         JLabel bakerLabel = display.getBakerLabel();
-        JLabel raccoonLabel = display.getRaccoonLabel();
+        ArrayList<JLabel> raccoonLabels = display.getRaccoonLabels();
 
         if (source == bakerLabel) { // Verify if the click comes from the baker label
             System.out.println("Baker clicked!");
             rcPanel.setVisible(false);
-            display.add(bkPanel, BorderLayout.EAST);
+            bkPanel.setBounds(Display.FRAME_W, 0, BakerPanel.WIDTH, BakerPanel.HEIGHT); // Position the panel off-screen to the right
+            display.add(bkPanel);
             bkPanel.setVisible(true);
-        } else if (source == raccoonLabel) { // Verify if the click comes from the raccoon label
-            System.out.println("Raccoon clicked!");
-            bkPanel.setVisible(false);
-            display.add(rcPanel, BorderLayout.EAST);
-            rcPanel.setVisible(true);
+        } else {
+            for(JLabel raccoonLabel : raccoonLabels) {
+                if (source == raccoonLabel) { // Verify if the click comes from the raccoon label
+                    System.out.println("Raccoon clicked!");
+                    bkPanel.setVisible(false);
+                    rcPanel.setBounds(Display.FRAME_W, 0, RaccoonPanel.WIDTH, RaccoonPanel.HEIGHT); // Position the panel off-screen to the right
+                    display.add(rcPanel);
+                    rcPanel.setVisible(true);
+                }
+            }
         }
     }
 

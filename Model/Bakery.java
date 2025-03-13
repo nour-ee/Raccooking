@@ -51,7 +51,10 @@ public class Bakery {
         //Initialisation of the raccoons
         this.raccoons = new Raccoon[NB_RACCOONS];
         for(int i = 0; i<NB_RACCOONS; i++){
-            raccoons[i] = new Raccoon(carte[BAKERY_H-1][BAKERY_W-1], this);
+            //raccoons[i] = new Raccoon(carte[BAKERY_H-1][BAKERY_W-1], this); //ils sont tous au même endroit ???
+            //proposition de placement des raccoons pour tester leur affichage
+            int p = (int)(Math.random()*5);
+            raccoons[i] = new Raccoon(carte[i+p][i+1], this);
             raccoons[i].setAge(i);
         }
     }

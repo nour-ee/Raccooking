@@ -16,7 +16,7 @@ public class Redraw extends Thread{
     public void run(){
         while(true){
             myDisplay.repaint();
-            bkPanel.update(); // fonctionne pas pour l'instant
+            bkPanel.update();
             rcPanel.repaint();
             try{
                 Thread.sleep(DELAY);

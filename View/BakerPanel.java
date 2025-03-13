@@ -16,7 +16,7 @@ public class BakerPanel extends JPanel {
     private JLabel breadLabel;
 
 
-    public static final int HEIGHT = 600;
+    public static final int HEIGHT = 650;
     public static final int WIDTH = 300;
 
     public static final int BUTTON_HEIGHT = 50;
@@ -105,6 +105,6 @@ public class BakerPanel extends JPanel {
     }
     public void update(){
         moneyLabel.setText("Money:  " + bakerControl.getBakery().getPlayer().getMoney()+"$");
-        //breadLabel.setText("Bread: " + bakerControl.getBakery().getPlayer().getSoldBread());
+        breadLabel.setText("Bread: " + bakerControl.getBakery().getPlayer().getSoldBread());
     }
 }
