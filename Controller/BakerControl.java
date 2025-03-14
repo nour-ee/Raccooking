@@ -28,7 +28,10 @@ public class BakerControl implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch(e.getActionCommand()){
-            case "Collect & Sell" -> {System.out.println("Collect");break;}
+            case "Collect & Sell" -> {
+                System.out.println("Collect");
+                bakery.collectBread();
+                ;break;}
             case "Buy" -> {// print combo box
                 String input = (String) JOptionPane.showInputDialog(null, "Choose one element you need...",
                         "The Choice of a ressource", JOptionPane.QUESTION_MESSAGE, null,
@@ -38,22 +41,19 @@ public class BakerControl implements ActionListener {
                 bakery.getPlayer().buy(input);
                 System.out.println("Money: " + bakery.getPlayer().getMoney());
                 ;break;}
+
+            //if the player has enough ressources, and if there is a free oven, the player can bake bread
             case "Add Bread" -> {System.out.println("Add Bread");
                 Baker b= bakery.getPlayer();
-                if(b.canBake()){
+                if(true){ // TODO remplacer par après les tests b.canBake()
                     Optional<Oven> o= bakery.hasFreeOven();
                     if(o.isPresent()){
                         o.get().addBread();
+                        b.spendRessources();
                     }
-                    else{
-                        System.out.println("No free oven");
-                    }
-                    b.spendRessources();
-
+                    else{ System.out.println("No free oven"); }
                 }
-                else{
-                    System.out.println("Not enough ressources to bake bread");
-                }
+                else{System.out.println("Not enough ressources to bake bread");}
                 break;}
         }
 

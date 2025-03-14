@@ -24,7 +24,7 @@ public class Bakery {
      *  ATTRIBUTES *
      ***************/
     private Tile[][] map;
-    private Baker joueur;
+    private Baker player;
     private Raccoon[] raccoons; //TODO : change to ArrayList ---------------------------------------------
     private ArrayList<Oven> ovens;
 
@@ -33,8 +33,12 @@ public class Bakery {
      *    GETTERS   *
      ****************/
     public Tile[][] getMap() { return map; }
-    public Baker getPlayer() { return joueur; }
+    public Baker getPlayer() { return player; }
     public Raccoon[] getRaccoons() { return raccoons; }
+
+    public ArrayList<Oven> getOvens() {
+        return ovens;
+    }
 
     /********************
      *    CONSTRUCTOR   *
@@ -62,7 +66,7 @@ public class Bakery {
             }
         }
         //Initialisation of player : as of now, placed in top left corner aka (0,0)
-        this.joueur = new Baker(map[0][0]);
+        this.player = new Baker(map[0][0]);
         //Initialisation of the raccoons
         this.raccoons = new Raccoon[NB_RACCOONS];
         for(int i = 0; i<NB_RACCOONS; i++){
@@ -159,6 +163,10 @@ public class Bakery {
         }
     }
 
+    /**
+     * Method that checks if there is an empty oven
+     * @return an optional containing the oven if there is an empty oven, empty otherwise
+     */
     public Optional<Oven> hasFreeOven(){
         for (int i = 0; i < 4; i+=3){
             for (int j = 0; j < 6; j++){
@@ -171,5 +179,19 @@ public class Bakery {
             }
         }
         return Optional.empty();
+    }
+
+    /**
+     * Method that collects and sells cooked breads from the ovens and removes burnt ones
+     */
+    public void collectBread(){
+        for (Oven o : ovens){
+            if(o.isOccupied()&& o.getBread().getState()!= Bread.State.COOKING){
+                if (o.getBread().getState()== Bread.State.COOKED) {
+                    player.sellBread();
+                }
+                o.removeBread();
+            }
+        }
     }
 }

@@ -25,6 +25,8 @@ public class Display extends JFrame {
     private ArrayList<JLabel> raccoonLabels = new ArrayList<JLabel>();
     private ArrayList<RaccoonPanel> raccoonPanels = new ArrayList<RaccoonPanel>();
 
+    private ArrayList<JLabel> breadLabels = new ArrayList<JLabel>();
+
     public static final int TILE_SIZE = 75;   //size of a tile, in pixels (square tile)
     public static final int MARGIN = 10; //margin around the bakery, in pixels
     public static final int FRAME_H = Bakery.BAKERY_H*TILE_SIZE + 2*MARGIN;
@@ -60,7 +62,7 @@ public class Display extends JFrame {
         //Add raccoons to the Bakery frame
         placeRaccoons();
         //Add bread to the Bakery frame
-        //placeBread();
+        initBread();
 
         //set frame visible
         setVisible(true);
@@ -141,7 +143,48 @@ public class Display extends JFrame {
     /**
      * Places breads in bakery by accessing the ovens and checking if they're occupied
      * **/
-    private void placeBread(){ //TODO : redo the whole function ---------------------------------------------
+    private void initBread() { //TODO : redo the whole function ---------------------------------------------
+        for (Oven o : bakery.getOvens()) {
+            int newWidth = TILE_SIZE;
+            int newHeight = TILE_SIZE;
+            JLabel breadLabel = new JLabel();
+            Point coord = coord(o.getX(), o.getY());
+            breadLabel.setBounds(coord.x, coord.y, newWidth, newHeight);
+            breadLabels.add(breadLabel);
+            add(breadLabel);
+        }
+    }
+
+    private void repaintBread () {
+        for (int i = 0; i < bakery.getOvens().size(); i++) {
+            Oven o = bakery.getOvens().get(i);
+            if (o.isOccupied()) {
+                System.out.println("Bread found");
+                Bread b = o.getBread();
+                String filename="";
+                switch(b.getState()) {
+                    case COOKING:
+                        filename = "/img/cooking.png";
+                        break;
+                    case COOKED:
+                        filename = "/img/cooked.png";
+                        break;
+                    case BURNT:
+                        filename = "/img/burnt.png";
+                }
+                ImageIcon breadIcon = new ImageIcon(getClass().getResource(filename));
+                Image scaledImage = breadIcon.getImage().getScaledInstance(TILE_SIZE, TILE_SIZE, Image.SCALE_SMOOTH);
+                ImageIcon scaledBreadIcon = new ImageIcon(scaledImage);
+                breadLabels.get(i).setIcon(scaledBreadIcon);
+            }
+            else{
+                breadLabels.get(i).setIcon(null);
+            }
+        }
+    }
+
+
+
         /*Tile[][] map = bakery.getMap();
         for (int i = 0; i < Bakery.BAKERY_H; i++) {
             for (int j = 0; j < Bakery.BAKERY_W; j++) {
@@ -150,7 +193,7 @@ public class Display extends JFrame {
                     if (o.isOccupied()) {
                         Bread b = o.getBread();
                         if (true) { //il y avait b.isCooked() avant ici mais c'est pas très logique donc en attendant
-                            ImageIcon breadIcon = new ImageIcon(getClass().getResource("/img/bread.png"));
+                            ImageIcon breadIcon = new ImageIcon(getClass().getResource("/img/cooked.png"));
                             int newWidth = TILE_SIZE;
                             int newHeight = TILE_SIZE;
                             Image scaledImage = breadIcon.getImage().getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
@@ -165,10 +208,11 @@ public class Display extends JFrame {
                 }
             }
         }*/
-    }
+
+    @Override
     public void paint(Graphics g) {
         super.paint(g);
-        placeBread();
+        initBread();
 
         //Update baker position :
         int x = bakery.getPlayer().getPosition().getX();
@@ -178,5 +222,7 @@ public class Display extends JFrame {
         //bakerLabel.setIcon();  TO DO ----------- LATER
 
         placeRaccoons();
+
+        repaintBread();
     }
 }

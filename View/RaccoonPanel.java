@@ -74,7 +74,7 @@ public class RaccoonPanel extends JPanel {
 
 
         // bread label with image and number
-        ImageIcon breadIcon = new ImageIcon(getClass().getResource("/img/bread.png"));
+        ImageIcon breadIcon = new ImageIcon(getClass().getResource("/img/cooked.png"));
         int newWidthBread = 50;
         int newHeightBread = 50;
         Image scaledImageBread = breadIcon.getImage().getScaledInstance(newWidthBread, newHeightBread, Image.SCALE_SMOOTH);

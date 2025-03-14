@@ -24,8 +24,10 @@ public class Cooking extends Thread{
 
             }
             if (bread.getTime() == COOKED) {
+                System.out.println("Bread is cooked");
                 bread.setState(Bread.State.COOKED);
             } else if (bread.getTime() == BURNT) {
+                System.out.println("Bread is burnt");
                 bread.setState(Bread.State.BURNT);
             }
             bread.incrTime();

@@ -53,6 +53,7 @@ public class Baker extends Entity {
      */
     public void sellBread(){
         soldBread++;
+        money+=Bread.PRICE;
     }
 
     /**
