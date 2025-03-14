@@ -59,7 +59,6 @@ public class BakerPanel extends JPanel {
 
         // money label
         moneyLabel = new JLabel("Money:  " + bakerControl.getBakery().getPlayer().getMoney()+"$");
-        System.out.println(bakerControl.getBakery().getPlayer().getMoney());
         gbc2.gridx = 0;
         gbc2.gridy = 0;
         gbc2.insets = new Insets(2, 2, 10, 10);

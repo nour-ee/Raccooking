@@ -96,6 +96,7 @@ public class Display extends JFrame {
 
         bakerLabel = new JLabel(scaledBakerIcon);
         bakerLabel.setBounds(coord(x, y).x, coord(x, y).y, newWidth, newHeight);
+        bakerLabel.setFocusable(true);
 
         // bakerpanel appears on the right when I click on bakerlabel
         bakerLabel.addMouseListener(entityControl);
@@ -154,7 +155,7 @@ public class Display extends JFrame {
                             Point coord = coord(o.getX(),o.getY());
                             breadLabel.setBounds(coord.x, coord.y, newWidth, newHeight);
                             add(breadLabel);
-                        }
+                       }
                     }
                 }
             }
@@ -166,7 +167,7 @@ public class Display extends JFrame {
         //update the baker position
         int x = bakery.getPlayer().getPosition().getX();
         int y = bakery.getPlayer().getPosition().getY();
-        bakerLabel.setBounds(coord(x, y).x, coord(x, y).y, TILE_SIZE, TILE_SIZE);//la position reste toujours à 0,0
+        bakerLabel.setBounds(coord(x, y).x, coord(x, y).y, TILE_SIZE, TILE_SIZE);
         placeRaccoons();
 
     }

@@ -30,7 +30,8 @@ public class EntityControl extends MouseAdapter {
         if (source == bakerLabel) { // Verify if the click comes from the baker label
             System.out.println("Baker clicked!");
             rcPanel.setVisible(false);
-            bkPanel.setBounds(Display.FRAME_W, 0, BakerPanel.WIDTH, BakerPanel.HEIGHT); // Position the panel off-screen to the right
+            bkPanel.setBounds(Display.FRAME_W, 0, BakerPanel.WIDTH, BakerPanel.HEIGHT);
+            bkPanel.requestFocus();
             display.add(bkPanel);
             bkPanel.setVisible(true);
         } else {
