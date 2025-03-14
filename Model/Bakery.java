@@ -1,5 +1,6 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 /**
@@ -19,9 +20,14 @@ public class Bakery {
     public static final int BAKERY_W = 10;
 
 
+    /***************
+     *  ATTRIBUTES *
+     ***************/
     private Tile[][] map;
     private Baker joueur;
-    private Raccoon[] raccoons;
+    private Raccoon[] raccoons; //TODO : change to ArrayList ---------------------------------------------
+    private ArrayList<Oven> ovens;
+
 
     /****************
      *    GETTERS   *
@@ -37,12 +43,17 @@ public class Bakery {
     public Bakery(){
         // Initialisation of the bakery
         this.map = new Tile[BAKERY_H][BAKERY_W];
+        this.ovens = new ArrayList<>();
+
         for (int i = 0; i < BAKERY_H; i++){
+
             for (int j = 0; j < BAKERY_W; j++){
-                //Ovens are placed betwen (0,0) and (0,5) as well as (3,0) and (3,5)
+                //Ovens are placed betwen (0,0) and (0,5) , and between (3,0) and (3,5)
                 if(i==0 || i==3){
                     if(j<6){
-                        this.map[i][j] = new Oven(j,i);
+                        Oven o = new Oven(j, i);
+                        this.map[i][j] = o;
+                        this.ovens.add(o);
                     }
                     else this.map[i][j] = new Tile(j, i);
                 }
@@ -50,7 +61,7 @@ public class Bakery {
 
             }
         }
-        //Initialisation of the player, placed for the moment at (0,0) i.e the top left corner
+        //Initialisation of player : as of now, placed in top left corner aka (0,0)
         this.joueur = new Baker(map[0][0]);
         //Initialisation of the raccoons
         this.raccoons = new Raccoon[NB_RACCOONS];

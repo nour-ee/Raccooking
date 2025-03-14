@@ -82,7 +82,7 @@ public class Display extends JFrame {
         return new Point(x*TILE_SIZE, y*TILE_SIZE);
 
     }
-    /**place the baker on the bakery by getting its position**/
+    /**places the baker in the bakery by getting its position**/
     private void placeBaker() {
         Baker b = bakery.getPlayer();
         int x = b.getPosition().getX();
@@ -105,7 +105,9 @@ public class Display extends JFrame {
         add(bakerLabel);
     }
 
-    /**place the raccoons on the bakery by getting their positions**/
+    /**
+     * Places raccoons in bakery by accessing their positions
+     * **/
     private void placeRaccoons() {
         Raccoon[] rc = bakery.getRaccoons();
         for (Raccoon r : rc) {
@@ -121,13 +123,14 @@ public class Display extends JFrame {
             JLabel raccoonLabel = new JLabel(scaledRaccoonIcon);
             raccoonLabel.setBounds(coord(x, y).x, coord(x, y).y, newWidth, newHeight);
 
-            //create raccoon panel for each raccoon
+            //Create raccoon panel for each raccoon
             RaccoonPanel raccoonPanel = new RaccoonPanel();
             raccoonPanel.setVisible(false);
 
-            // raccoonpanel appears on the right when I click on raccoonlabel
+            //RaccoonPanel appears on the right when RaccoonLabel is clicked
             raccoonLabel.addMouseListener(entityControl);
 
+            //Identify which label and panel corresponds to which  raccoon with indexes
             raccoonLabels.add(raccoonLabel);
             raccoonPanels.add(raccoonPanel);
             add(raccoonLabel);
@@ -135,9 +138,11 @@ public class Display extends JFrame {
         }
     }
 
-    /**place the bread on the bakery by getting the ovens**/
-    private void placeBread(){
-        Tile[][] map = bakery.getMap();
+    /**
+     * Places breads in bakery by accessing the ovens and checking if they're occupied
+     * **/
+    private void placeBread(){ //TODO : redo the whole function ---------------------------------------------
+        /*Tile[][] map = bakery.getMap();
         for (int i = 0; i < Bakery.BAKERY_H; i++) {
             for (int j = 0; j < Bakery.BAKERY_W; j++) {
                 if (map[i][j].hasOven()) {
@@ -159,16 +164,19 @@ public class Display extends JFrame {
                     }
                 }
             }
-        }
+        }*/
     }
     public void paint(Graphics g) {
         super.paint(g);
         placeBread();
-        //update the baker position
+
+        //Update baker position :
         int x = bakery.getPlayer().getPosition().getX();
         int y = bakery.getPlayer().getPosition().getY();
-        bakerLabel.setBounds(coord(x, y).x, coord(x, y).y, TILE_SIZE, TILE_SIZE);
-        placeRaccoons();
 
+        bakerLabel.setBounds(coord(x, y).x, coord(x, y).y, TILE_SIZE, TILE_SIZE);
+        //bakerLabel.setIcon();  TO DO ----------- LATER
+
+        placeRaccoons();
     }
 }
