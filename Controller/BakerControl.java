@@ -45,7 +45,7 @@ public class BakerControl implements ActionListener {
             //if the player has enough ressources, and if there is a free oven, the player can bake bread
             case "Add Bread" -> {System.out.println("Add Bread");
                 Baker b= bakery.getPlayer();
-                if(true){ // TODO remplacer par après les tests b.canBake()
+                if(b.canBake()){
                     Optional<Oven> o= bakery.hasFreeOven();
                     if(o.isPresent()){
                         o.get().addBread();
