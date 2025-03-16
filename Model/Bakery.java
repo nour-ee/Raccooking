@@ -65,15 +65,21 @@ public class Bakery {
 
             }
         }
-        //Initialisation of player : as of now, placed in top left corner aka (0,0)
-        this.player = new Baker(map[0][0]);
+        //Initialisation of player : as of now, placed in top left corner aka (1,0)
+        this.player = new Baker(map[0][1]);
         //Initialisation of the raccoons
         this.raccoons = new Raccoon[NB_RACCOONS];
         for(int i = 0; i<NB_RACCOONS; i++){
             //raccoons[i] = new Raccoon(carte[BAKERY_H-1][BAKERY_W-1], this); //ils sont tous au même endroit ???
             //proposition de placement des raccoons pour tester leur affichage
             int p = (int)(Math.random()*5);
-            raccoons[i] = new Raccoon(map[i+p][i+1], this);
+            //place raccoons randomly with verifications that they are placed on accessible tiles
+            if(map[i+p][i+1].isAccessible()){
+                raccoons[i] = new Raccoon(map[i+p][i+1], this);
+            }
+            else{
+                raccoons[i] = new Raccoon(map[0][8], this);
+            }
             raccoons[i].setAge(i);
         }
 

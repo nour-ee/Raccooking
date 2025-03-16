@@ -178,40 +178,38 @@ public class Display extends JFrame {
                 breadLabels.get(i).setIcon(scaledBreadIcon);
             }
             else{
-                breadLabels.get(i).setIcon(null);
+                //draw square to reprensents oven
+                breadLabels.get(i).setBounds(coord(o.getX(), o.getY()).y, coord(o.getX(), o.getY()).x, TILE_SIZE, TILE_SIZE); // x et y sont inversés
+                breadLabels.get(i).setOpaque(true);
+                breadLabels.get(i).setBackground(Color.GRAY);
+                breadLabels.get(i).setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            }
+        }
+    }
+    public void paintTiles() {
+        for (int i = 0; i < Bakery.BAKERY_W; i++) {
+            for (int j = 0; j < Bakery.BAKERY_H; j++) {
+                Tile t = bakery.getMap()[i][j];
+                JLabel tileLabel = new JLabel();
+                tileLabel.setBounds(coord(i, j).x, coord(i, j).y, TILE_SIZE, TILE_SIZE);
+                if (t.isAccessible()) {
+                    tileLabel.setOpaque(true);
+                    tileLabel.setBackground(new Color(238, 129, 47, 161));
+                }
+                add(tileLabel);
             }
         }
     }
 
-
-
-        /*Tile[][] map = bakery.getMap();
-        for (int i = 0; i < Bakery.BAKERY_H; i++) {
-            for (int j = 0; j < Bakery.BAKERY_W; j++) {
-                if (map[i][j].hasOven()) {
-                    Oven o = (Oven) map[i][j];
-                    if (o.isOccupied()) {
-                        Bread b = o.getBread();
-                        if (true) { //il y avait b.isCooked() avant ici mais c'est pas très logique donc en attendant
-                            ImageIcon breadIcon = new ImageIcon(getClass().getResource("/img/cooked.png"));
-                            int newWidth = TILE_SIZE;
-                            int newHeight = TILE_SIZE;
-                            Image scaledImage = breadIcon.getImage().getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-                            ImageIcon scaledBreadIcon = new ImageIcon(scaledImage);
-
-                            JLabel breadLabel = new JLabel(scaledBreadIcon);
-                            Point coord = coord(o.getX(),o.getY());
-                            breadLabel.setBounds(coord.x, coord.y, newWidth, newHeight);
-                            add(breadLabel);
-                       }
-                    }
-                }
-            }
-        }*/
+    /**
+     * Method to update the display
+     * @param g the graphics
+     */
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
+        paintTiles();
         initBread();
 
         //Update baker position :
