@@ -1,8 +1,6 @@
 package Model;
 
 
-import java.util.Collection;
-
 public class Raccoon extends Entity {
     /****************
      *  ATTRIBUTES  *
@@ -41,8 +39,9 @@ public class Raccoon extends Entity {
      * Method that changes the position of the raccoon
      * @param c the tile to move to
      */
+    @Override
     public void move(Tile c){
-        this.position.RacoonLeft();
+        this.position.RacoonHasLeft();
         this.position = c;
         this.position.RacoonArrived();
     }

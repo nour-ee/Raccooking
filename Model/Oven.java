@@ -32,7 +32,7 @@ public class Oven extends Tile {
     *****************/
     public Oven(int x, int y) {
         super(x, y);
-        this.accesible = false;
+        this.accessible = false;
         this.occupied = false;
         this.hasOven=true;
         //System.out.println("Oven created at (" + x + ", " + y + ")"+hasOven+hasOven());

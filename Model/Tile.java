@@ -6,11 +6,11 @@ public class Tile {
      *  ATTRIBUTES  *
      ****************/
 
-    //Indicates the indexes of the tile in its array 
+    //Indicates the indexes of the tile on the map
     protected int x;
     protected int y;
 
-    protected boolean accesible; //indicates if the tile is traversable/accesible
+    protected boolean accessible; //indicates if the tile is accessible
     protected boolean hasBaker; //indicates if the tile has a baker on it
     protected boolean hasRacoon; //indicates if the tile has a racoon on it
     protected boolean hasOven; //indicates if the tile has a bread on it
@@ -18,7 +18,7 @@ public class Tile {
     /*************************************
      *              GETTERS
      *************************************/
-    public boolean isAccessible(){ return this.accesible; }
+    public boolean isAccessible(){ return this.accessible; }
     public int getX() { return x; }
     public int getY() { return y; }
 
@@ -30,19 +30,19 @@ public class Tile {
     /*************************************
      *              SETTERS
      *************************************/
-    public void setTraversable(boolean traversable) { this.accesible = traversable; }
+    public void setAccessible(boolean b) { this.accessible = b; }
     public void BakerArrived() { this.hasBaker = true; }
-    public void BakerLeft() { this.hasBaker = false; }
+    public void BakerHasLeft() { this.hasBaker = false; }
     public void RacoonArrived() { this.hasRacoon = true; }
-    public void RacoonLeft() { this.hasRacoon = false; }
+    public void RacoonHasLeft() { this.hasRacoon = false; }
 
     /*************************************
      *              CONSTRUCTORS
      *************************************/
 
-    //By default, a tile is accessible
+    //By default, a tile is accessible and contains nothing
     public Tile(int x, int y) {
-        this.accesible = true;
+        this.accessible = true;
         this.hasBaker = false;
         this.hasRacoon = false;
         this.hasOven = false;

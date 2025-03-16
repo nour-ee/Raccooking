@@ -27,6 +27,7 @@ public class Baker extends Entity {
     public Baker(Tile c){
         this.position = c; this.money = 50;
         this.ressources = new int[4];
+        for(int i = 0; i<4; i++) ressources[i] = 10;
         this.soldBread = 0;
     }
 
@@ -38,9 +39,11 @@ public class Baker extends Entity {
      * Method to move the player
      * @param c the tile to move to
      */
+    @Override
     public void move(Tile c){
+
         if(c.isAccessible()){
-            this.position.BakerLeft();
+            this.position.BakerHasLeft();
             this.position = c;
             this.position.BakerArrived();
             System.out.println("Position du joueur : "+position.getX()+" "+position.getY());

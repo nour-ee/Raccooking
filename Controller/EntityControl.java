@@ -8,7 +8,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-/** Control the visibility of panel entities  */
+/**
+ * Controls the visibility of the panel entities
+ * */
 public class EntityControl extends MouseAdapter {
     RaccoonPanel rcPanel;
     BakerPanel bkPanel;

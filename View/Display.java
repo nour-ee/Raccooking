@@ -12,21 +12,23 @@ public class Display extends JFrame {
     /****************
      *  ATTRIBUTES  *
      ****************/
+    //panels that appear when clicking on the entities
     private BakerPanel bkPanel;
     private RaccoonPanel rcPanel;
 
     private EntityControl entityControl;
 
-    private BakerMovement bakerMovement;
+    private BakerMovement bakerMovement; //thread to move the baker
 
-    private Bakery bakery ;
+    private Bakery bakery ; //the bakery aka map
 
+    //labels to display the entities
     private JLabel bakerLabel;
     private ArrayList<JLabel> raccoonLabels = new ArrayList<JLabel>();
     private ArrayList<RaccoonPanel> raccoonPanels = new ArrayList<RaccoonPanel>();
-
     private ArrayList<JLabel> breadLabels = new ArrayList<JLabel>();
 
+    //constants of our display
     public static final int TILE_SIZE = 75;   //size of a tile, in pixels (square tile)
     public static final int MARGIN = 10; //margin around the bakery, in pixels
     public static final int FRAME_H = Bakery.BAKERY_H*TILE_SIZE + 2*MARGIN;
@@ -76,6 +78,7 @@ public class Display extends JFrame {
     public BakerPanel getBakerPanel() {return bkPanel;}
     public ArrayList<JLabel> getRaccoonLabels() {return raccoonLabels;}
 
+
     /****************
      *    METHODS   *
      ****************/
@@ -84,12 +87,16 @@ public class Display extends JFrame {
         return new Point(x*TILE_SIZE, y*TILE_SIZE);
 
     }
-    /**places the baker in the bakery by getting its position**/
+
+    /** Places the baker in the bakery by accessing their position
+     * **/
     private void placeBaker() {
+        //gets the baker and their position in the bakery
         Baker b = bakery.getPlayer();
         int x = b.getPosition().getX();
         int y = b.getPosition().getY();
 
+        //The image representing our baker :
         ImageIcon bakerIcon = new ImageIcon(getClass().getResource("/img/baker.png"));
         int newWidth = TILE_SIZE;
         int newHeight = TILE_SIZE;
@@ -100,7 +107,7 @@ public class Display extends JFrame {
         bakerLabel.setBounds(coord(x, y).x, coord(x, y).y, newWidth, newHeight);
         bakerLabel.setFocusable(true);
 
-        // bakerpanel appears on the right when I click on bakerlabel
+        // bakerpanel appears on the right when bakerlabel is clicked
         bakerLabel.addMouseListener(entityControl);
         bakerLabel.addKeyListener(bakerMovement);
 
@@ -179,7 +186,9 @@ public class Display extends JFrame {
             else{
                 breadLabels.get(i).setIcon(null);
             }
-            //draw square to reprensents oven
+
+            //TODO : pourquoi les x et y des ovens sont inversés ???????????????????
+            //draw square to represent an oven
             breadLabels.get(i).setBounds(coord(o.getX(), o.getY()).y, coord(o.getX(), o.getY()).x, TILE_SIZE, TILE_SIZE); // x et y sont inversés
             breadLabels.get(i).setOpaque(true);
             breadLabels.get(i).setBackground(Color.GRAY);
@@ -187,9 +196,14 @@ public class Display extends JFrame {
 
         }
     }
+
+    /**
+     * Paints the tiles of the bakery
+     * **/
     public void paintTiles() {
-        for (int i = 0; i < Bakery.BAKERY_W; i++) {
-            for (int j = 0; j < Bakery.BAKERY_H; j++) {
+        for (int i = 0; i < Bakery.BAKERY_H; i++) {
+
+            for (int j = 0; j < Bakery.BAKERY_W; j++) {
                 Tile t = bakery.getMap()[i][j];
                 JLabel tileLabel = new JLabel();
                 tileLabel.setBounds(coord(i, j).x, coord(i, j).y, TILE_SIZE, TILE_SIZE);
@@ -199,14 +213,14 @@ public class Display extends JFrame {
                 }
                 add(tileLabel);
             }
+
         }
     }
 
     /**
-     * Method to update the display
-     * @param g the graphics
-     */
-
+     * Paints the components of the bakery
+     * @param g Graphics
+    */
     @Override
     public void paint(Graphics g) {
         super.paint(g);
@@ -218,7 +232,7 @@ public class Display extends JFrame {
         int y = bakery.getPlayer().getPosition().getY();
 
         bakerLabel.setBounds(coord(x, y).x, coord(x, y).y, TILE_SIZE, TILE_SIZE);
-        //bakerLabel.setIcon();  TO DO ----------- LATER
+        //bakerLabel.setIcon();  TODO ----------- LATER
 
         placeRaccoons();
 

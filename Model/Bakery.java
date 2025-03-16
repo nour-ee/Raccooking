@@ -14,9 +14,8 @@ public class Bakery {
     /***************
     *  CONSTANTS   *
     ****************/
-    public static final int SIZE = 8; //size of the grid
-    public static final int NB_RACCOONS = 5; //number of raccoons
-    public static final int BAKERY_H = 10;
+    public static final int NB_RACCOONS = 5; //number of raccoons on the map (might change in later versions)
+    public static final int BAKERY_H = 10; //height of the grid/bakery
     public static final int BAKERY_W = 10;
 
 
@@ -26,7 +25,7 @@ public class Bakery {
     private Tile[][] map;
     private Baker player;
     private Raccoon[] raccoons; //TODO : change to ArrayList ---------------------------------------------
-    private ArrayList<Oven> ovens;
+    private ArrayList<Oven> ovens; //ovens to cook breads
 
 
     /****************
@@ -35,23 +34,21 @@ public class Bakery {
     public Tile[][] getMap() { return map; }
     public Baker getPlayer() { return player; }
     public Raccoon[] getRaccoons() { return raccoons; }
-    public ArrayList<Oven> getOvens() {
-        return ovens;
-    }
+    public ArrayList<Oven> getOvens() { return ovens; }
 
     /********************
      *    CONSTRUCTOR   *
      ********************/
-
     public Bakery(){
         // Initialisation of the bakery
         this.map = new Tile[BAKERY_H][BAKERY_W];
         this.ovens = new ArrayList<>();
 
-        for (int i = 0; i < BAKERY_H; i++){
+        for (int i = 0; i < BAKERY_H; i++){     //lines
 
-            for (int j = 0; j < BAKERY_W; j++){
-                //Ovens are placed betwen (0,0) and (0,5) , and between (3,0) and (3,5)
+            for (int j = 0; j < BAKERY_W; j++){ //columns
+
+                //Ovens are placed between (0,0) and (0,5) , and between (3,0) and (3,5)
                 if(i==0 || i==3){
                     if(j<6){
                         Oven o = new Oven(j, i);
@@ -64,9 +61,11 @@ public class Bakery {
 
             }
         }
-        //Initialisation of player : as of now, placed in top left corner aka (1,0)
-        this.player = new Baker(map[0][1]);
-        //Initialisation of the raccoons
+
+        //Initialization of player : as of now, placed in top left corner aka (1,0)
+        this.player = new Baker(map[1][0]);
+
+        //Initialization of the raccoons
         this.raccoons = new Raccoon[NB_RACCOONS];
         for(int i = 0; i<NB_RACCOONS; i++){
             //raccoons[i] = new Raccoon(carte[BAKERY_H-1][BAKERY_W-1], this); //ils sont tous au même endroit ???
@@ -91,24 +90,10 @@ public class Bakery {
     }
 
 
-    /**
-     * Function that returns an oven that is empty
-     * @return an oven that is empty, or if none is empty, returns null
-     */
-    public Oven OvenEmpty(){
-        for (int i = 0; i < 4; i+=3){
-            for (int j = 0; j < 6; j++){
-                if(map[i][j] instanceof Oven){
-                    Oven o = (Oven) map[i][j];
-                    if(o.isOccupied()){
-                        return o;
-                    }
-                }
-            }
-        }
-        System.out.println("No oven empty");
-        return null;
-    }
+    /***************
+     *  METHODS    *
+     ***************/
+
 
     /**
      * Function that finds the closest oven with a cooked bread
@@ -155,10 +140,9 @@ public class Bakery {
         return t;
     }
 
-
     /**
-     * Method that goes through the raccoons checks if any have died (age>20)
-     * if yes they are removed from the array and replaced by a new raccoon
+     * Method that goes through the raccoons and checks if any have died (age>20)
+     * If yes, removes them from the array and replaces them with a new raccoon
      */
     public void checkRaccoons(){
         for(int i = 0; i<raccoons.length; i++){
