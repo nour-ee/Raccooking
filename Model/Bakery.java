@@ -35,7 +35,6 @@ public class Bakery {
     public Tile[][] getMap() { return map; }
     public Baker getPlayer() { return player; }
     public Raccoon[] getRaccoons() { return raccoons; }
-
     public ArrayList<Oven> getOvens() {
         return ovens;
     }

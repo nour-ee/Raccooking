@@ -143,7 +143,7 @@ public class Display extends JFrame {
     /**
      * Places breads in bakery by accessing the ovens and checking if they're occupied
      * **/
-    private void initBread() { //TODO : redo the whole function ---------------------------------------------
+    private void initBread() {
         for (Oven o : bakery.getOvens()) {
             int newWidth = TILE_SIZE;
             int newHeight = TILE_SIZE;
@@ -159,7 +159,6 @@ public class Display extends JFrame {
         for (int i = 0; i < bakery.getOvens().size(); i++) {
             Oven o = bakery.getOvens().get(i);
             if (o.isOccupied()) {
-                System.out.println("Bread found");
                 Bread b = o.getBread();
                 String filename="";
                 switch(b.getState()) {
@@ -178,12 +177,14 @@ public class Display extends JFrame {
                 breadLabels.get(i).setIcon(scaledBreadIcon);
             }
             else{
-                //draw square to reprensents oven
-                breadLabels.get(i).setBounds(coord(o.getX(), o.getY()).y, coord(o.getX(), o.getY()).x, TILE_SIZE, TILE_SIZE); // x et y sont inversés
-                breadLabels.get(i).setOpaque(true);
-                breadLabels.get(i).setBackground(Color.GRAY);
-                breadLabels.get(i).setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                breadLabels.get(i).setIcon(null);
             }
+            //draw square to reprensents oven
+            breadLabels.get(i).setBounds(coord(o.getX(), o.getY()).y, coord(o.getX(), o.getY()).x, TILE_SIZE, TILE_SIZE); // x et y sont inversés
+            breadLabels.get(i).setOpaque(true);
+            breadLabels.get(i).setBackground(Color.GRAY);
+            breadLabels.get(i).setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
         }
     }
     public void paintTiles() {
