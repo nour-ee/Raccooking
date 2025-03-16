@@ -194,7 +194,7 @@ public class Display extends JFrame {
                 tileLabel.setBounds(coord(i, j).x, coord(i, j).y, TILE_SIZE, TILE_SIZE);
                 if (t.isAccessible()) {
                     tileLabel.setOpaque(true);
-                    tileLabel.setBackground(new Color(238, 129, 47, 161));
+                    tileLabel.setBackground(new Color(241, 132, 60, 161));
                 }
                 add(tileLabel);
             }
