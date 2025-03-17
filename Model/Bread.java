@@ -1,23 +1,27 @@
 package Model;
 
-import java.awt.*;
-
 import Controller.Cooking;
 
 public class Bread {
+    // Enum to represent the state of the bread
     public enum State {
         COOKING, COOKED, BURNT
     }
+
+    /****************
+     *  ATTRIBUTES  *
+     ****************/
     private State state ;
-
     private Cooking cooking;
-
     private int time;
-    public static final int COOKED=100;
-    public static final int BURNT=150;
+    public static final int T_COOKED =150;
+    public static final int T_BURNT =250;
+    public static final int PRICE = 20; //selling price of a bread
 
-    public static final int PRICE = 20;
 
+    /****************
+     *  CONSTRUCTOR  *
+     ****************/
     public Bread() {
         this.state = State.COOKING;
         time=0;
@@ -25,6 +29,10 @@ public class Bread {
         cooking.start();
     }
 
+
+    /**************************
+     *   GETTERS & SETTERS    *
+     **************************/
     public void setState(State s){ state = s;}
 
     public State getState() {
@@ -35,9 +43,21 @@ public class Bread {
         return time;
     }
 
-    public void incrTime(){time++;}
 
+    /****************
+     *   METHODS    *
+     ****************/
+    public void incrTime(){time++;}
     public boolean isCooked(){return state== State.COOKED;}
+
+    /**
+     * Method to kill the thread
+     * when the bread is discarded
+     */
+    public void killThread(){
+        cooking.interrupt(); //idk if this is the right way to do it
+        cooking=null;
+    }
 
 
 }
