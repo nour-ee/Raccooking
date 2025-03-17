@@ -54,9 +54,8 @@ public class Bread {
      * Method to kill the thread
      * when the bread is discarded
      */
-    public void killThread(){
-        cooking.interrupt(); //idk if this is the right way to do it
-        cooking=null;
+    public void stopThread(){
+        cooking.in();
     }
 
 

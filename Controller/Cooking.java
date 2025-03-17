@@ -9,11 +9,14 @@ import static Model.Bread.T_COOKED;
 public class Cooking extends Thread{
     private Bread bread;
 
+    private boolean out;
+
     /****************
      * CONSTRUCTOR  *
      ****************/
     public Cooking(Bread b){
         this.bread = b;
+        this.out = false;
     }
 
 
@@ -21,12 +24,16 @@ public class Cooking extends Thread{
      *   METHODS    *
      ****************/
 
+    public void in(){
+        out = true;
+    }
+
     /**
      * Method to simulate the cooking of the bread
      */
     @Override
     public void run() {
-        while (bread.getTime()<= T_BURNT) {
+        while (bread.getTime()<= T_BURNT && !out) {
             try {
                 Thread.sleep(100);
             } catch (Exception e) {

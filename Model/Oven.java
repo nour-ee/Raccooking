@@ -41,7 +41,7 @@ public class Oven extends Tile {
      * Method to remove the bread from the oven
      */
     public void removeBread(){
-        this.bread.killThread();
+        this.bread.stopThread();
         this.bread = null; //the bread still exists even though it's not contained anywhere
         this.occupied = false;
     }
