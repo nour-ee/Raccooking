@@ -121,7 +121,6 @@ public class Display extends JFrame {
     private void placeRaccoons() {
         Raccoon[] rc = bakery.getRaccoons();
         for (Raccoon r : rc) {
-            System.out.println(r.getPosition().getX() + " " + r.getPosition().getY());
             int x = r.getPosition().getX();
             int y = r.getPosition().getY();
 

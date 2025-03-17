@@ -2,6 +2,7 @@ package Model;
 
 
 public class Raccoon extends Entity {
+    public static int MAX_AGE = 10000;
     /****************
      *  ATTRIBUTES  *
      ****************/
