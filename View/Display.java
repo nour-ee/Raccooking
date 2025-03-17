@@ -80,8 +80,8 @@ public class Display extends JFrame {
      *    METHODS   *
      ****************/
 
-    public Point coord(int i, int j) {
-        return new Point(j*TILE_SIZE, i*TILE_SIZE);
+    public Point coord(int x, int y) {
+        return new Point(x*TILE_SIZE, y*TILE_SIZE);
 
     }
 
