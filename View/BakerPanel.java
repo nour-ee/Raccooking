@@ -49,7 +49,7 @@ public class BakerPanel extends JPanel {
     }
 
     // private methods to create the ressources panel and the buttons panel
-    public void createRessourcesPanel() {
+    private void createRessourcesPanel() {
         // === Panel ressources ===
         JPanel ressourcesPanel = new JPanel();
         ressourcesPanel.setLayout(new GridBagLayout());
