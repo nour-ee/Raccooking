@@ -170,7 +170,7 @@ public class Bakery {
                     player.sellBread();
                     o.removeBread();
                 }
-                if (o.getBread().getState()== Bread.State.BURNT) {
+                else if (o.getBread().getState()== Bread.State.BURNT) {
                     o.removeBread();
                 }
             }
