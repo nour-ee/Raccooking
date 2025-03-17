@@ -37,14 +37,14 @@ public class Display extends JFrame {
     /********************
      *    CONSTRUCTOR   *
      ********************/
-    public Display() {
+    public Display(Bakery bakery ) {
         setTitle("Raccooking");
         setSize(FRAME_W+BakerPanel.WIDTH, FRAME_H);
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         // Create a bakery
-        bakery = new Bakery();
+        this.bakery = bakery;
 
         // Add the Bakerpanel to the Bakery frame
         bkPanel = new BakerPanel(bakery);
@@ -59,7 +59,7 @@ public class Display extends JFrame {
         //Add raccoons to the Bakery frame
         placeRaccoons();
         //Add bread to the Bakery frame
-        initBread();
+        initOvens();
 
         //set frame visible
         setVisible(true);
@@ -80,8 +80,8 @@ public class Display extends JFrame {
      *    METHODS   *
      ****************/
 
-    public Point coord(int x, int y) {
-        return new Point(x*TILE_SIZE, y*TILE_SIZE);
+    public Point coord(int i, int j) {
+        return new Point(j*TILE_SIZE, i*TILE_SIZE);
 
     }
 
@@ -101,7 +101,8 @@ public class Display extends JFrame {
         ImageIcon scaledBakerIcon = new ImageIcon(scaledImage);
 
         bakerLabel = new JLabel(scaledBakerIcon);
-        bakerLabel.setBounds(coord(x, y).x, coord(x, y).y, newWidth, newHeight);
+        Point coord = coord(x, y);
+        bakerLabel.setBounds(coord.x, coord.y, newWidth, newHeight);
         bakerLabel.setFocusable(true);
 
         // bakerpanel appears on the right when bakerlabel is clicked
@@ -127,7 +128,8 @@ public class Display extends JFrame {
             ImageIcon scaledRaccoonIcon = new ImageIcon(scaledImage);
 
             JLabel raccoonLabel = new JLabel(scaledRaccoonIcon);
-            raccoonLabel.setBounds(coord(x, y).x, coord(x, y).y, newWidth, newHeight);
+            Point coord = coord(x, y);
+            raccoonLabel.setBounds(coord.x, coord.y, newWidth, newHeight);
 
             //Create raccoon panel for each raccoon
             RaccoonPanel raccoonPanel = new RaccoonPanel(r);
@@ -155,7 +157,9 @@ public class Display extends JFrame {
             //System.out.println(r + ":" + rac.getPosition().getX() + " " + rac.getPosition().getY());
             int x = rac.getPosition().getX();
             int y = rac.getPosition().getY();
-            raccoonLabels.get(r).setBounds(coord(x,y).x,coord(x,y).y,TILE_SIZE,TILE_SIZE);
+
+            Point coord = coord(x, y);
+            raccoonLabels.get(r).setBounds(coord.x,coord.y,TILE_SIZE,TILE_SIZE);
         }
     }
 
@@ -163,15 +167,19 @@ public class Display extends JFrame {
     /**
      * Places breads in bakery by accessing the ovens and checking if they're occupied
      * **/
-    private void initBread() {
+    private void initOvens() {
         for (Oven o : bakery.getOvens()) {
-            int newWidth = TILE_SIZE;
-            int newHeight = TILE_SIZE;
             JLabel breadLabel = new JLabel();
             Point coord = coord(o.getX(), o.getY());
-            breadLabel.setBounds(coord.x, coord.y, newWidth, newHeight);
+            breadLabel.setBounds(coord.x, coord.y, TILE_SIZE, TILE_SIZE);
             breadLabels.add(breadLabel);
             add(breadLabel);
+
+            //draw square to represent an oven
+            breadLabel.setBounds(coord.x, coord.y, TILE_SIZE, TILE_SIZE);
+            breadLabel.setOpaque(true);
+            breadLabel.setBackground(Color.GRAY);
+            breadLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         }
     }
 
@@ -199,26 +207,20 @@ public class Display extends JFrame {
             else{
                 breadLabels.get(i).setIcon(null);
             }
-
-            //draw square to represent an oven
-            breadLabels.get(i).setBounds(coord(o.getX(), o.getY()).x, coord(o.getX(), o.getY()).y, TILE_SIZE, TILE_SIZE); 
-            breadLabels.get(i).setOpaque(true);
-            breadLabels.get(i).setBackground(Color.GRAY);
-            breadLabels.get(i).setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
         }
     }
 
     /**
      * Paints the tiles of the bakery
      * **/
-    public void paintTiles() {
+    private void paintTiles() {
         for (int i = 0; i < Bakery.BAKERY_W; i++) {
 
             for (int j = 0; j < Bakery.BAKERY_H; j++) {
                 Tile t = bakery.getMap()[i][j];
                 JLabel tileLabel = new JLabel();
-                tileLabel.setBounds(coord(i, j).x, coord(i, j).y, TILE_SIZE, TILE_SIZE);
+                Point coord = coord(i, j);
+                tileLabel.setBounds(coord.x, coord.y, TILE_SIZE, TILE_SIZE);
                 if (t.isAccessible()) {
                     tileLabel.setOpaque(true);
                     tileLabel.setBackground(new Color(241, 132, 60, 161));
@@ -242,7 +244,8 @@ public class Display extends JFrame {
         int x = bakery.getPlayer().getPosition().getX();
         int y = bakery.getPlayer().getPosition().getY();
 
-        bakerLabel.setBounds(coord(x, y).x, coord(x, y).y, TILE_SIZE, TILE_SIZE);
+        Point coord = coord(x, y);
+        bakerLabel.setBounds(coord.x, coord.y, TILE_SIZE, TILE_SIZE);
         //bakerLabel.setIcon();  TODO ----------- LATER
 
         repaintRaccoons();
