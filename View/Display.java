@@ -187,9 +187,8 @@ public class Display extends JFrame {
                 breadLabels.get(i).setIcon(null);
             }
 
-            //TODO : pourquoi les x et y des ovens sont inversés ???????????????????
             //draw square to represent an oven
-            breadLabels.get(i).setBounds(coord(o.getX(), o.getY()).y, coord(o.getX(), o.getY()).x, TILE_SIZE, TILE_SIZE); // x et y sont inversés
+            breadLabels.get(i).setBounds(coord(o.getX(), o.getY()).x, coord(o.getX(), o.getY()).y, TILE_SIZE, TILE_SIZE); 
             breadLabels.get(i).setOpaque(true);
             breadLabels.get(i).setBackground(Color.GRAY);
             breadLabels.get(i).setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -201,9 +200,9 @@ public class Display extends JFrame {
      * Paints the tiles of the bakery
      * **/
     public void paintTiles() {
-        for (int i = 0; i < Bakery.BAKERY_H; i++) {
+        for (int i = 0; i < Bakery.BAKERY_W; i++) {
 
-            for (int j = 0; j < Bakery.BAKERY_W; j++) {
+            for (int j = 0; j < Bakery.BAKERY_H; j++) {
                 Tile t = bakery.getMap()[i][j];
                 JLabel tileLabel = new JLabel();
                 tileLabel.setBounds(coord(i, j).x, coord(i, j).y, TILE_SIZE, TILE_SIZE);

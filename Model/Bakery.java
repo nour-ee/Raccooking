@@ -41,29 +41,26 @@ public class Bakery {
      ********************/
     public Bakery(){
         // Initialisation of the bakery
-        this.map = new Tile[BAKERY_H][BAKERY_W];
+        this.map = new Tile[BAKERY_W][BAKERY_H];
         this.ovens = new ArrayList<>();
 
-        for (int i = 0; i < BAKERY_H; i++){     //lines
+        for (int i = 0; i < BAKERY_W; i++){     //lines
 
-            for (int j = 0; j < BAKERY_W; j++){ //columns
+            for (int j = 0; j < BAKERY_H; j++){ //columns
 
-                //Ovens are placed between (0,0) and (0,5) , and between (3,0) and (3,5)
-                if(i==0 || i==3){
-                    if(j<6){
-                        Oven o = new Oven(j, i);
-                        this.map[i][j] = o;
-                        this.ovens.add(o);
-                    }
-                    else this.map[i][j] = new Tile(j, i);
+                //Ovens are placed between (0,0) and (5,0) , and between (0,3) and (5,3)
+                if((j==0 || j==3)&&i<6){
+                    Oven o = new Oven(i, j);
+                    this.map[i][j] = o;
+                    this.ovens.add(o);
                 }
-                else this.map[i][j] = new Tile(j, i);
+                else this.map[i][j] = new Tile(i, j);
 
             }
         }
 
-        //Initialization of player : as of now, placed in top left corner aka (1,0)
-        this.player = new Baker(map[1][0]);
+        //Initialization of player : as of now, placed in top left corner aka (0,1)
+        this.player = new Baker(map[0][1]);
 
         //Initialization of the raccoons
         this.raccoons = new Raccoon[NB_RACCOONS];
@@ -76,7 +73,7 @@ public class Bakery {
                 raccoons[i] = new Raccoon(map[i+p][i+1], this);
             }
             else{
-                raccoons[i] = new Raccoon(map[0][8], this);
+                raccoons[i] = new Raccoon(map[8][0], this);
             }
             raccoons[i].setAge(i);
         }
@@ -105,8 +102,8 @@ public class Bakery {
         int y = t.getY();
         int min = 100;
         Oven oven = null;
-        for (int i = 0; i < 4; i+=3){
-            for (int j = 0; j < 6; j++){
+        for (int i = 0; i < 6; i++){
+            for (int j = 0; j < 4; j+=3){
                 if(map[i][j] instanceof Oven){
                     Oven o = (Oven) map[i][j];
                     if(o.isOccupied() && o.getBread().isCooked()){

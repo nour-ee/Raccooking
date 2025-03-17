@@ -52,7 +52,7 @@ public class BakerMovement implements KeyListener {
 
         //Down or S : moves the player to the tile below
         if (  (e.getKeyCode() == 40 || e.getKeyCode() == 83)
-                && bakery.getPlayer().getPosition().getY() < bakery.getPlayer().getPosition().getY() - 1  ) { //checks if the player is still in the map
+                && bakery.getPlayer().getPosition().getY() < bakery.getMap().length -1  ) { //checks if the player is still in the map
             //bakery.getPlayer().move(bakery.getMap()[bakery.getPlayer().getPosition().getX()][bakery.getPlayer().getPosition().getY()+1]);
             System.out.println("GO DOWN");
             bakery.getPlayer().move(bakery.getMap()[pos.getX()][pos.getY()+1]); //will attempt to move downwards
@@ -63,7 +63,7 @@ public class BakerMovement implements KeyListener {
                 && bakery.getPlayer().getPosition().getX() > 0  ) { //checks if the player is still in the map
             //bakery.getPlayer().move(bakery.getMap()[bakery.getPlayer().getPosition().getX()-1][bakery.getPlayer().getPosition().getX()]);
             System.out.println("GO LEFT");
-            bakery.getPlayer().move(bakery.getMap()[pos.getX()-1][pos.getX()]); //will attempt to move left
+            bakery.getPlayer().move(bakery.getMap()[pos.getX()-1][pos.getY()]); //will attempt to move left
         }
 
         //Right or D : moves the player to the tile on the right
