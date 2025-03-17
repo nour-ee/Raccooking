@@ -1,8 +1,11 @@
-package Model;
+package Controller;
 
 
 import java.awt.*;
 import java.util.ArrayList;
+
+import Model.Bread;
+import Model.Bread.State;
 
 import static Model.Bread.BURNT;
 import static Model.Bread.COOKED;
