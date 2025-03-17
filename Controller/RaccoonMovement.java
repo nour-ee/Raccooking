@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Bakery;
 import Model.Raccoon;
+import View.RaccoonPanel;
 
 public class RaccoonMovement extends Thread {
     int DELAY = 100;
@@ -22,7 +23,7 @@ public class RaccoonMovement extends Thread {
         for(int i =0; i<r.length; i++){
             while(r[i].getAge() < 10){
                 r[i].increment();
-                r[i].move(r[i].nextMove());
+                r[i].move(map.randomNeighbour(r[i].getPosition()));
             }
         
         }

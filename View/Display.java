@@ -77,6 +77,7 @@ public class Display extends JFrame {
     public JLabel getBakerLabel() {return bakerLabel;}
     public BakerPanel getBakerPanel() {return bkPanel;}
     public ArrayList<JLabel> getRaccoonLabels() {return raccoonLabels;}
+    public Bakery getBakery() { return bakery;}
 
 
     /****************
@@ -120,6 +121,7 @@ public class Display extends JFrame {
     private void placeRaccoons() {
         Raccoon[] rc = bakery.getRaccoons();
         for (Raccoon r : rc) {
+            System.out.println(r.getPosition().getX() + " " + r.getPosition().getY());
             int x = r.getPosition().getX();
             int y = r.getPosition().getY();
 
@@ -146,6 +148,18 @@ public class Display extends JFrame {
             add(raccoonPanel);
         }
     }
+
+    /**
+     * Updates the raccoons to their new positions after they moved
+     */
+    private void repaintRaccoons(){
+        for(int r=0;r<raccoonLabels.size();r++){
+            int x = bakery.getRaccoons()[r].getPosition().getX();
+            int y = bakery.getRaccoons()[r].getPosition().getY();
+            raccoonLabels.get(r).setBounds(coord(x,y).x,coord(x,y).y,TILE_SIZE,TILE_SIZE);
+        }
+    }
+
 
     /**
      * Places breads in bakery by accessing the ovens and checking if they're occupied
@@ -224,7 +238,6 @@ public class Display extends JFrame {
     public void paint(Graphics g) {
         super.paint(g);
         paintTiles();
-        initBread();
 
         //Update baker position :
         int x = bakery.getPlayer().getPosition().getX();
@@ -233,8 +246,7 @@ public class Display extends JFrame {
         bakerLabel.setBounds(coord(x, y).x, coord(x, y).y, TILE_SIZE, TILE_SIZE);
         //bakerLabel.setIcon();  TODO ----------- LATER
 
-        placeRaccoons();
-
+        repaintRaccoons();
         repaintBread();
     }
 }

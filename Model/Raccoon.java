@@ -25,6 +25,7 @@ public class Raccoon extends Entity {
     ********************/
     public Raccoon(Tile c, Bakery b){
         this.position = c;
+        c.RacoonArrived();
         this.age = 0;
         this.map = b;
         this.nb_bread = 0;

@@ -65,22 +65,13 @@ public class Bakery {
         //Initialization of the raccoons
         this.raccoons = new Raccoon[NB_RACCOONS];
         for(int i = 0; i<NB_RACCOONS; i++){
-            //raccoons[i] = new Raccoon(carte[BAKERY_H-1][BAKERY_W-1], this); //ils sont tous au même endroit ???
-            //proposition de placement des raccoons pour tester leur affichage
-            int p = (int)(Math.random()*5);
-            //place raccoons randomly with verifications that they are placed on accessible tiles
-            if(map[i+p][i+1].isAccessible()){
-                raccoons[i] = new Raccoon(map[i+p][i+1], this);
-            }
-            else{
-                raccoons[i] = new Raccoon(map[8][0], this);
-            }
+            raccoons[i] = new Raccoon(map[8][i], this);
             raccoons[i].setAge(i);
         }
 
         for (Tile[] lig : map) {
             for (Tile t : lig) {
-                System.out.print(t.hasOven() + " ");
+                System.out.print(t.hasRacoon() + " ");
             }
             System.out.println();
         }
@@ -129,7 +120,7 @@ public class Bakery {
         int y = t.getY();
         for(int i = -1; i<2 ;i++){
             for(int j=-1; j<2; j++){
-                if(x+i<8 && y+j<8 && map[(x+i)][(y+j)].isAccessible()){
+                if(x+i>0 && y+j>0 && x+i<8 && y+j<8 && map[(x+i)][(y+j)].isAccessible()){
                     return map[(x+i)][(y+j)];
                 }
             }
@@ -154,8 +145,8 @@ public class Bakery {
      * @return an optional containing the oven if there is an empty oven, empty otherwise
      */
     public Optional<Oven> hasFreeOven(){
-        for (int i = 0; i < 4; i+=3){
-            for (int j = 0; j < 6; j++){
+        for (int i = 0; i < 6; i++){
+            for (int j = 0; j < 4; j+=3){
                 if(map[i][j] instanceof Oven){
                     Oven o = (Oven) map[i][j];
                     if(!o.isOccupied()){
