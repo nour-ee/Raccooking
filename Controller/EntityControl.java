@@ -12,14 +12,31 @@ import java.util.ArrayList;
  * Controls the visibility of the panel entities
  * */
 public class EntityControl extends MouseAdapter {
+
+    /****************
+     *  ATTRIBUTES  *
+     ****************/
     BakerPanel bkPanel;
     Display display;
+
+    /********************
+     *    CONSTRUCTOR   *
+     ********************/
 
     public EntityControl( BakerPanel bkPanel, Display display) {
         this.bkPanel = bkPanel;
         this.display = display;
     }
 
+    /****************
+     *    METHODS   *
+     ****************/
+
+    /**
+     * Method to manage the interactions with the entities
+     * to print the corresponding panel
+     * @param e the action event
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         Object source = e.getSource();

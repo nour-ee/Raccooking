@@ -12,19 +12,37 @@ import java.util.Optional;
 
 /** Control the baker panel in particular buttons */
 public class BakerControl implements ActionListener {
+
+    /****************
+     *  ATTRIBUTES  *
+     ****************/
     private BakerPanel bkpanel;
     private Bakery bakery;
 
+    /****************
+     *    GETTERS   *
+     ****************/
     public Bakery getBakery() {
         return bakery;
     }
 
+    /********************
+     *    CONSTRUCTOR   *
+     ********************/
     public BakerControl(BakerPanel p, Bakery bakery){
         this.bkpanel = p;
         this.bakery = bakery;
 
     }
 
+    /****************
+     *    METHODS   *
+     ****************/
+
+    /**
+     * Method to manage the actions of the buttons
+     * @param e the action event
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         switch(e.getActionCommand()){
@@ -37,9 +55,8 @@ public class BakerControl implements ActionListener {
                         "The Choice of a ressource", JOptionPane.QUESTION_MESSAGE, null,
                         BakerPanel.RESSOURCES, // Array of choices
                         BakerPanel.RESSOURCES[1]); // Initial choice
-                System.out.println("Buy " + input); // à remplacer par  l'appel d'une methode qui stocke les ressources
+                System.out.println("Buy " + input); // print the choice
                 bakery.getPlayer().buy(input);
-                System.out.println("Money: " + bakery.getPlayer().getMoney());
                 ;break;}
 
             //if the player has enough ressources, and if there is a free oven, the player can bake bread
