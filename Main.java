@@ -7,11 +7,13 @@ import View.Redraw;
 
 public class Main {
 
-    //I WAS JUST TESTING SMTH
-    //can either delete or refactor this class you do you
     public static void main(String[] args) {
+
+        //Creation of the bakery
         Bakery bakery = new Bakery();
         Display display = new Display(bakery);
+        
+        //Starting the threads
         RaccoonMovement rm = new RaccoonMovement(display.getBakery());
         rm.start();
         RaccoonLife rl = new RaccoonLife(display.getBakery());
