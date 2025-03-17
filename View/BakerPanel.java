@@ -89,18 +89,21 @@ public class BakerPanel extends JPanel {
         collectButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         gbc.gridx = 0;
         gbc.gridy = 0;
+        collectButton.setFocusable(false);
         collectButton.addActionListener(bakerControl);
         buttonPanel.add(collectButton, gbc);
 
         JButton buyButton = new JButton("Buy");
         buyButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         gbc.gridy++;
+        buyButton.setFocusable(false);
         buyButton.addActionListener(bakerControl);
         buttonPanel.add(buyButton, gbc);
 
         JButton AddButton = new JButton("Add Bread");
         AddButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         gbc.gridy++;
+        AddButton.setFocusable(false);
         AddButton.addActionListener(bakerControl);
         buttonPanel.add(AddButton, gbc);
 
