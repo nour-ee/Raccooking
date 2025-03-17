@@ -20,6 +20,7 @@ public class Baker extends Entity {
     public Tile getPosition() { return position; }
     public int getMoney() { return money; }
     public int getSoldBread() { return soldBread; }
+    public Tile getTile() { return position; }
 
     /********************
      *    CONSTRUCTOR   *
@@ -27,7 +28,7 @@ public class Baker extends Entity {
     public Baker(Tile c){
         this.position = c; this.money = 50;
         this.ressources = new int[4];
-        for(int i = 0; i<4; i++) ressources[i] = 10; //rn we have a default number of ressources to test around stuff : might change later
+        for(int i = 0; i<4; i++) ressources[i] = 10;
         this.soldBread = 0;
     }
 
@@ -47,13 +48,11 @@ public class Baker extends Entity {
             this.position = c;
             this.position.BakerArrived();
             System.out.println("Position du joueur : "+position.getX()+" "+position.getY());
-    
         }
     }
 
      /**
-     * Method that increments the number of breads sold
-      * and the money of the player
+     * Method that increments breads sold
      */
     public void sellBread(){
         soldBread++;
@@ -61,7 +60,7 @@ public class Baker extends Entity {
     }
 
     /**
-     * Method to buy ingredients in order to bake our bread
+     * Method to buy ressources
      * @param s string representing the ressource to buy
      *          "flour", "egg", "yeast", "butter"
      */
@@ -76,17 +75,10 @@ public class Baker extends Entity {
         }
     }
 
-    /**
-     * Checks if the player has enough ingredients to bake bread
-     * @return b : true if the player has enough ingredients, false otherwise
-     */
     public boolean canBake(){
         return ressources[0] > 0 && ressources[1] > 0 && ressources[2] > 0 && ressources[3] > 0;
     }
 
-    /**
-     * Decrement the ressources of the player when he bakes a bread
-     */
     public void spendRessources(){
         ressources[0]--; ressources[1]--; ressources[2]--; ressources[3]--;
     }

@@ -8,14 +8,28 @@ import Model.Raccoon;
 
 /** Thread to update the progress bar */
 public class RaccoonThread extends Thread{
+    /****************
+     *  ATTRIBUTES  *
+     ****************/
     private RaccoonPanel raccoonPanel;
+
+    /********************
+     *    CONSTRUCTOR   *
+     ********************/
     public RaccoonThread(RaccoonPanel raccoonPanel){
         this.raccoonPanel = raccoonPanel;
     }
+
+    /****************
+     *    METHODS   *
+     ****************/
+    /**
+     * Method to update the progress bar
+     */
     @Override
     public void run() {
         while (true) {
-            SwingUtilities.invokeLater(() -> raccoonPanel.getProgressBar().setValue(Raccoon.MAX_AGE-this.raccoonPanel.getRaccoon().getAge())); // Update the progress bar on the EDT
+            SwingUtilities.invokeLater(() -> raccoonPanel.getProgressBar().setValue(Raccoon.MAX_AGE-this.raccoonPanel.getRaccoon().getAge()));
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
