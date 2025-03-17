@@ -83,34 +83,6 @@ public class Bakery {
     /***************
      *  METHODS    *
      ***************/
-
-
-    /**
-     * Function that finds the closest oven with a cooked bread
-     * @param t the tile from which we are looking for the oven
-     * @return the oven with a cooked bread that is the closest to the tile
-     */
-    public Oven closestReadyBread(Tile t){
-        int x = t.getX();
-        int y = t.getY();
-        int min = 100;
-        Oven oven = null;
-        for (int i = 0; i < 6; i++){
-            for (int j = 0; j < 4; j+=3){
-                if(map[i][j] instanceof Oven){
-                    Oven o = (Oven) map[i][j];
-                    if(o.isOccupied() && o.getBread().isCooked()){
-                        int dist = Math.abs(x-i) + Math.abs(y-j);
-                        if(dist < min){
-                            min = dist;
-                            oven = o;
-                        }
-                    }
-                }
-            }
-        }
-        return oven;
-    }
     
     /**
      * Function that returns a random neighbour of the tile given in parameter
