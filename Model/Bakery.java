@@ -139,9 +139,38 @@ public class Bakery {
     }
 
     /**
-     * Method that collects and sells cooked breads from the ovens and removes burnt ones
+     * Method that checks if there is an empty tile
+     * @return an optional containing the tile if there is an empty tile, empty otherwise
      */
+    public Optional<Tile> tileAbove(Tile t){
+        int x = t.getX();
+        int y = t.getY();
+        if(y>0){
+            Tile c = map[x][y-1];
+            if(c.isAccessible()&&c.isEmpty()){
+                return Optional.of(c);
+            }
+        }
+        return Optional.empty();
+    }
+
+        /**
+         * Method that collects and sells cooked breads from the ovens and removes burnt ones
+         */
     public void collectBread(){
+        Optional<Tile> t =tileAbove(player.getTile());
+        if(t.isPresent() && t.get() instanceof Oven){
+            Oven o= (Oven) t.get();
+            if(o.isOccupied()&& o.getBread().getState()!= Bread.State.COOKING){
+                if (o.getBread().getState()== Bread.State.COOKED) {
+                    player.sellBread();
+                }
+                o.removeBread();
+            }
+        }
+
+
+        /*
         for (Oven o : ovens){
             if(o.isOccupied()&& o.getBread().getState()!= Bread.State.COOKING){
                 if (o.getBread().getState()== Bread.State.COOKED) {
@@ -150,5 +179,7 @@ public class Bakery {
                 o.removeBread();
             }
         }
+
+         */
     }
 }
