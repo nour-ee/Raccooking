@@ -20,6 +20,7 @@ public class Baker extends Entity {
     public Tile getPosition() { return position; }
     public int getMoney() { return money; }
     public int getSoldBread() { return soldBread; }
+    public Tile getTile() { return position; }
 
     /********************
      *    CONSTRUCTOR   *
@@ -47,11 +48,10 @@ public class Baker extends Entity {
             this.position = c;
             this.position.BakerArrived();
             System.out.println("Position du joueur : "+position.getX()+" "+position.getY());
-    
         }
     }
 
-     /*
+     /**
      * Method that increments breads sold
      */
     public void sellBread(){
