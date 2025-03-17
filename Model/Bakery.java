@@ -73,7 +73,7 @@ public class Bakery {
 
         for (Tile[] lig : map) {
             for (Tile t : lig) {
-                System.out.print(t.hasRacoon() + " ");
+                System.out.print(t.hasOven() + " ");
             }
             System.out.println();
         }
