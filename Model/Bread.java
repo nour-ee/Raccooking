@@ -2,6 +2,8 @@ package Model;
 
 import java.awt.*;
 
+import Controller.Cooking;
+
 public class Bread {
     public enum State {
         COOKING, COOKED, BURNT

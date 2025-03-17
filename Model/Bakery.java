@@ -67,7 +67,7 @@ public class Bakery {
         //Initialization of the raccoons
         this.raccoons = new Raccoon[NB_RACCOONS];
         for(int i = 0; i<NB_RACCOONS; i++){
-            raccoons[i] = new Raccoon(map[8][i], this);
+            raccoons[i] = new Raccoon(map[8][i*2], this);
             raccoons[i].setAge(i);
         }
 
@@ -143,7 +143,7 @@ public class Bakery {
         for(int i = 0; i<raccoons.length; i++){
             if(raccoons[i].getAge() >= Raccoon.MAX_AGE){
                 raccoons[i].getPosition().RacoonHasLeft();
-                raccoons[i] = new Raccoon(map[7][7], this);
+                raccoons[i] = new Raccoon(map[BAKERY_H-1][BAKERY_W-1], this);
             }
         }
     }
