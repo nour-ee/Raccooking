@@ -46,9 +46,9 @@ public class Bakery {
         this.map = new Tile[BAKERY_W][BAKERY_H];
         this.ovens = new ArrayList<>();
 
-        for (int i = 0; i < BAKERY_W; i++){     //lines
+        for (int i = 0; i < BAKERY_W; i++){     //lines = y
 
-            for (int j = 0; j < BAKERY_H; j++){ //columns
+            for (int j = 0; j < BAKERY_H; j++){ //columns = x
 
                 //Ovens are placed between (0,0) and (5,0) , and between (0,3) and (5,3)
                 if((j==0 || j==3)&&i<6){

@@ -6,6 +6,20 @@ package Model;
  * - raccoon
  */
 abstract class Entity {
-    Tile position;
+
+    /****************
+     *  ATTRIBUTES  *
+     ****************/
+    Tile position; //current position of the entity
+
+
+    /****************
+     *    METHODS   *
+     ****************/
+
+    /**
+     * Abstract method to move our entity to the given tile
+     * @param T the tile to move to
+     */
     public abstract void move(Tile T);
 }
