@@ -154,8 +154,10 @@ public class Display extends JFrame {
      */
     private void repaintRaccoons(){
         for(int r=0;r<raccoonLabels.size();r++){
-            int x = bakery.getRaccoons()[r].getPosition().getX();
-            int y = bakery.getRaccoons()[r].getPosition().getY();
+            Raccoon rac = bakery.getRaccoons()[r];
+            //System.out.println(r + ":" + rac.getPosition().getX() + " " + rac.getPosition().getY());
+            int x = rac.getPosition().getX();
+            int y = rac.getPosition().getY();
             raccoonLabels.get(r).setBounds(coord(x,y).x,coord(x,y).y,TILE_SIZE,TILE_SIZE);
         }
     }

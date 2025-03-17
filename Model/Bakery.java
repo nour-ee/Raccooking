@@ -2,6 +2,8 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.Random;
+import java.util.random.RandomGenerator;
 
 /**
  * Classe qui représente la boulangerie
@@ -118,14 +120,19 @@ public class Bakery {
     public Tile randomNeighbour(Tile t){
         int x = t.getX();
         int y = t.getY();
-        for(int i = -1; i<2 ;i++){
-            for(int j=-1; j<2; j++){
-                if(x+i>0 && y+j>0 && x+i<8 && y+j<8 && map[(x+i)][(y+j)].isAccessible()){
-                    return map[(x+i)][(y+j)];
+        ArrayList<Tile> neighbours = new ArrayList<>();
+        for(int i =-1; i<2 ;i++){
+            for(int j = -1; j<2; j++){
+                if(x+i>=0 && x+i<BAKERY_W && y+j>=0 && y+j<BAKERY_H){
+                    Tile c = map[x+i][y+j];
+                    if(c.isAccessible()&&c.isEmpty()){
+                        neighbours.add(c);
+                    }
                 }
             }
         }
-        return t;
+        if(neighbours.size() == 0) return t;
+        return neighbours.get(Random.from(RandomGenerator.getDefault()).nextInt(neighbours.size())); 
     }
 
     /**
@@ -134,7 +141,7 @@ public class Bakery {
      */
     public void checkRaccoons(){
         for(int i = 0; i<raccoons.length; i++){
-            if(raccoons[i].getAge() > 20){
+            if(raccoons[i].getAge() >= 20){
                 raccoons[i] = new Raccoon(map[7][7], this);
             }
         }

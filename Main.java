@@ -1,3 +1,4 @@
+import Controller.RaccoonLife;
 import Controller.RaccoonMovement;
 import Controller.RaccoonThread;
 import View.Display;
@@ -13,6 +14,8 @@ public class Main {
         raccoonThread.start();
         RaccoonMovement rm = new RaccoonMovement(display.getBakery());
         rm.start();
+        RaccoonLife rl = new RaccoonLife(display.getBakery());
+        rl.start();
         Redraw redraw = new Redraw(display, display.getBakerPanel(), display.getRaccoonPanel());
         redraw.start();
     }

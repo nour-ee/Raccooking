@@ -51,8 +51,18 @@ public class Raccoon extends Entity {
      * Method that increments the age of the raccoon (i.e the number of move it has done)
      */
     public void increment(){
-        this.age++;
+        this.setAge(this.age+1);
     }   
+
+    /**
+     * Method that makes the raccoon eat the bread
+     *@param o the oven from which the raccoon will eat the bread
+     */
+    public void eatBread(Oven o){
+        o.removeBread();
+        this.nb_bread++;
+    }
+    
 
     /** 
      * Function that returns the tile to which the raccoon will move
@@ -61,8 +71,13 @@ public class Raccoon extends Entity {
         //search for the closest bread that is cooked
         Oven o = map.closestReadyBread(position); 
         if(o != null){
-            return o;
-        }else{ //if no bread is ready to be eaten, move randomly
+            //if a bread is cooked moves towards it
+            if(o.getX() > position.getX()) return map.getMap()[position.getX()+1][position.getY()];
+            if(o.getX() < position.getX()) return map.getMap()[position.getX()-1][position.getY()];
+            if(o.getY()+1 > position.getY()) return map.getMap()[position.getX()][position.getY()+1];
+            if(o.getY()+1 < position.getY()) return map.getMap()[position.getX()][position.getY()-1];
+            else this.eatBread(o);return position;
+        }else { //if no bread is ready to be eaten, move randomly
             return map.randomNeighbour(position);
         }
     }

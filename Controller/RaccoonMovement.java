@@ -2,10 +2,11 @@ package Controller;
 
 import Model.Bakery;
 import Model.Raccoon;
+import Model.Tile;
 import View.RaccoonPanel;
 
 public class RaccoonMovement extends Thread {
-    int DELAY = 100;
+    int DELAY = 800;
     private Bakery map;
 
     /***************
@@ -19,15 +20,18 @@ public class RaccoonMovement extends Thread {
      * Function that will move the raccoons and increment their age
      */
     public void run(){
-        Raccoon[] r = map.getRaccoons();
-        for(int i =0; i<r.length; i++){
-            while(r[i].getAge() < 10){
-                r[i].increment();
-                r[i].move(map.randomNeighbour(r[i].getPosition()));
+        while(true){
+            Raccoon[] r = map.getRaccoons();
+            for(int i =0; i<r.length; i++){
+                if(r[i].getAge() < 20){
+                    r[i].increment();
+                    Tile c = r[i].nextMove();
+                    r[i].move(c);
+                }
             }
-        
+            try { Thread.sleep(DELAY); }
+            catch (Exception e) { e.printStackTrace(); }
         }
-        try { Thread.sleep(DELAY); }
-        catch (Exception e) { e.printStackTrace(); }
+        
     }
 }

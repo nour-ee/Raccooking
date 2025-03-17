@@ -27,6 +27,8 @@ public class Tile {
     public boolean hasOven() { //if(hasOven){System.out.println("oven found");}
         return hasOven; }
 
+    public boolean isEmpty() { return !hasBaker && !hasRacoon && !hasOven; }
+
     /*************************************
      *              SETTERS
      *************************************/
