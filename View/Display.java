@@ -37,14 +37,14 @@ public class Display extends JFrame {
     /********************
      *    CONSTRUCTOR   *
      ********************/
-    public Display() {
+    public Display(Bakery bakery ) {
         setTitle("Raccooking");
         setSize(FRAME_W+BakerPanel.WIDTH, FRAME_H);
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         // Create a bakery
-        bakery = new Bakery();
+        this.bakery = bakery;
 
         // Add the Bakerpanel to the Bakery frame
         bkPanel = new BakerPanel(bakery);
