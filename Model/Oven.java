@@ -35,14 +35,20 @@ public class Oven extends Tile {
         this.accessible = false;
         this.occupied = false;
         this.hasOven=true;
-        //System.out.println("Oven created at (" + x + ", " + y + ")"+hasOven+hasOven());
     }
 
+    /**
+     * Method to remove the bread from the oven
+     */
     public void removeBread(){
-        this.bread = null; // TODO : le pain existe toujours même s'il n'est contenu dans rien, il faudrait le supprimer
+        this.bread.killThread();
+        this.bread = null; //the bread still exists even though it's not contained anywhere
         this.occupied = false;
     }
 
+    /**
+     * Method to add a bread to the oven
+     */
     public void addBread(){
         this.bread = new Bread();
         this.occupied = true;
