@@ -10,8 +10,8 @@ abstract class Entity {
     /****************
      *  ATTRIBUTES  *
      ****************/
-    Tile position; //current position of the entity
-
+    public Tile position; //current position of the entity
+    //TODO : change to private --------------------------------------------
 
     /****************
      *    METHODS   *
