@@ -139,25 +139,19 @@ public class Bakery {
     }
 
     /**
-     * Method that checks if there is an empty tile
-     * @return an optional containing the tile if there is an empty tile, empty otherwise
+     * Method that checks if the tile given in argument is above the player
+     * @param t the tile to check
+     * @return an optional containing the tile if it is above the player, empty otherwise
      */
-    public Optional<Tile> tileAbove(Tile t){
-        int x = t.getX();
-        int y = t.getY();
-        if(y>0){
-            Tile c = map[x][y-1];
-            if(c.isAccessible()&&c.isEmpty()){
-                return Optional.of(c);
-            }
-        }
-        return Optional.empty();
+    public boolean isAboveplayer(Tile t){
+        return t.getY() == player.getPosition().getY()-1 && t.getX() == player.getPosition().getX();
     }
 
         /**
          * Method that collects and sells cooked breads from the ovens and removes burnt ones
          */
     public void collectBread(){
+        /*
         Optional<Tile> t =tileAbove(player.getTile());
         if(t.isPresent() && t.get() instanceof Oven){
             Oven o= (Oven) t.get();
@@ -168,18 +162,20 @@ public class Bakery {
                 o.removeBread();
             }
         }
+        */
 
-
-        /*
         for (Oven o : ovens){
-            if(o.isOccupied()&& o.getBread().getState()!= Bread.State.COOKING){
-                if (o.getBread().getState()== Bread.State.COOKED) {
+            if(o.isOccupied()){
+                if (o.getBread().getState()== Bread.State.COOKED && isAboveplayer(o)) {
                     player.sellBread();
+                    o.removeBread();
                 }
-                o.removeBread();
+                if (o.getBread().getState()== Bread.State.BURNT) {
+                    o.removeBread();
+                }
             }
         }
 
-         */
+
     }
 }
