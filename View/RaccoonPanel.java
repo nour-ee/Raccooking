@@ -1,20 +1,24 @@
 package View;
 
 import javax.swing.*;
+
+import Model.Raccoon;
+
 import java.awt.*;
 
 /** Panel for the raccoon */
 public class RaccoonPanel extends JPanel {
     private JProgressBar progressBar; // can be used to manage the progress of the raccoon in the frame (time before disappearing)
-
+    private Raccoon raccoon ; // the raccoon is it connected to
+    public Raccoon getRaccoon() {return raccoon;}
     public static final int HEIGHT = BakerPanel.HEIGHT;
     public static final int WIDTH = BakerPanel.WIDTH;
 
-    public RaccoonPanel() {
+    public RaccoonPanel(Raccoon r) {
         this.setLayout(new BorderLayout());
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.setBackground(new Color(182, 179, 175));
-
+        this.raccoon = r;
 
         // add image of raccoon in panel
         ImageIcon bakerIcon = new ImageIcon(getClass().getResource("/img/raccoon.png")); // add as attribute for dissepearing raccoon
@@ -61,7 +65,8 @@ public class RaccoonPanel extends JPanel {
         // Progress bar
         progressBar = new JProgressBar();
         progressBar.setPreferredSize(new Dimension(150, 20));
-        progressBar.setValue(100); // Valeur initiale
+        progressBar.setMaximum(Raccoon.MAX_AGE); // Valeur maximale
+        progressBar.setValue(Raccoon.MAX_AGE-this.raccoon.getAge()); // Valeur initiale
         timeLabel.add(progressBar);
 
         // jpanel with time image and progress bar

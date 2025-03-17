@@ -4,6 +4,8 @@ import View.RaccoonPanel;
 
 import javax.swing.*;
 
+import Model.Raccoon;
+
 /** Thread to update the progress bar */
 public class RaccoonThread extends Thread{
     private RaccoonPanel raccoonPanel;
@@ -12,13 +14,10 @@ public class RaccoonThread extends Thread{
     }
     @Override
     public void run() {
-        int i = 100;
-        while (i >= 0) {
-            int finalI = i;
-            SwingUtilities.invokeLater(() -> raccoonPanel.getProgressBar().setValue(finalI)); // Update the progress bar on the EDT
-            i -= 5;
+        while (true) {
+            SwingUtilities.invokeLater(() -> raccoonPanel.getProgressBar().setValue(Raccoon.MAX_AGE-this.raccoonPanel.getRaccoon().getAge())); // Update the progress bar on the EDT
             try {
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -1,6 +1,7 @@
 package View;
 import Controller.BakerMovement;
 import Controller.EntityControl;
+import Controller.RaccoonThread;
 import Model.*;
 
 import javax.swing.*;
@@ -14,7 +15,6 @@ public class Display extends JFrame {
      ****************/
     //panels that appear when clicking on the entities
     private BakerPanel bkPanel;
-    private RaccoonPanel rcPanel;
 
     private EntityControl entityControl;
 
@@ -51,13 +51,8 @@ public class Display extends JFrame {
         bkPanel.setVisible(false);
         bakerMovement = new BakerMovement(bakery);
 
-
-        // Add the RaccoonPanel to the Bakery frame
-        rcPanel = new RaccoonPanel();
-        rcPanel.setVisible(false);
-
         // Manage interaction with bakery elements
-        entityControl = new EntityControl(rcPanel, bkPanel, this);
+        entityControl = new EntityControl( bkPanel, this);
 
         // Add the Baker to the Bakery frame
         placeBaker();
@@ -73,10 +68,11 @@ public class Display extends JFrame {
     /****************
      *    GETTERS   *
      ****************/
-    public RaccoonPanel getRaccoonPanel() {return rcPanel;}
+    //public RaccoonPanel getRaccoonPanel() {return rcPanel;}
     public JLabel getBakerLabel() {return bakerLabel;}
     public BakerPanel getBakerPanel() {return bkPanel;}
     public ArrayList<JLabel> getRaccoonLabels() {return raccoonLabels;}
+    public ArrayList<RaccoonPanel> getRaccoonPanels() {return raccoonPanels;}
     public Bakery getBakery() { return bakery;}
 
 
@@ -134,7 +130,7 @@ public class Display extends JFrame {
             raccoonLabel.setBounds(coord(x, y).x, coord(x, y).y, newWidth, newHeight);
 
             //Create raccoon panel for each raccoon
-            RaccoonPanel raccoonPanel = new RaccoonPanel();
+            RaccoonPanel raccoonPanel = new RaccoonPanel(r);
             raccoonPanel.setVisible(false);
 
             //RaccoonPanel appears on the right when RaccoonLabel is clicked
@@ -145,6 +141,8 @@ public class Display extends JFrame {
             raccoonPanels.add(raccoonPanel);
             add(raccoonLabel);
             add(raccoonPanel);
+
+            (new RaccoonThread(raccoonPanel)).start();
         }
     }
 

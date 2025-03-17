@@ -12,15 +12,12 @@ import java.util.ArrayList;
  * Controls the visibility of the panel entities
  * */
 public class EntityControl extends MouseAdapter {
-    RaccoonPanel rcPanel;
     BakerPanel bkPanel;
-
     Display display;
 
-    public EntityControl(RaccoonPanel rcPanel, BakerPanel bkPanel, Display display) {
-        this.rcPanel = rcPanel;
+    public EntityControl( BakerPanel bkPanel, Display display) {
         this.bkPanel = bkPanel;
-       this.display = display;
+        this.display = display;
     }
 
     @Override
@@ -31,22 +28,43 @@ public class EntityControl extends MouseAdapter {
 
         if (source == bakerLabel) { // Verify if the click comes from the baker label
             System.out.println("Baker clicked!");
-            rcPanel.setVisible(false);
+            setAllNonVisible();
             bkPanel.setBounds(Display.FRAME_W, 0, BakerPanel.WIDTH, BakerPanel.HEIGHT);
             bkPanel.requestFocus();
             display.add(bkPanel);
             bkPanel.setVisible(true);
         } else {
-            for(JLabel raccoonLabel : raccoonLabels) {
-                if (source == raccoonLabel) { // Verify if the click comes from the raccoon label
+            for(int i =0; i<raccoonLabels.size();i++){
+                RaccoonPanel rc = display.getRaccoonPanels().get(i);
+                if(source == raccoonLabels.get(i)){
                     System.out.println("Raccoon clicked!");
                     bkPanel.setVisible(false);
-                    rcPanel.setBounds(Display.FRAME_W, 0, RaccoonPanel.WIDTH, RaccoonPanel.HEIGHT); // Position the panel off-screen to the right
-                    display.add(rcPanel);
-                    rcPanel.setVisible(true);
+                    setNonVisible(i);
+                    rc.setBounds(Display.FRAME_W, 0, RaccoonPanel.WIDTH, RaccoonPanel.HEIGHT); // Position the panel off-screen to the right
+                    display.add(rc);
+                    rc.setVisible(true);
                 }
             }
         }
     }
 
+    /**
+     * Makes all RaccoonPanels except the one we want non visible
+     */
+    public void setNonVisible(int i){
+        for(int j = 0; j<display.getRaccoonPanels().size();j++){
+            if(j!=i){
+                display.getRaccoonPanels().get(j).setVisible(false);
+            }
+        }
+    }
+
+    /**
+     * Makes all RaccoonPanels non visible
+     */
+    public void setAllNonVisible(){
+        for(int j = 0; j<display.getRaccoonPanels().size();j++){
+            display.getRaccoonPanels().get(j).setVisible(false);
+        }
+    }
 }
