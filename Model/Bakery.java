@@ -125,14 +125,9 @@ public class Bakery {
      * @return an optional containing the oven if there is an empty oven, empty otherwise
      */
     public Optional<Oven> hasFreeOven(){
-        for (int i = 0; i < 6; i++){
-            for (int j = 0; j < 4; j+=3){
-                if(map[i][j] instanceof Oven){
-                    Oven o = (Oven) map[i][j];
-                    if(!o.isOccupied()){
-                        return Optional.of(o);
-                    }
-                }
+        for (Oven o : ovens){
+            if(!o.isOccupied()){
+                return Optional.of(o);
             }
         }
         return Optional.empty();
