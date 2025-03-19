@@ -138,7 +138,7 @@ public class Bakery {
      * @param t the tile to check
      * @return an optional containing the tile if it is above the player, empty otherwise
      */
-    public boolean isAboveplayer(Tile t){
+    public boolean isAbovePlayer(Tile t){
         return t.getY() == player.getPosition().getY()-1 && t.getX() == player.getPosition().getX();
     }
 
@@ -146,22 +146,9 @@ public class Bakery {
          * Method that collects and sells cooked breads from the ovens and removes burnt ones
          */
     public void collectBread(){
-        /*
-        Optional<Tile> t =tileAbove(player.getTile());
-        if(t.isPresent() && t.get() instanceof Oven){
-            Oven o= (Oven) t.get();
-            if(o.isOccupied()&& o.getBread().getState()!= Bread.State.COOKING){
-                if (o.getBread().getState()== Bread.State.COOKED) {
-                    player.sellBread();
-                }
-                o.removeBread();
-            }
-        }
-        */
-
         for (Oven o : ovens){
             if(o.isOccupied()){
-                if (o.getBread().getState()== Bread.State.COOKED && isAboveplayer(o)) {
+                if (o.getBread().getState()== Bread.State.COOKED && isAbovePlayer(o)) {
                     player.sellBread();
                     o.removeBread();
                 }
@@ -170,7 +157,5 @@ public class Bakery {
                 }
             }
         }
-
-
     }
 }
