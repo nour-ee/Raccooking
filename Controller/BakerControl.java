@@ -6,6 +6,7 @@ import Model.Oven;
 import View.BakerPanel;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Optional;
@@ -51,12 +52,31 @@ public class BakerControl implements ActionListener {
                 bakery.collectBread();
                 ;break;}
             case "Buy" -> {// print combo box
-                String input = (String) JOptionPane.showInputDialog(null, "Choose one element you need...",
-                        "The Choice of a ressource", JOptionPane.QUESTION_MESSAGE, null,
-                        BakerPanel.RESSOURCES, // Array of choices
-                        BakerPanel.RESSOURCES[1]); // Initial choice
-                System.out.println("Buy " + input); // print the choice
-                bakery.getPlayer().buy(input);
+                // JPanel for the check boxes
+                JPanel panel = new JPanel(new GridLayout(0, 1));
+
+                // Create the check boxes
+                JCheckBox[] checkBoxes = new JCheckBox[BakerPanel.RESSOURCES.length];
+
+                for (int i = 0; i < BakerPanel.RESSOURCES.length; i++) {
+                    checkBoxes[i] = new JCheckBox(BakerPanel.RESSOURCES[i]);
+                    panel.add(checkBoxes[i]);
+                }
+
+                // Show the dialog with the check boxes
+                int result = JOptionPane.showConfirmDialog(null, panel,
+                        "Choose ressource(s) you need...",
+                        JOptionPane.OK_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE);
+
+                // Action to do if the user click on OK
+                if (result == JOptionPane.OK_OPTION) {
+                    for (JCheckBox checkBox : checkBoxes) {
+                        if (checkBox.isSelected()) {
+                            bakery.getPlayer().buy(checkBox.getText());
+                        }
+                    }
+                }
                 ;break;}
 
             //if the player has enough ressources, and if there is a free oven, the player can bake bread
