@@ -88,7 +88,7 @@ public class RaccoonPanel extends JPanel {
         gbc2.gridx = 0;
         gbc2.gridy = 1;
         gbc2.insets = new Insets(2, 2, 10, 10);
-        breadLabel.setText("50"); // add attribut for number of bread in raccoon ==> get it from raccoon
+        breadLabel.setText(""+raccoon.getBread()); // add attribut for number of bread in raccoon ==> get it from raccoon
 
         infoPanel.add(breadLabel, gbc2);
         this.add(infoPanel);
