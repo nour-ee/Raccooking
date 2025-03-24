@@ -23,6 +23,7 @@ public class Baker extends Entity {
     public int getMoney() { return money; }
     public int getSoldBread() { return soldBread; }
     public Tile getTile() { return position; }
+    public HashMap<String, Integer> getRessources() { return ressources; }
 
     /********************
      *    CONSTRUCTOR   *
