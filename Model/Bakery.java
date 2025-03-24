@@ -1,8 +1,12 @@
 package Model;
 
+import javax.swing.tree.FixedHeightLayoutCache;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.random.RandomGenerator;
 
 /**
@@ -17,8 +21,8 @@ public class Bakery {
     *  CONSTANTS   *
     ****************/
     public static final int NB_RACCOONS = 5; //number of raccoons on the map (might change in later versions)
-    public static final int BAKERY_H = 10; //height of the grid/bakery
-    public static final int BAKERY_W = 10;
+    public static int BAKERY_H = 10; //height of the grid/bakery
+    public static int BAKERY_W = 10;
 
 
     /***************
@@ -70,12 +74,60 @@ public class Bakery {
             raccoons[i] = new Raccoon(map[8][i*2], this);
             raccoons[i].setAge(i);
         }
+    }
 
-        for (Tile[] lig : map) {
-            for (Tile t : lig) {
-                System.out.print(t.hasRacoon() + " ");
+
+    public Bakery(String filename){
+        try {
+            Scanner file = new Scanner(new FileInputStream(filename));
+            BAKERY_H = file.nextInt();
+            BAKERY_W= file.nextInt();
+            file.nextLine();
+            int goal= file.nextInt();
+            int racoonsNb = file.nextInt();
+
+            file.nextLine();
+            //CaseTraversable[] var6 = new CaseTraversable[1];
+            this.map = new Tile[BAKERY_H][BAKERY_W];
+            this.raccoons= new Raccoon[racoonsNb];
+            this.ovens = new ArrayList<>();
+
+            int r=0; //index of raccoons TODO : change to ArrayList ---------------------------------------------
+
+            for(int i = 0; i < this.BAKERY_H; i++) {
+                String line = file.nextLine();
+                for(int j = 0; j < this.BAKERY_W; j++) {
+                    Character c = line.charAt(j);
+                    Tile t;
+                    switch (c) {
+                        case 'B':
+                            t = new Tile(i,j);
+                            Baker baker = new Baker(t);
+                            this.player = baker;
+                            break;
+                        case 'O':
+                            t = new Oven(i,j);
+                            this.ovens.add((Oven) t);
+                            break;
+                        case 'R' :
+                            t = new Tile(i,j);
+                            Raccoon raccoon = new Raccoon(t, this);
+                            raccoon.setAge(r);
+                            this.raccoons[r]=raccoon;
+                            System.out.println("Raccoon "+r+" created at "+i+" "+j);
+                            r++;
+                            break;
+                        default:
+                            t = new Tile(i,j);
+                    }
+                    this.map[i][j] = (Tile) t;
+                }
             }
-            System.out.println();
+
+            file.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
         }
     }
 
