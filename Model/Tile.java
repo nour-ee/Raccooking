@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.List;
+
 public class Tile {
 
     /****************
@@ -14,14 +16,16 @@ public class Tile {
     protected boolean hasBaker; //indicates if the tile has a baker on it
     protected boolean hasRacoon; //indicates if the tile has a racoon on it
     protected boolean hasOven; //indicates if the tile has a bread on it
+    protected boolean nextToBaker; //indicates if the tile is next to the baker
 
     /*************************************
      *              GETTERS
      *************************************/
     public boolean isAccessible(){ return this.accessible; }
+    public boolean isAccessibleToRaccoon(){ return this.accessible && !(nextToBaker||hasBaker); }
     public int getX() { return x; }
     public int getY() { return y; }
-
+    public boolean isNextToBaker() { return nextToBaker; }
     public boolean hasBaker() { return hasBaker; }
     public boolean hasRacoon() { return hasRacoon;}
     public boolean hasOven() { //if(hasOven){System.out.println("oven found");}
@@ -33,6 +37,7 @@ public class Tile {
      *              SETTERS
      *************************************/
     public void setAccessible(boolean b) { this.accessible = b; }
+    public void setNextToBaker(boolean b) { this.nextToBaker = b; }
     public void BakerArrived() { this.hasBaker = true; }
     public void BakerHasLeft() { this.hasBaker = false; }
     public void RacoonArrived() { this.hasRacoon = true; }
@@ -48,7 +53,24 @@ public class Tile {
         this.hasBaker = false;
         this.hasRacoon = false;
         this.hasOven = false;
+        this.nextToBaker = false;
         this.x = x; this.y = y;
     }
 
+    /*************************************
+     *              METHODS
+     *************************************/
+
+    /**
+     * Function that tells you whether or not a given tile is a neighbour of the current tile
+     * @param t the tile to check
+     */
+    public boolean isNeighbour(Tile t){
+        int x = t.getX();
+        int y = t.getY();
+        if(this.x == x && Math.abs(this.y - y)== 1) return true;
+        if(this.y == y && Math.abs(this.x - x) == 1) return true;
+        if(Math.abs(this.x - x) == 1 && Math.abs(this.y - y) == 1) return true;
+        return false;
+    }
 }
