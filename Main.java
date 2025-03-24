@@ -2,6 +2,7 @@ import Controller.RaccoonLife;
 import Controller.RaccoonMovement;
 import Controller.RaccoonThread;
 import Model.Bakery;
+import View.Begin;
 import View.Display;
 import View.Redraw;
 
@@ -12,6 +13,7 @@ public class Main {
         //Creation of the bakery
         Bakery bakery = new Bakery();
         Display display = new Display(bakery);
+        Begin begin = new Begin(display);
         
         //Starting the threads
         RaccoonMovement rm = new RaccoonMovement(display.getBakery());
@@ -20,6 +22,13 @@ public class Main {
         rl.start();
         Redraw redraw = new Redraw(display, display.getBakerPanel());
         redraw.start();
+
+        if(begin.getBegin()){
+            display.setVisible(true);
+        }
+        else{
+            display.setVisible(false);
+        }
 
     }
 }

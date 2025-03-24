@@ -13,6 +13,7 @@ public class Display extends JFrame {
     /****************
      *  ATTRIBUTES  *
      ****************/
+
     //panels that appear when clicking on the entities
     private BakerPanel bkPanel;
 
@@ -42,7 +43,6 @@ public class Display extends JFrame {
         setSize(FRAME_W+BakerPanel.WIDTH, FRAME_H);
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-
         // Create a bakery
         this.bakery = bakery;
 
