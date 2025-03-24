@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.HashMap;
+
 /**
  * Baker : our player class !
  */
@@ -9,7 +11,7 @@ public class Baker extends Entity {
      *  ATTRIBUTES  *
      ****************/
     private int money; // current money of the player
-    private int[] ressources; //Stores the ressources of the baker
+    private HashMap<String, Integer> ressources; //Stores the ressources of the baker
                               // in the following indexes:
                               // 0 flour, 1 egg, 2 yeast, 3 butter
     private int soldBread; // number of breads sold
@@ -27,8 +29,11 @@ public class Baker extends Entity {
      ********************/
     public Baker(Tile c){
         this.position = c; this.money = 50;
-        this.ressources = new int[4];
-        for(int i = 0; i<4; i++) ressources[i] = 10;
+        //this.ressources = new int[4];
+        //for(int i = 0; i<4; i++) ressources[i] = 10;
+        this.ressources = new HashMap<>();
+        ressources.put("flour", 5); ressources.put("egg", 5);
+        ressources.put("yeast", 5); ressources.put("butter", 5);
         this.soldBread = 0;
     }
 
@@ -66,21 +71,29 @@ public class Baker extends Entity {
      */
     public void buy(String s){
         if( money >= 2 ) {
+            /*
             switch (s) {
                 case "flour" : ressources[0]++; money=money-2; break;
                 case "egg" : ressources[1]++; money=money-2; break;
                 case "yeast" : ressources[2]++; money=money-2; break;
                 case "butter" : ressources[3]++; money=money-2; break;
-            }
+            }*/
+            ressources.put(s, ressources.get(s)+1); money-=2;
         }
     }
 
     public boolean canBake(){
-        return ressources[0] > 0 && ressources[1] > 0 && ressources[2] > 0 && ressources[3] > 0;
+        //return ressources[0] > 0 && ressources[1] > 0 && ressources[2] > 0 && ressources[3] > 0;
+        for (int i : ressources.values()) {
+            if(i<=0) return false;
+        } return true;
     }
 
     public void spendRessources(){
-        ressources[0]--; ressources[1]--; ressources[2]--; ressources[3]--;
+        //ressources[0]--; ressources[1]--; ressources[2]--; ressources[3]--;
+        for (String s : ressources.keySet()) {
+            ressources.put(s, ressources.get(s)-1);
+        }
     }
 
 
