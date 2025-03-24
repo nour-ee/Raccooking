@@ -15,6 +15,7 @@ public class Baker extends Entity {
                               // in the following indexes:
                               // 0 flour, 1 egg, 2 yeast, 3 butter
     private int soldBread; // number of breads sold
+    private Bakery bakery; //la boulangerie
 
     /****************
      *    GETTERS   *
@@ -24,12 +25,16 @@ public class Baker extends Entity {
     public int getSoldBread() { return soldBread; }
     public Tile getTile() { return position; }
     public HashMap<String, Integer> getRessources() { return ressources; }
+    public Bakery getBakery() { return bakery; }
 
     /********************
      *    CONSTRUCTOR   *
      ********************/
-    public Baker(Tile c){
-        this.position = c; this.money = 50;
+    public Baker(Tile c, Bakery b){
+        this.bakery = b;
+        this.position = c;
+        c.BakerArrived();
+        this.money = 50;
         //this.ressources = new int[4];
         //for(int i = 0; i<4; i++) ressources[i] = 10;
         this.ressources = new HashMap<>();
@@ -50,9 +55,21 @@ public class Baker extends Entity {
     public void move(Tile c){
 
         if(c.isAccessible()){
+            //make the tiles next to old baker pos not have a nextToBaker
+            for(Tile t : this.bakery.neighbours(this.position)){
+                t.setNextToBaker(false);
+            }
             this.position.BakerHasLeft();
             this.position = c;
             this.position.BakerArrived();
+            //make the tiles next to new baker pos have a nextToBaker
+            for(Tile t : this.bakery.neighbours(c)){
+                t.setNextToBaker(true);
+            }
+            //makes all raccoons in proximity run away
+            for(Raccoon r : bakery.raccoonsNextTo(c)){
+                r.set_on_the_run(true);
+            }
             System.out.println("Position du joueur : "+position.getX()+" "+position.getY());
         }
     }
