@@ -14,6 +14,7 @@ public class BakerPanel extends JPanel {
 
     private JLabel moneyLabel;
     private JLabel breadLabel;
+    private JLabel ressourcesLabel;
 
 
     public static final int HEIGHT = 650;
@@ -70,6 +71,29 @@ public class BakerPanel extends JPanel {
         gbc2.gridy = 1;
         gbc2.insets = new Insets(2, 2, 10, 10);
         ressourcesPanel.add(breadLabel, gbc2);
+
+
+        // ingredients labels
+        ressourcesLabel = new JLabel("Ingrédients :");
+        gbc2.gridx = 0; gbc2.gridy =  2;
+
+        gbc2.insets = new Insets(2, 2, 10, 10);
+        ressourcesPanel.add(ressourcesLabel, gbc2);
+
+        // display the ingredients
+        for (int i = 0; i < RESSOURCES.length; i++) {
+            JLabel ingredientLabel = new JLabel(RESSOURCES[i] + ": " + bakerControl.getBakery().getPlayer().getRessources().get(RESSOURCES[i]));
+            if( i%2 == 0 ) {
+                gbc2.gridx = 0;
+                gbc2.gridy = 3 + i;
+            }
+            else {
+                gbc2.gridx = 1;
+                gbc2.gridy = 3 + (i-1);
+            }
+            gbc2.insets = new Insets(2, 2, 10, 10);
+            ressourcesPanel.add(ingredientLabel, gbc2);
+        }
         this.add(ressourcesPanel);
     }
 
