@@ -1,5 +1,7 @@
 package Model;
 
+import View.LevelPanel;
+
 import javax.swing.tree.FixedHeightLayoutCache;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -32,6 +34,7 @@ public class Bakery {
     private Baker player;
     private Raccoon[] raccoons; //TODO : change to ArrayList ---------------------------------------------
     private ArrayList<Oven> ovens; //ovens to cook breads
+    private String levelFile; //level of the game
 
 
     /****************
@@ -41,11 +44,18 @@ public class Bakery {
     public Baker getPlayer() { return player; }
     public Raccoon[] getRaccoons() { return raccoons; }
     public ArrayList<Oven> getOvens() { return ovens; }
+    public String getLevelFile() { return levelFile; }
+
+    /****************
+     *    SETTERS   *
+     ****************/
+    public void setLevel(int level) { this.levelFile = "levels/level"+level+".txt"; }
 
     /********************
      *    CONSTRUCTOR   *
      ********************/
-    public Bakery(){
+    /*public Bakery(){
+        this.levelFile = "levels/level1.txt";
         // Initialisation of the bakery
         this.map = new Tile[BAKERY_W][BAKERY_H];
         this.ovens = new ArrayList<>();
@@ -74,9 +84,62 @@ public class Bakery {
             raccoons[i] = new Raccoon(map[8][i*2], this);
             raccoons[i].setAge(i);
         }
+    }*/
+
+
+    public Bakery(LevelPanel levelPanel){
+        this.levelFile = "levels/level"+levelPanel.getCurrentLevel()+".txt";
+        try {
+            Scanner file = new Scanner(new FileInputStream(levelFile));
+            BAKERY_H = file.nextInt();
+            BAKERY_W= file.nextInt();
+            file.nextLine();
+            int goal= file.nextInt();
+            int racoonsNb = file.nextInt();
+
+            file.nextLine();
+            //CaseTraversable[] var6 = new CaseTraversable[1];
+            this.map = new Tile[BAKERY_H][BAKERY_W];
+            this.raccoons= new Raccoon[racoonsNb];
+            this.ovens = new ArrayList<>();
+
+            int r=0; //index of raccoons TODO : change to ArrayList ---------------------------------------------
+
+            for(int i = 0; i < this.BAKERY_H; i++) {
+                String line = file.nextLine();
+                for(int j = 0; j < this.BAKERY_W; j++) {
+                    Character c = line.charAt(j);
+                    Tile t;
+                    switch (c) {
+                        case 'B':
+                            t = new Tile(i,j);
+                            Baker baker = new Baker(t, this);
+                            this.player = baker;
+                            break;
+                        case 'O':
+                            t = new Oven(i,j);
+                            this.ovens.add((Oven) t);
+                            break;
+                        case 'R' :
+                            t = new Tile(i,j);
+                            Raccoon raccoon = new Raccoon(t, this);
+                            raccoon.setAge(r);
+                            this.raccoons[r]=raccoon;
+                            r++;
+                            break;
+                        default:
+                            t = new Tile(i,j);
+                    }
+                    this.map[i][j] = (Tile) t;
+                }
+            }
+
+            file.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
-
-
     public Bakery(String filename){
         try {
             Scanner file = new Scanner(new FileInputStream(filename));

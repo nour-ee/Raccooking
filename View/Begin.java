@@ -5,41 +5,62 @@ import java.awt.*;
 
 public class Begin extends JFrame {
 
-    private boolean begin;
     private boolean sound;
     private Display display;
+
+    //private JPanel panelButton; // panel for the button
+    private LevelPanel panelLevel; // panel for the level
 
     public static final int BEGIN_W = 800;
     public static final int BEGIN_H = 600;
 
-
-    public Begin(Display display){
+    /****************
+     *  CONSTRUCTOR *
+     ****************/
+    public Begin(Display display,LevelPanel levelPanel) {
         this.display = display;
         this.sound = true;
+        this.panelLevel = levelPanel;
+
+        ImageIcon icon = new ImageIcon("img/Raccooking.png");
+
+        // resize the image
+        Image imgIcon = icon.getImage();
+        Image newImg = imgIcon.getScaledInstance(BEGIN_W, BEGIN_H, Image.SCALE_SMOOTH);
+        icon = new ImageIcon(newImg);
+
+        // set the frame
         setTitle("Raccooking");
         setSize(BEGIN_W, BEGIN_H);
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
-        this.getContentPane().setBackground(new Color(255, 235, 182, 150));
 
-        creePlayButton(BEGIN_W/2-90, 300, 100, 50);
-        creeSoundButton(BEGIN_W/2+25, 300, 100, 50, new ImageIcon("img/sound-on.png"));
+        // create the image of the background
+        JLabel fond = new JLabel(icon);
+        fond.setBounds(0,0,getWidth(),getHeight());
+        //add the image to the frame
+        this.add(fond);
+        panelLevel.setLocation(BEGIN_W/2-150, 150);
+        this.add(panelLevel);
+        //create the buttons
+        createPlayButton();
+        createSoundButton(new ImageIcon("img/sound-on.png"));
         setVisible(true);
     }
-    public boolean getBegin(){ return begin; }
 
-    public void creePlayButton(int x, int y, int w, int h) {
+    /** Create the play button*/
+    public void createPlayButton() {
         JButton playB = new JButton("Play");
         playB.addActionListener(e -> {
-            begin = true;
             this.setVisible(false);
             display.setVisible(true);
         });
-        playB.setBounds(x, y, w, h);
+        playB.setBounds(BEGIN_W/2-50, 330, 100, 50);
         this.add(playB);
     }
-    public void creeSoundButton(int x, int y, int w, int h, ImageIcon img) {
+    /** Create the sound button **/
+    public void createSoundButton(ImageIcon img) {
         JButton soundB = new JButton();
         soundB.setIcon(img);
         soundB.addActionListener(e -> {
@@ -52,38 +73,7 @@ public class Begin extends JFrame {
                 soundB.setIcon(new ImageIcon("img/sound-on.png"));
             }
         });
-        soundB.setBounds(x, y, w, h);
+        soundB.setBounds(BEGIN_W/2-50, 400, 100, 50);
         this.add(soundB);
-    }
-
-    /*public void chooseLevel(){
-        String[] levels = {"level1.txt", "level2.txt", "level3.txt"};
-        JComboBox<String> levelList = new JComboBox<>(levels);
-        levelList.setSelectedIndex(0);
-        levelList.addActionListener(e -> {
-            JComboBox cb = (JComboBox)e.getSource();
-            String level = (String)cb.getSelectedItem();
-            switch (level){
-                case "Level 1":
-                    display.setBakery(new Bakery(1));
-                    break;
-                case "Level 2":
-                    display.setBakery(new Bakery(2));
-                    break;
-                case "Level 3":
-                    display.setBakery(new Bakery(3));
-                    break;
-            }
-        });
-        levelList.setBounds(BEGIN_W/2-50, 400, 100, 50);
-        this.add(levelList);
-
-    }*/
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-        g.setFont(new Font("Arial", Font.BOLD, 25));
-        g.drawString("Raccooking", BEGIN_W/2-50, 200);
-
     }
 }

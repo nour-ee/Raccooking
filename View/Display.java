@@ -62,7 +62,7 @@ public class Display extends JFrame {
         initOvens();
 
         //set frame visible
-        setVisible(true);
+        //setVisible(true);
     }
 
     /****************
