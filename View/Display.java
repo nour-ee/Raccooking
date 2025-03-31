@@ -272,7 +272,7 @@ public class Display extends JFrame {
         bakerLabel.setBounds(coord.x, coord.y, TILE_SIZE, TILE_SIZE);
         //bakerLabel.setIcon();  TODO ----------- LATER
 
-        repaintRaccoons();
+        //repaintRaccoons();
         repaintBread();
     }
 }

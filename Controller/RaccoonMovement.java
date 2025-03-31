@@ -13,7 +13,7 @@ import Model.Tile;
 import View.RaccoonPanel;
 
 public class RaccoonMovement extends Thread {
-    int DELAY = 1000;
+    public static final int DELAY_RACCOONMOVEMENT = 1000;
     private Bakery map;
     private ArrayList<JLabel> raccoonPanels;
 
@@ -35,11 +35,11 @@ public class RaccoonMovement extends Thread {
                 if(r[i].getAge() < Raccoon.MAX_AGE){
                     Tile c = r[i].nextMove();
                     r[i].move(c);
-                    //(new MovingAnimation(r[i].getLabel(), c)).start();
+                    (new MovingAnimation(raccoonPanels.get(i), c, r[i].position)).start();
                     r[i].increment();
                 }
             }
-            try { Thread.sleep(DELAY); }
+            try { Thread.sleep(DELAY_RACCOONMOVEMENT); }
             catch (Exception e) { e.printStackTrace(); }
         }
         
