@@ -92,19 +92,12 @@ public class Raccoon extends Entity {
     public Oven closestReadyBread(){
         int x = this.position.getX();
         int y = this.position.getY();
-        int min = 100;
         Oven oven = null;
-        for (int i = 0; i < 6; i++){
-            for (int j = 0; j < 4; j+=3){
-                if(bakery.getMap()[i][j] instanceof Oven){
-                    Oven o = (Oven) bakery.getMap()[i][j];
-                    if(o.isOccupied() && o.getBread().isCooked()){
-                        int dist = Math.abs(x-i) + Math.abs(y-j);
-                        if(dist < min){
-                            min = dist;
-                            oven = o;
-                        }
-                    }
+        for(Tile t: this.bakery.neighbours(position)){
+            if(t.hasOven()){
+                Oven o = (Oven)t;
+                if(o.isOccupied() && o.getBread().isCooked()){
+                    oven = o;
                 }
             }
         }
