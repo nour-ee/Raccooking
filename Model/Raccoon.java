@@ -92,19 +92,12 @@ public class Raccoon extends Entity {
     public Oven closestReadyBread(){
         int x = this.position.getX();
         int y = this.position.getY();
-        int min = 100;
         Oven oven = null;
-        for (int i = 0; i < 6; i++){
-            for (int j = 0; j < 4; j+=3){
-                if(bakery.getMap()[i][j] instanceof Oven){
-                    Oven o = (Oven) bakery.getMap()[i][j];
-                    if(o.isOccupied() && o.getBread().isCooked()){
-                        int dist = Math.abs(x-i) + Math.abs(y-j);
-                        if(dist < min){
-                            min = dist;
-                            oven = o;
-                        }
-                    }
+        for(Tile t: this.bakery.neighbours(position)){
+            if(t.hasOven()){
+                Oven o = (Oven)t;
+                if(o.isOccupied() && o.getBread().isCooked()){
+                    oven = o;
                 }
             }
         }
@@ -184,8 +177,8 @@ public class Raccoon extends Entity {
         //if none return curent position, raccon is blocked
         for(int i =-1 ; i<2;i++){
             for(int j=-1; j<2;j++){
-                if(raccoon_y+j>Bakery.BAKERY_W && raccoon_y+j>=0 && raccoon_x+i>=0 && raccoon_x+i<Bakery.BAKERY_H && this.bakery.getMap()[raccoon_x+i][raccoon_y+j].isAccessibleToRaccoon()){
-                    return this.bakery.getMap()[i][j];
+                if(raccoon_y+j<Bakery.BAKERY_H && raccoon_y+j>=0 && raccoon_x+i>=0 && raccoon_x+i<Bakery.BAKERY_W-1 && this.bakery.getMap()[raccoon_x+i][raccoon_y+j].isAccessibleToRaccoon()){
+                    return this.bakery.getMap()[raccoon_x+i][raccoon_y+j];
                 }
             }
         }
@@ -198,12 +191,12 @@ public class Raccoon extends Entity {
     public Tile nextMove(){
         //search for the closest bread that is cooked
         Oven o = closestReadyBread(); 
-        if(o != null){
+        if (this.is_on_the_run()){
+            return moveAwayFromBaker();
+        }else if(o != null){
             //if a bread is cooked moves towards it
             return moveTowardsBread(o);
-        }else if (this.is_on_the_run()){
-            return moveAwayFromBaker();
-        }else { //if no bread is ready to be eaten, move randomly
+        } else { //if no bread is ready to be eaten, move randomly
             return randomNeighbour();
         }
     }
