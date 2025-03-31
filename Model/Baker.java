@@ -15,7 +15,7 @@ public class Baker extends Entity {
                               // in the following indexes:
                               // 0 flour, 1 egg, 2 yeast, 3 butter
     private int soldBread; // number of breads sold
-    private Bakery bakery; //la boulangerie
+    private Bakery bakery; //the bakery 
 
     /****************
      *    GETTERS   *
@@ -54,7 +54,7 @@ public class Baker extends Entity {
     @Override
     public void move(Tile c){
 
-        if(c.isAccessible()){
+        if(c.isAccessibleToBaker()){
             //make the tiles next to old baker pos not have a nextToBaker
             for(Tile t : this.bakery.neighbours(this.position)){
                 t.setNextToBaker(false);

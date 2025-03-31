@@ -22,6 +22,7 @@ public class Tile {
      *              GETTERS
      *************************************/
     public boolean isAccessible(){ return this.accessible; }
+    public boolean isAccessibleToBaker(){ return this.accessible && !hasRacoon; }
     public boolean isAccessibleToRaccoon(){ return this.accessible && !(nextToBaker||hasBaker); }
     public int getX() { return x; }
     public int getY() { return y; }

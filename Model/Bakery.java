@@ -133,7 +133,11 @@ public class Bakery {
                     this.map[i][j] = (Tile) t;
                 }
             }
-
+            //finds the player and makes all neighbour tiles' nextToBaker true
+            //make the tiles next to new baker pos have a nextToBaker
+            for(Tile t : this.neighbours(this.getPlayer().position)){
+                t.setNextToBaker(true);
+            }
             file.close();
         } catch (IOException e) {
             e.printStackTrace();

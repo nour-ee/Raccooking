@@ -14,7 +14,7 @@ public class Raccoon extends Entity {
     private Bakery bakery ;
     private int age = 0; // correspons to the life of the raccoon
     private int nb_bread; // number of bread stolen by the raccoon
-    private boolean on_the_run = false; // if the baker is within a certain radius, making the raccoon run awa
+    private boolean on_the_run = false; // if the baker is within a certain radius, making the raccoon run away
     
     public int getAge() {
         return age;
@@ -45,6 +45,7 @@ public class Raccoon extends Entity {
         this.age = 0;
         this.bakery = b;
         this.nb_bread = 0;
+        this.on_the_run = false;
     }
 
     /********************
@@ -61,6 +62,9 @@ public class Raccoon extends Entity {
         this.position.RacoonHasLeft();
         this.position = c;
         this.position.RacoonArrived();
+        if(!c.isNextToBaker()){
+            this.set_on_the_run(false);
+        }
     }
 
     /**
@@ -146,7 +150,7 @@ public class Raccoon extends Entity {
         }
     }
 
-        /**
+    /**
      * Function that returns a random neighbour of our raccoon
      * @return a random neighbour of the tile, or the tile itself if no neighbour is accessible
      */
@@ -168,6 +172,26 @@ public class Raccoon extends Entity {
         if(neighbours.size() == 0) return t;
         return neighbours.get(Random.from(RandomGenerator.getDefault()).nextInt(neighbours.size())); 
     }
+    
+    /**
+     * Function that makes the raccoon move away from the player
+     * @return the tile to move to
+     */
+    public Tile moveAwayFromBaker(){
+        int raccoon_x = this.position.getX();
+        int raccoon_y = this.position.getY();
+        //Find a tile around the raccoon that is away from the baker 
+        //if none return curent position, raccon is blocked
+        for(int i =-1 ; i<2;i++){
+            for(int j=-1; j<2;j++){
+                if(raccoon_y+j>Bakery.BAKERY_W && raccoon_y+j>=0 && raccoon_x+i>=0 && raccoon_x+i<Bakery.BAKERY_H && this.bakery.getMap()[raccoon_x+i][raccoon_y+j].isAccessibleToRaccoon()){
+                    return this.bakery.getMap()[i][j];
+                }
+            }
+        }
+        return this.position;
+    }
+
     /** 
      * Function that returns the tile to which the raccoon will move
      */
@@ -177,54 +201,12 @@ public class Raccoon extends Entity {
         if(o != null){
             //if a bread is cooked moves towards it
             return moveTowardsBread(o);
+        }else if (this.is_on_the_run()){
+            return moveAwayFromBaker();
         }else { //if no bread is ready to be eaten, move randomly
             return randomNeighbour();
         }
     }
 
-    /**
-     * Method that makes the raccoon run away from the baker
-     * @param posBaker the position of the baker
-     */
-    public void runAway(Tile posBaker){
-        //finds where the baker is and moves in the opposite direction
-        int x = this.position.getX();
-        int y = this.position.getY();
-        int xB = posBaker.getX();
-        int yB = posBaker.getY();
-        if(xB>x){ //baker is to the right of the raccoon
-            if(bakery.getMap()[x-1][y].isAccessibleToRaccoon() && x-1>=0){
-                System.out.println("A");
-                this.move(bakery.getMap()[x-1][y]);
-                this.set_on_the_run(false);
 
-                return;
-            }
-        }if (xB<x){ //baker is to the left of the raccoon
-            if(bakery.getMap()[x+1][y].isAccessibleToRaccoon() && x+1<Bakery.BAKERY_W){
-                System.out.println("B");
-
-                this.move(bakery.getMap()[x+1][y]);
-                return;
-            }
-        }
-        if(yB>y){ //baker above the raccoon
-            if(bakery.getMap()[x][y-1].isAccessibleToRaccoon() && y-1>=0){
-                System.out.println("C");
-
-                this.move(bakery.getMap()[x][y-1]);
-                return;
-            }
-        }
-        if(yB<y){ //baker below the raccoon
-            if(bakery.getMap()[x][y+1].isAccessibleToRaccoon() && y+1<Bakery.BAKERY_H){
-                System.out.println("D");
-
-                this.move(bakery.getMap()[x][y+1]);
-            
-                return;
-            }
-        }
-        
-    }
 }

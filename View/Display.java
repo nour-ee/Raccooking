@@ -25,6 +25,7 @@ public class Display extends JFrame {
 
     //labels to display the entities
     private JLabel bakerLabel;
+    private JLabel forbiddenZone = new JLabel();
     private ArrayList<JLabel> raccoonLabels = new ArrayList<JLabel>();
     private ArrayList<RaccoonPanel> raccoonPanels = new ArrayList<RaccoonPanel>();
     private ArrayList<JLabel> breadLabels = new ArrayList<JLabel>();
@@ -60,6 +61,11 @@ public class Display extends JFrame {
         placeRaccoons();
         //Add bread to the Bakery frame
         initOvens();
+
+        //Add forbidden zone
+        forbiddenZone.setOpaque(true);
+        forbiddenZone.setBackground(new Color(255, 219, 183, 150));
+        add(forbiddenZone);
 
         //set frame visible
         //setVisible(true);
@@ -223,12 +229,22 @@ public class Display extends JFrame {
                 tileLabel.setBounds(coord.x, coord.y, TILE_SIZE, TILE_SIZE);
                 if (t.isAccessible()) {
                     tileLabel.setOpaque(true);
-                    tileLabel.setBackground(new Color(255, 249, 213, 150));
+                    tileLabel.setBackground(new Color(255, 249, 213, 150));   
                 }
                 add(tileLabel);
             }
 
         }
+    }
+
+    /**
+     * Paints the square around the baker
+     */
+    private void paintForbiddenZone(){
+        int x = bakery.getPlayer().getPosition().getX();
+        int y = bakery.getPlayer().getPosition().getY();
+        Point coord = coord(x-1, y-1);
+        forbiddenZone.setBounds(coord.x, coord.y, 3*TILE_SIZE, 3*TILE_SIZE);
     }
 
     /**
@@ -239,6 +255,7 @@ public class Display extends JFrame {
     public void paint(Graphics g) {
         super.paint(g);
         paintTiles();
+        paintForbiddenZone();  
 
         //Update baker position :
         int x = bakery.getPlayer().getPosition().getX();
