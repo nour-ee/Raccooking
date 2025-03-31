@@ -18,7 +18,7 @@ public class RaccoonLife extends Thread {
      * If they are not, they will be removed from the map and a new one will be created
      */
     public void run(){
-        while(true){
+        while( !map.endOfGame ){
             map.checkRaccoons();
             try { Thread.sleep(DELAY); }
             catch (Exception e) { e.printStackTrace(); }

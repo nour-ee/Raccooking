@@ -25,6 +25,7 @@ public class Bakery {
     public static final int NB_RACCOONS = 5; //number of raccoons on the map (might change in later versions)
     public static int BAKERY_H = 10; //height of the grid/bakery
     public static int BAKERY_W = 10;
+    public static boolean endOfGame;
 
 
     /***************
@@ -56,39 +57,6 @@ public class Bakery {
     /********************
      *    CONSTRUCTOR   *
      ********************/
-    /*public Bakery(){
-        this.levelFile = "levels/level1.txt";
-        // Initialisation of the bakery
-        this.map = new Tile[BAKERY_W][BAKERY_H];
-        this.ovens = new ArrayList<>();
-
-        for (int i = 0; i < BAKERY_W; i++){     //lines = y
-
-            for (int j = 0; j < BAKERY_H; j++){ //columns = x
-
-                //Ovens are placed between (0,0) and (5,0) , and between (0,3) and (5,3)
-                if((j==0 || j==3)&&i<6){
-                    Oven o = new Oven(i, j);
-                    this.map[i][j] = o;
-                    this.ovens.add(o);
-                }
-                else this.map[i][j] = new Tile(i, j);
-
-            }
-        }
-
-        //Initialization of player : as of now, placed in top left corner aka (0,1)
-        this.player = new Baker(map[0][1], this);
-
-        //Initialization of the raccoons
-        this.raccoons = new Raccoon[NB_RACCOONS];
-        for(int i = 0; i<NB_RACCOONS; i++){
-            raccoons[i] = new Raccoon(map[8][i*2], this);
-            raccoons[i].setAge(i);
-        }
-    }*/
-
-
     public Bakery(LevelPanel levelPanel){
         this.levelFile = "levels/level"+levelPanel.getCurrentLevel()+".txt";
         try {
@@ -98,6 +66,7 @@ public class Bakery {
             file.nextLine();
             int goal= file.nextInt();
             int racoonsNb = file.nextInt();
+            boolean endOfGame = false;
 
             file.nextLine();
             //CaseTraversable[] var6 = new CaseTraversable[1];
@@ -154,6 +123,7 @@ public class Bakery {
             file.nextLine();
             GOAL= file.nextInt();
             int racoonsNb = file.nextInt();
+            boolean endOfGame = false;
 
             file.nextLine();
             //CaseTraversable[] var6 = new CaseTraversable[1];
@@ -242,9 +212,9 @@ public class Bakery {
                 Math.abs(t.getX() - player.getPosition().getX())==1  && t.getY()==player.getPosition().getY();
     }
 
-        /**
-         * Method that collects and sells cooked breads from the ovens and removes burnt ones
-         */
+    /**
+     * Method that collects and sells cooked breads from the ovens and removes burnt ones
+     */
     public void collectBread(){
         for (Oven o : ovens){
             if(o.isOccupied()){
@@ -312,9 +282,11 @@ public class Bakery {
     public void gameEnded(){
         int money=player.getMoney();
         if(money>=GOAL){
+            endOfGame = true;
             System.out.println("You won!");
         }
         else if (money<=0 && allOvensEmpty()){
+            endOfGame = true;
            System.out.println("You lost!");
         }
     }
