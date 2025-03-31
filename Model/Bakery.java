@@ -229,13 +229,15 @@ public class Bakery {
         return Optional.empty();
     }
 
+
     /**
-     * Method that checks if the tile given in argument is above the player
+     * Method that checks if a tile is collectible by the player (is one tile above, below, left or right of the player)
      * @param t the tile to check
-     * @return an optional containing the tile if it is above the player, empty otherwise
+     * @return true if the tile is collectible, false otherwise
      */
-    public boolean isAbovePlayer(Tile t){
-        return t.getY() == player.getPosition().getY()-1 && t.getX() == player.getPosition().getX();
+    public boolean isCollectible(Tile t){
+        return Math.abs(t.getY() - player.getPosition().getY())==1  && t.getX()==player.getPosition().getX() ||
+                Math.abs(t.getX() - player.getPosition().getX())==1  && t.getY()==player.getPosition().getY();
     }
 
         /**
@@ -244,7 +246,7 @@ public class Bakery {
     public void collectBread(){
         for (Oven o : ovens){
             if(o.isOccupied()){
-                if (o.getBread().getState()== Bread.State.COOKED && isAbovePlayer(o)) {
+                if (o.getBread().getState()== Bread.State.COOKED && isCollectible(o)) {
                     player.sellBread();
                     o.removeBread();
                 }
