@@ -184,8 +184,8 @@ public class Raccoon extends Entity {
         //if none return curent position, raccon is blocked
         for(int i =-1 ; i<2;i++){
             for(int j=-1; j<2;j++){
-                if(raccoon_y+j>Bakery.BAKERY_W && raccoon_y+j>=0 && raccoon_x+i>=0 && raccoon_x+i<Bakery.BAKERY_H && this.bakery.getMap()[raccoon_x+i][raccoon_y+j].isAccessibleToRaccoon()){
-                    return this.bakery.getMap()[i][j];
+                if(raccoon_y+j<Bakery.BAKERY_H && raccoon_y+j>=0 && raccoon_x+i>=0 && raccoon_x+i<Bakery.BAKERY_W-1 && this.bakery.getMap()[raccoon_x+i][raccoon_y+j].isAccessibleToRaccoon()){
+                    return this.bakery.getMap()[raccoon_x+i][raccoon_y+j];
                 }
             }
         }
