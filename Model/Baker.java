@@ -80,6 +80,7 @@ public class Baker extends Entity {
                 case "butter" : ressources[3]++; money=money-2; break;
             }*/
             ressources.put(s, ressources.get(s)+1); money-=2;
+            System.out.println("Ressource "+s+" : "+ressources.get(s));
         }
     }
 
@@ -94,6 +95,7 @@ public class Baker extends Entity {
         //ressources[0]--; ressources[1]--; ressources[2]--; ressources[3]--;
         for (String s : ressources.keySet()) {
             ressources.put(s, ressources.get(s)-1);
+            System.out.println("Ressource "+s+" : "+ressources.get(s));
         }
     }
 

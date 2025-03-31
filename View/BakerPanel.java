@@ -1,21 +1,29 @@
 package View;
 
 import Controller.BakerControl;
-import Model.Baker;
 import Model.Bakery;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 
 /** Manage interaction with the baker panel */
 public class BakerPanel extends JPanel {
+
+    /*****************
+     *   ATTRIBUTES  *
+     *****************/
+
     private BakerControl bakerControl; // manage buttons actions
 
     private JLabel moneyLabel;
     private JLabel breadLabel;
-    private JLabel ressourcesLabel;
-
+    private ArrayList<JLabel> ingredientsLabelsList;    //to store our ingredients labels
+                                                        //to update them easily
+    /*****************
+     *   CONSTANTS  *
+     *****************/
 
     public static final int HEIGHT = 650;
     public static final int WIDTH = 300;
@@ -24,11 +32,18 @@ public class BakerPanel extends JPanel {
     public static final int BUTTON_WIDTH = 200;
     public static final String[] RESSOURCES = {"flour", "egg", "yeast", "butter"};
 
+
+    /********************
+     *    CONSTRUCTOR   *
+     ********************/
     public BakerPanel(Bakery bakery) {
         this.bakerControl = new BakerControl(this,bakery);
         this.setLayout(new BorderLayout());
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.setBackground(new Color( 182, 179, 175 ));
+
+        // to store the ingredients labels
+        this.ingredientsLabelsList = new ArrayList<>();
 
         // add image of baker in panel
         ImageIcon bakerIcon = new ImageIcon(getClass().getResource("/img/baker.png"));
@@ -49,7 +64,13 @@ public class BakerPanel extends JPanel {
         createButtonsPanel();
     }
 
-    // private methods to create the ressources panel and the buttons panel
+    /***************
+     *   METHODS   *
+     ***************/
+
+    /**
+     * Creates the ressources panel to display money, bread and ingredients
+      */
     private void createRessourcesPanel() {
         // === Panel ressources ===
         JPanel ressourcesPanel = new JPanel();
@@ -59,24 +80,26 @@ public class BakerPanel extends JPanel {
         GridBagConstraints gbc2 = new GridBagConstraints();
 
         // money label
-        moneyLabel = new JLabel("Money:  " + bakerControl.getBakery().getPlayer().getMoney()+"$");
+        moneyLabel = new JLabel("Money :  " + bakerControl.getBakery().getPlayer().getMoney()+"$");
         gbc2.gridx = 0;
         gbc2.gridy = 0;
+        gbc2.gridwidth = 2;
         gbc2.insets = new Insets(2, 2, 10, 10);
         ressourcesPanel.add(moneyLabel, gbc2);
 
         // bread label
-        breadLabel = new JLabel("Bread: 50");
+        breadLabel = new JLabel("Bread : 50");
         gbc2.gridx = 0;
         gbc2.gridy = 1;
+        gbc2.gridwidth = 2;
         gbc2.insets = new Insets(2, 2, 10, 10);
         ressourcesPanel.add(breadLabel, gbc2);
 
 
         // ingredients labels
-        ressourcesLabel = new JLabel("Ingrédients :");
+        JLabel ressourcesLabel = new JLabel("Ingrédients :");
         gbc2.gridx = 0; gbc2.gridy =  2;
-
+        gbc2.gridwidth = 2;
         gbc2.insets = new Insets(2, 2, 10, 10);
         ressourcesPanel.add(ressourcesLabel, gbc2);
 
@@ -91,12 +114,17 @@ public class BakerPanel extends JPanel {
                 gbc2.gridx = 1;
                 gbc2.gridy = 3 + (i-1);
             }
+            gbc2.gridwidth = 1;
             gbc2.insets = new Insets(2, 2, 10, 10);
+            ingredientsLabelsList.add(ingredientLabel);
             ressourcesPanel.add(ingredientLabel, gbc2);
         }
         this.add(ressourcesPanel);
     }
 
+    /**
+     * Creates the buttons panel to collect and sell, buy and add bread
+     */
     private void createButtonsPanel(){
         // === Panel buttons ===
         JPanel buttonPanel = new JPanel();
@@ -135,8 +163,17 @@ public class BakerPanel extends JPanel {
         // Add the buttonPanel to the Bakerpanel
         this.add(buttonPanel, BorderLayout.SOUTH);
     }
+
+    /**
+     * Update the ressources panel
+     */
     public void update(){
         moneyLabel.setText("Money:  " + bakerControl.getBakery().getPlayer().getMoney()+"$");
         breadLabel.setText("Bread: " + bakerControl.getBakery().getPlayer().getSoldBread());
+        for ( JLabel j : ingredientsLabelsList) {
+            j.setText(RESSOURCES[ingredientsLabelsList.indexOf(j)]
+                    + ": " + bakerControl.getBakery().getPlayer().getRessources(). //HashMap des ingrédients du baker
+                    get(RESSOURCES[ingredientsLabelsList.indexOf(j)]));
+        }
     }
 }
