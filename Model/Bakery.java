@@ -1,5 +1,7 @@
 package Model;
 
+import View.LevelPanel;
+
 import javax.swing.tree.FixedHeightLayoutCache;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -32,6 +34,7 @@ public class Bakery {
     private Baker player;
     private Raccoon[] raccoons; //TODO : change to ArrayList ---------------------------------------------
     private ArrayList<Oven> ovens; //ovens to cook breads
+    private String levelFile; //level of the game
 
 
     /****************
@@ -41,11 +44,18 @@ public class Bakery {
     public Baker getPlayer() { return player; }
     public Raccoon[] getRaccoons() { return raccoons; }
     public ArrayList<Oven> getOvens() { return ovens; }
+    public String getLevelFile() { return levelFile; }
+
+    /****************
+     *    SETTERS   *
+     ****************/
+    public void setLevel(int level) { this.levelFile = "levels/level"+level+".txt"; }
 
     /********************
      *    CONSTRUCTOR   *
      ********************/
-    public Bakery(){
+    /*public Bakery(){
+        this.levelFile = "levels/level1.txt";
         // Initialisation of the bakery
         this.map = new Tile[BAKERY_W][BAKERY_H];
         this.ovens = new ArrayList<>();
@@ -66,7 +76,7 @@ public class Bakery {
         }
 
         //Initialization of player : as of now, placed in top left corner aka (0,1)
-        this.player = new Baker(map[0][1]);
+        this.player = new Baker(map[0][1], this);
 
         //Initialization of the raccoons
         this.raccoons = new Raccoon[NB_RACCOONS];
@@ -74,9 +84,62 @@ public class Bakery {
             raccoons[i] = new Raccoon(map[8][i*2], this);
             raccoons[i].setAge(i);
         }
+    }*/
+
+
+    public Bakery(LevelPanel levelPanel){
+        this.levelFile = "levels/level"+levelPanel.getCurrentLevel()+".txt";
+        try {
+            Scanner file = new Scanner(new FileInputStream(levelFile));
+            BAKERY_H = file.nextInt();
+            BAKERY_W= file.nextInt();
+            file.nextLine();
+            int goal= file.nextInt();
+            int racoonsNb = file.nextInt();
+
+            file.nextLine();
+            //CaseTraversable[] var6 = new CaseTraversable[1];
+            this.map = new Tile[BAKERY_H][BAKERY_W];
+            this.raccoons= new Raccoon[racoonsNb];
+            this.ovens = new ArrayList<>();
+
+            int r=0; //index of raccoons TODO : change to ArrayList ---------------------------------------------
+
+            for(int i = 0; i < this.BAKERY_H; i++) {
+                String line = file.nextLine();
+                for(int j = 0; j < this.BAKERY_W; j++) {
+                    Character c = line.charAt(j);
+                    Tile t;
+                    switch (c) {
+                        case 'B':
+                            t = new Tile(i,j);
+                            Baker baker = new Baker(t, this);
+                            this.player = baker;
+                            break;
+                        case 'O':
+                            t = new Oven(i,j);
+                            this.ovens.add((Oven) t);
+                            break;
+                        case 'R' :
+                            t = new Tile(i,j);
+                            Raccoon raccoon = new Raccoon(t, this);
+                            raccoon.setAge(r);
+                            this.raccoons[r]=raccoon;
+                            r++;
+                            break;
+                        default:
+                            t = new Tile(i,j);
+                    }
+                    this.map[i][j] = (Tile) t;
+                }
+            }
+
+            file.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
-
-
     public Bakery(String filename){
         try {
             Scanner file = new Scanner(new FileInputStream(filename));
@@ -102,7 +165,7 @@ public class Bakery {
                     switch (c) {
                         case 'B':
                             t = new Tile(i,j);
-                            Baker baker = new Baker(t);
+                            Baker baker = new Baker(t, this);
                             this.player = baker;
                             break;
                         case 'O':
@@ -135,29 +198,6 @@ public class Bakery {
     /***************
      *  METHODS    *
      ***************/
-    
-    /**
-     * Function that returns a random neighbour of the tile given in parameter
-     * @param t the tile from which we are looking for a neighbour
-     * @return a random neighbour of the tile, or the tile itself if no neighbour is accessible
-     */
-    public Tile randomNeighbour(Tile t){
-        int x = t.getX();
-        int y = t.getY();
-        ArrayList<Tile> neighbours = new ArrayList<>();
-        for(int i =-1; i<2 ;i++){
-            for(int j = -1; j<2; j++){
-                if(x+i>=0 && x+i<BAKERY_W && y+j>=0 && y+j<BAKERY_H){
-                    Tile c = map[x+i][y+j];
-                    if(c.isAccessible()&&c.isEmpty()){
-                        neighbours.add(c);
-                    }
-                }
-            }
-        }
-        if(neighbours.size() == 0) return t;
-        return neighbours.get(Random.from(RandomGenerator.getDefault()).nextInt(neighbours.size())); 
-    }
 
     /**
      * Method that goes through the raccoons and checks if any have died (age>20)
@@ -209,5 +249,38 @@ public class Bakery {
                 }
             }
         }
+    }
+
+    /**
+    * Methods that returns the raccoon that are next to a tile given in argument
+    * @param t the tile from which we are looking for raccoons
+    * @return an array of raccoons that are next to the tile
+    */
+    public Raccoon[] raccoonsNextTo(Tile t){
+        ArrayList<Raccoon> r = new ArrayList<>();
+        for (Raccoon raccoon : raccoons) {
+            if (raccoon.getPosition().isNeighbour(t)) {
+                r.add(raccoon);
+            }
+        }
+        return r.toArray(new Raccoon[0]);
+    }
+
+    /**
+     * Method that returns the neighbours of a tile
+     * @param t the tile from which we are looking for neighbours
+     * @return an array of tiles that are neighbours of the tile
+     */
+    public Tile[] neighbours(Tile t){
+        ArrayList<Tile> n = new ArrayList<>();
+        for (int i = -1; i < 2; i++){
+            for (int j = -1; j < 2; j++){
+                if (t.getX()+i >= 0 && t.getX()+i < BAKERY_W && t.getY()+j >= 0 && t.getY()+j < BAKERY_H){
+                    Tile c = map[t.getX()+i][t.getY()+j];
+                    n.add(c);
+                }
+            }
+        }
+        return n.toArray(new Tile[0]);
     }
 }

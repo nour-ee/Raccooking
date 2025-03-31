@@ -6,7 +6,7 @@ import Model.Tile;
 import View.RaccoonPanel;
 
 public class RaccoonMovement extends Thread {
-    int DELAY = 800;
+    int DELAY = 1000;
     private Bakery map;
 
     /***************
@@ -24,9 +24,13 @@ public class RaccoonMovement extends Thread {
             Raccoon[] r = map.getRaccoons();
             for(int i =0; i<r.length; i++){
                 if(r[i].getAge() < Raccoon.MAX_AGE){
+                    if(r[i].is_on_the_run()){
+                        r[i].runAway(map.getPlayer().getPosition());
+                    }else{
+                        Tile c = r[i].nextMove();
+                        r[i].move(c);
+                    }
                     r[i].increment();
-                    Tile c = r[i].nextMove();
-                    r[i].move(c);
                 }
             }
             try { Thread.sleep(DELAY); }
