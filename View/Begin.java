@@ -22,6 +22,11 @@ public class Begin extends JFrame {
         this.sound = true;
         this.panelLevel = levelPanel;
 
+        JLayeredPane layeredPane = new JLayeredPane();
+        this.setContentPane(layeredPane);
+        layeredPane.setBounds(0, 0, BEGIN_W, BEGIN_H);
+        layeredPane.setLayout(null);
+
         ImageIcon icon = new ImageIcon("img/Raccooking.png");
 
         // resize the image
@@ -40,27 +45,27 @@ public class Begin extends JFrame {
         JLabel fond = new JLabel(icon);
         fond.setBounds(0,0,getWidth(),getHeight());
         //add the image to the frame
-        this.add(fond);
+        layeredPane.add(fond,Integer.valueOf(0));
         panelLevel.setLocation(BEGIN_W/2-150, 150);
-        this.add(panelLevel);
+        layeredPane.add(panelLevel,Integer.valueOf(1));
         //create the buttons
-        createPlayButton();
-        createSoundButton(new ImageIcon("img/sound-on.png"));
+        createPlayButton(layeredPane);
+        createSoundButton(new ImageIcon("img/sound-on.png"),layeredPane);
         setVisible(true);
     }
 
     /** Create the play button*/
-    public void createPlayButton() {
+    public void createPlayButton(JLayeredPane layeredPane) {
         JButton playB = new JButton("Play");
         playB.addActionListener(e -> {
             this.setVisible(false);
             display.setVisible(true);
         });
         playB.setBounds(BEGIN_W/2-50, 330, 100, 50);
-        this.add(playB);
+        layeredPane.add(playB,Integer.valueOf(1));
     }
     /** Create the sound button **/
-    public void createSoundButton(ImageIcon img) {
+    public void createSoundButton(ImageIcon img, JLayeredPane layeredPane) {
         JButton soundB = new JButton();
         soundB.setIcon(img);
         soundB.addActionListener(e -> {
@@ -74,6 +79,6 @@ public class Begin extends JFrame {
             }
         });
         soundB.setBounds(BEGIN_W/2-50, 400, 100, 50);
-        this.add(soundB);
+        layeredPane.add(soundB, Integer.valueOf(1));
     }
 }

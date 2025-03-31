@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class LevelPanel extends JPanel {
     private Bakery bakery;
-    private JButton levelButton;
+    private JLabel levelLabel;
     private JButton nextButton;
     private JButton previousButton;
     private int currentLevel = 1;
@@ -20,8 +20,9 @@ public class LevelPanel extends JPanel {
     public LevelPanel() {
         this.setBounds(0, 0, LEVEL_W, LEVEL_H);
         this.setLayout(null);
+        this.setOpaque(false);
 
-        createLevelButton();
+        createLevelLabel();
         createNavigationButton();
         bakery = new Bakery(this);
         this.setVisible(true);
@@ -29,7 +30,7 @@ public class LevelPanel extends JPanel {
     /****************
      *    GETTERS   *
      ****************/
-    public JButton getLevelButton() {return levelButton;}
+    public JLabel getLevelLabel() {return levelLabel;}
     public  boolean getNext() { return next; }
     public  boolean getPrev() { return prev; }
     public int getCurrentLevel() { return currentLevel; }
@@ -55,18 +56,18 @@ public class LevelPanel extends JPanel {
         this.add(nextButton);
         this.add(previousButton);
     }
-
-    private void createLevelButton() {
-        levelButton = new JButton("Level " + currentLevel);
-        levelButton.setBounds(LEVEL_W / 2 - 50, LEVEL_H / 4, 100, 50);
-        this.add(levelButton);
+    private void createLevelLabel() {
+        levelLabel = new JLabel("LEVEL " + currentLevel);
+        levelLabel.setBounds(LEVEL_W / 2 -50, LEVEL_H / 4, 100, 50);
+        levelLabel.setFont(new Font("Arial", Font.BOLD, 23));
+        this.add(levelLabel);
     }
 
     public void updateLevel(int direction) {
         currentLevel += direction;
-        levelButton.setText("Level " + currentLevel);
+        levelLabel.setText("LEVEL " + currentLevel);
         bakery.setLevel(currentLevel);
-        levelButton.setBounds(LEVEL_W / 2 - 50, LEVEL_H / 4, 100, 50); // Reset position
+        levelLabel.setBounds(LEVEL_W / 2 - 50, LEVEL_H / 4, 100, 50); // Reset position
     }
 
 }
