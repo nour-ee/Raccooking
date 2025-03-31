@@ -243,8 +243,10 @@ public class Display extends JFrame {
     private void paintForbiddenZone(){
         int x = bakery.getPlayer().getPosition().getX();
         int y = bakery.getPlayer().getPosition().getY();
+        int width = 3*TILE_SIZE;
+        if(x== Bakery.BAKERY_W-1) width = 2*TILE_SIZE;
         Point coord = coord(x-1, y-1);
-        forbiddenZone.setBounds(coord.x, coord.y, 3*TILE_SIZE, 3*TILE_SIZE);
+        forbiddenZone.setBounds(coord.x, coord.y, width, 3*TILE_SIZE);
     }
 
     /**
