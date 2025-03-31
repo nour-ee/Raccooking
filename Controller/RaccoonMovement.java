@@ -3,6 +3,10 @@ package Controller;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import javax.imageio.plugins.jpeg.JPEGHuffmanTable;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import Model.Bakery;
 import Model.Raccoon;
 import Model.Tile;
@@ -11,12 +15,12 @@ import View.RaccoonPanel;
 public class RaccoonMovement extends Thread {
     int DELAY = 1000;
     private Bakery map;
-    private ArrayList<RaccoonPanel> raccoonPanels;
+    private ArrayList<JLabel> raccoonPanels;
 
     /***************
      * CONSTRUCTOR *
      **************/
-    public RaccoonMovement(Bakery m, ArrayList<RaccoonPanel> rP) {
+    public RaccoonMovement(Bakery m, ArrayList<JLabel> rP) {
         this.map = m;
         this.raccoonPanels = rP;
     }
