@@ -1,5 +1,8 @@
 package Controller;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import Model.Bakery;
 import Model.Raccoon;
 import Model.Tile;
@@ -8,12 +11,14 @@ import View.RaccoonPanel;
 public class RaccoonMovement extends Thread {
     int DELAY = 1000;
     private Bakery map;
+    private ArrayList<RaccoonPanel> raccoonPanels;
 
     /***************
      * CONSTRUCTOR *
      **************/
-    public RaccoonMovement(Bakery m){
+    public RaccoonMovement(Bakery m, ArrayList<RaccoonPanel> rP) {
         this.map = m;
+        this.raccoonPanels = rP;
     }
 
     /**
@@ -26,6 +31,7 @@ public class RaccoonMovement extends Thread {
                 if(r[i].getAge() < Raccoon.MAX_AGE){
                     Tile c = r[i].nextMove();
                     r[i].move(c);
+                    //(new MovingAnimation(r[i].getLabel(), c)).start();
                     r[i].increment();
                 }
             }

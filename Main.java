@@ -17,7 +17,7 @@ public class Main {
         Begin begin = new Begin(display,levelPanel);
 
         //Starting the threads
-        RaccoonMovement rm = new RaccoonMovement(display.getBakery());
+        RaccoonMovement rm = new RaccoonMovement(display.getBakery(), display.getRaccoonJLabels());
         rm.start();
         RaccoonLife rl = new RaccoonLife(display.getBakery());
         rl.start();
