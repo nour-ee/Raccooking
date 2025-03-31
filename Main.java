@@ -10,12 +10,12 @@ public class Main {
 
         //Creation of the bakery
         LevelPanel levelPanel = new LevelPanel();
-        Bakery bakery = new Bakery(levelPanel);
-        System.out.println(bakery.getLevelFile());
-        Display display = new Display(bakery);
-        System.out.println(bakery.getLevelFile());
+        //Bakery bakery = new Bakery(levelPanel);
+        System.out.println(levelPanel.getBakery().getLevelFile());
+        Display display = new Display(levelPanel.getBakery());
+        System.out.println(levelPanel.getBakery().getLevelFile());
         Begin begin = new Begin(display,levelPanel);
-        
+
         //Starting the threads
         RaccoonMovement rm = new RaccoonMovement(display.getBakery());
         rm.start();

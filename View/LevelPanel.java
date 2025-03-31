@@ -34,6 +34,7 @@ public class LevelPanel extends JPanel {
     public  boolean getNext() { return next; }
     public  boolean getPrev() { return prev; }
     public int getCurrentLevel() { return currentLevel; }
+    public Bakery getBakery() { return bakery; }
     public void setNext(boolean b) { next = b; }
     public void setPrev(boolean b) { prev = b; }
 

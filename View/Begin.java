@@ -1,5 +1,7 @@
 package View;
 
+import Model.Bakery;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -10,6 +12,8 @@ public class Begin extends JFrame {
 
     //private JPanel panelButton; // panel for the button
     private LevelPanel panelLevel; // panel for the level
+
+    private Bakery bakery;
 
     public static final int BEGIN_W = 800;
     public static final int BEGIN_H = 600;
@@ -59,6 +63,7 @@ public class Begin extends JFrame {
         JButton playB = new JButton("Play");
         playB.addActionListener(e -> {
             this.setVisible(false);
+            bakery = new Bakery(panelLevel);
             display.setVisible(true);
         });
         playB.setBounds(BEGIN_W/2-50, 330, 100, 50);
