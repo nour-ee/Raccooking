@@ -53,14 +53,16 @@ public class BakerControl implements ActionListener {
                 ;break;}
             case "Buy" -> {// print combo box
                 // JPanel for the check boxes
-                JPanel panel = new JPanel(new GridLayout(0, 1));
+                JPanel panel = new JPanel(new GridLayout(0, 2));
 
                 // Create the check boxes
                 JCheckBox[] checkBoxes = new JCheckBox[BakerPanel.RESSOURCES.length];
 
                 for (int i = 0; i < BakerPanel.RESSOURCES.length; i++) {
                     checkBoxes[i] = new JCheckBox(BakerPanel.RESSOURCES[i]);
+                    JTextField textField = new JTextField(); // a ajouter sous forme de liste
                     panel.add(checkBoxes[i]);
+                    panel.add(textField);
                 }
 
                 // Show the dialog with the check boxes
