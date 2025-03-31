@@ -36,6 +36,8 @@ public class Bakery {
     private ArrayList<Oven> ovens; //ovens to cook breads
     private String levelFile; //level of the game
 
+    public static int GOAL; //monetary goal of the game
+
 
     /****************
      *    GETTERS   *
@@ -150,7 +152,7 @@ public class Bakery {
             BAKERY_H = file.nextInt();
             BAKERY_W= file.nextInt();
             file.nextLine();
-            int goal= file.nextInt();
+            GOAL= file.nextInt();
             int racoonsNb = file.nextInt();
 
             file.nextLine();
@@ -288,5 +290,32 @@ public class Bakery {
             }
         }
         return n.toArray(new Tile[0]);
+    }
+
+
+    /**
+     * Method that checks if all ovens are empty
+     * @return true if all ovens are empty, false otherwise
+     */
+    public boolean allOvensEmpty() {
+        for (Oven o : ovens) {
+            if (o.isOccupied()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Method that checks if the game has ended
+     */
+    public void gameEnded(){
+        int money=player.getMoney();
+        if(money>=GOAL){
+            System.out.println("You won!");
+        }
+        else if (money<=0 && allOvensEmpty()){
+           System.out.println("You lost!");
+        }
     }
 }
