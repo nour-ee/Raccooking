@@ -198,12 +198,12 @@ public class Raccoon extends Entity {
     public Tile nextMove(){
         //search for the closest bread that is cooked
         Oven o = closestReadyBread(); 
-        if(o != null){
+        if (this.is_on_the_run()){
+            return moveAwayFromBaker();
+        }else if(o != null){
             //if a bread is cooked moves towards it
             return moveTowardsBread(o);
-        }else if (this.is_on_the_run()){
-            return moveAwayFromBaker();
-        }else { //if no bread is ready to be eaten, move randomly
+        } else { //if no bread is ready to be eaten, move randomly
             return randomNeighbour();
         }
     }
