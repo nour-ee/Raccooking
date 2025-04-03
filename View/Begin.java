@@ -2,8 +2,12 @@ package View;
 
 import Model.Bakery;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 public class Begin extends JFrame {
 
@@ -11,8 +15,6 @@ public class Begin extends JFrame {
 
     //private JPanel panelButton; // panel for the button
     private LevelPanel levelPanel; // panel for the level
-
-    //private String levelFile; // the file of the level
 
     public static final int BEGIN_W = 800;
     public static final int BEGIN_H = 600;
@@ -62,6 +64,9 @@ public class Begin extends JFrame {
         JButton playB = new JButton("Play");
         playB.addActionListener(e -> {
             this.setVisible(false);
+            if(sound) {
+                PlaySound();
+            }
             Bakery b=new Bakery("levels/"+levelPanel.getCurrentLevel()+".txt");
             new Display(b);
         });
@@ -84,5 +89,16 @@ public class Begin extends JFrame {
         });
         soundB.setBounds(BEGIN_W/2-50, 400, 100, 50);
         layeredPane.add(soundB, Integer.valueOf(1));
+    }
+    private void PlaySound() {
+        File file = new File("sound/sound_play.wav");
+        try {
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+            clip.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -6,6 +6,7 @@ import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Display extends JFrame {
@@ -26,6 +27,10 @@ public class Display extends JFrame {
     private ArrayList<JLabel> raccoonLabels = new ArrayList<JLabel>();
     private ArrayList<RaccoonPanel> raccoonPanels = new ArrayList<RaccoonPanel>();
     private ArrayList<JLabel> breadLabels = new ArrayList<JLabel>();
+
+    public ArrayList<JLabel> getRaccoonJLabels() {
+        return raccoonLabels;
+    }
 
     //constants of our display
     public static final int TILE_SIZE = 75;   //size of a tile, in pixels (square tile)
@@ -270,7 +275,7 @@ public class Display extends JFrame {
         bakerLabel.setBounds(coord.x, coord.y, TILE_SIZE, TILE_SIZE);
         //bakerLabel.setIcon();  TODO ----------- LATER
 
-        repaintRaccoons();
+        //repaintRaccoons();
         repaintBread();
     }
 }

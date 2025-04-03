@@ -53,14 +53,29 @@ public class BakerControl implements ActionListener {
                 ;break;}
             case "Buy" -> {// print combo box
                 // JPanel for the check boxes
-                JPanel panel = new JPanel(new GridLayout(0, 1));
+                JPanel panel = new JPanel(new GridLayout(0, 2,10,5));
 
                 // Create the check boxes
                 JCheckBox[] checkBoxes = new JCheckBox[BakerPanel.RESSOURCES.length];
+                JSpinner[] spinners = new JSpinner[BakerPanel.RESSOURCES.length]; // add quantity of ressources
 
                 for (int i = 0; i < BakerPanel.RESSOURCES.length; i++) {
                     checkBoxes[i] = new JCheckBox(BakerPanel.RESSOURCES[i]);
+                    JSpinner spinner = new JSpinner(new SpinnerNumberModel(0,1 , 100, 1));
+                    spinner.setEnabled(false); // disable spinner by default
+                    spinners[i] = spinner;
+
+                    checkBoxes[i].addItemListener(evt -> {
+                        JCheckBox source = (JCheckBox) evt.getSource();
+                        for (int j = 0; j < checkBoxes.length; j++) {
+                            if (checkBoxes[j] == source) {
+                                spinners[j].setEnabled(source.isSelected());
+                                break;
+                            }
+                        }
+                    });
                     panel.add(checkBoxes[i]);
+                    panel.add(spinner);
                 }
 
                 // Show the dialog with the check boxes

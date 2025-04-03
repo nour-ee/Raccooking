@@ -36,10 +36,9 @@ public class Animation extends Thread {
 
     // Move the level button to the right or left
     private void moveButton(String direction) {
-        //JButton levelButton = levelPanel.getLevelButton();
         JLabel levelLabel = levelPanel.getLevelLabel();
 
-        // Move the button until it reaches the end of the panel
+        // Move the label until it reaches the end of the panel
         // or the beginning of the panel
         while (true) {
             int x = levelLabel.getX();
