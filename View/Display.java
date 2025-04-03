@@ -1,6 +1,7 @@
 package View;
 import Controller.BakerMovement;
 import Controller.EntityControl;
+import Controller.RaccoonMovement;
 import Controller.RaccoonThread;
 import Model.*;
 
@@ -76,6 +77,9 @@ public class Display extends JFrame {
 
         Redraw redraw = new Redraw(this, getBakerPanel());
         redraw.start();
+
+        RaccoonMovement rm = new RaccoonMovement(getBakery(),raccoonLabels);
+        rm.start();
 
     }
 

@@ -61,7 +61,7 @@ public class BakerControl implements ActionListener {
 
                 for (int i = 0; i < BakerPanel.RESSOURCES.length; i++) {
                     checkBoxes[i] = new JCheckBox(BakerPanel.RESSOURCES[i]);
-                    JSpinner spinner = new JSpinner(new SpinnerNumberModel(0,1 , 100, 1));
+                    JSpinner spinner = new JSpinner(new SpinnerNumberModel(1,0 , 100, 1));
                     spinner.setEnabled(false); // disable spinner by default
                     spinners[i] = spinner;
 

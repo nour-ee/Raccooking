@@ -178,8 +178,6 @@ public class Bakery {
 
 
         //Starting the threads
-        RaccoonMovement rm = new RaccoonMovement(this);
-        rm.start();
         RaccoonLife rl = new RaccoonLife(this);
         rl.start();
     }
