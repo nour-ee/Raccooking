@@ -1,6 +1,10 @@
 package Model;
 
+import Controller.RaccoonLife;
+import Controller.RaccoonMovement;
+import View.Animation;
 import View.LevelPanel;
+import View.Redraw;
 
 import javax.swing.tree.FixedHeightLayoutCache;
 import java.io.FileInputStream;
@@ -34,7 +38,6 @@ public class Bakery {
     private Baker player;
     private Raccoon[] raccoons; //TODO : change to ArrayList ---------------------------------------------
     private ArrayList<Oven> ovens; //ovens to cook breads
-    private String levelFile; //level of the game
 
     public static int GOAL; //monetary goal of the game
 
@@ -46,12 +49,12 @@ public class Bakery {
     public Baker getPlayer() { return player; }
     public Raccoon[] getRaccoons() { return raccoons; }
     public ArrayList<Oven> getOvens() { return ovens; }
-    public String getLevelFile() { return levelFile; }
+    //public String getLevelFile() { return levelFile; }
 
     /****************
      *    SETTERS   *
      ****************/
-    public void setLevel(int level) { this.levelFile = "levels/level"+level+".txt"; }
+    //public void setLevel(int level) { this.levelFile = "levels/level"+level+".txt"; }
 
     /********************
      *    CONSTRUCTOR   *
@@ -89,8 +92,8 @@ public class Bakery {
     }*/
 
 
-    public Bakery(LevelPanel levelPanel){
-        this.levelFile = "levels/level"+levelPanel.getCurrentLevel()+".txt";
+/*    public Bakery(String  levelPanel){
+        //this.levelFile = "levels/"+levelPanel.getCurrentLevel();
         try {
             Scanner file = new Scanner(new FileInputStream(levelFile));
             BAKERY_H = file.nextInt();
@@ -145,7 +148,7 @@ public class Bakery {
             e.printStackTrace();
             System.exit(1);
         }
-    }
+    }*/
     public Bakery(String filename){
         try {
             Scanner file = new Scanner(new FileInputStream(filename));
@@ -198,6 +201,13 @@ public class Bakery {
             e.printStackTrace();
             System.exit(1);
         }
+
+
+        //Starting the threads
+        RaccoonMovement rm = new RaccoonMovement(this);
+        rm.start();
+        RaccoonLife rl = new RaccoonLife(this);
+        rl.start();
     }
 
 

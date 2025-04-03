@@ -22,12 +22,12 @@ public class Animation extends Thread {
             }
 
             if (levelPanel.getNext()) {
-                moveButton("right");
+                moveButton("left");
                 levelPanel.setNext(false);
                 levelPanel.updateLevel(1);
             }
             else if (levelPanel.getPrev()) {
-                moveButton("left");
+                moveButton("right");
                 levelPanel.setPrev(false);
                 levelPanel.updateLevel(-1);
             }

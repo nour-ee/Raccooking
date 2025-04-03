@@ -1,15 +1,18 @@
 package View;
 
+import Model.Bakery;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class Begin extends JFrame {
 
     private boolean sound;
-    private Display display;
 
     //private JPanel panelButton; // panel for the button
-    private LevelPanel panelLevel; // panel for the level
+    private LevelPanel levelPanel; // panel for the level
+
+    //private String levelFile; // the file of the level
 
     public static final int BEGIN_W = 800;
     public static final int BEGIN_H = 600;
@@ -17,10 +20,8 @@ public class Begin extends JFrame {
     /****************
      *  CONSTRUCTOR *
      ****************/
-    public Begin(Display display,LevelPanel levelPanel) {
-        this.display = display;
+    public Begin() {
         this.sound = true;
-        this.panelLevel = levelPanel;
 
         JLayeredPane layeredPane = new JLayeredPane();
         this.setContentPane(layeredPane);
@@ -44,10 +45,12 @@ public class Begin extends JFrame {
         // create the image of the background
         JLabel fond = new JLabel(icon);
         fond.setBounds(0,0,getWidth(),getHeight());
+
         //add the image to the frame
+        levelPanel = new LevelPanel();
         layeredPane.add(fond,Integer.valueOf(0));
-        panelLevel.setLocation(BEGIN_W/2-150, 150);
-        layeredPane.add(panelLevel,Integer.valueOf(1));
+        levelPanel.setLocation(BEGIN_W/2-150, 150);
+        layeredPane.add(levelPanel,Integer.valueOf(1));
         //create the buttons
         createPlayButton(layeredPane);
         createSoundButton(new ImageIcon("img/sound-on.png"),layeredPane);
@@ -59,7 +62,8 @@ public class Begin extends JFrame {
         JButton playB = new JButton("Play");
         playB.addActionListener(e -> {
             this.setVisible(false);
-            display.setVisible(true);
+            Bakery b=new Bakery("levels/"+levelPanel.getCurrentLevel()+".txt");
+            new Display(b);
         });
         playB.setBounds(BEGIN_W/2-50, 330, 100, 50);
         layeredPane.add(playB,Integer.valueOf(1));

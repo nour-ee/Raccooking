@@ -16,11 +16,8 @@ public class Display extends JFrame {
 
     //panels that appear when clicking on the entities
     private BakerPanel bkPanel;
-
     private EntityControl entityControl;
-
     private BakerMovement bakerMovement; //thread to move the baker
-
     private Bakery bakery ; //the bakery aka map
 
     //labels to display the entities
@@ -39,7 +36,7 @@ public class Display extends JFrame {
     /********************
      *    CONSTRUCTOR   *
      ********************/
-    public Display(Bakery bakery ) {
+    public Display(Bakery bakery) {
         setTitle("Raccooking");
         setSize(FRAME_W+BakerPanel.WIDTH, FRAME_H);
         setLayout(null);
@@ -68,7 +65,13 @@ public class Display extends JFrame {
         add(forbiddenZone);
 
         //set frame visible
-        //setVisible(true);
+        setVisible(true);
+
+
+
+        Redraw redraw = new Redraw(this, getBakerPanel());
+        redraw.start();
+
     }
 
     /****************
