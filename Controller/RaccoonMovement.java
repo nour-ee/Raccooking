@@ -34,8 +34,8 @@ public class RaccoonMovement extends Thread {
             for(int i =0; i<r.length; i++){
                 if(r[i].getAge() < Raccoon.MAX_AGE){
                     Tile c = r[i].nextMove();
+                    //(new MovingAnimation(raccoonPanels.get(i), c, r[i].position)).start();
                     r[i].move(c);
-                    (new MovingAnimation(raccoonPanels.get(i), c, r[i].position)).start();
                     r[i].increment();
                 }
             }

@@ -1,7 +1,6 @@
 package View;
 import Controller.BakerMovement;
 import Controller.EntityControl;
-import Controller.MovingAnimation;
 import Controller.RaccoonThread;
 import Model.*;
 
@@ -56,7 +55,12 @@ public class Display extends JFrame {
         // Add the Bakerpanel to the Bakery frame
         bkPanel = new BakerPanel(bakery);
         bkPanel.setVisible(false);
-        bakerMovement = new BakerMovement(bakery);
+        // Add the Baker to the Bakery frame
+        placeBaker();
+        bakerMovement = new BakerMovement(bakery, bakerLabel);
+        bakerLabel.addKeyListener(bakerMovement);
+
+
 
         // Manage interaction with bakery elements
         entityControl = new EntityControl( bkPanel, this);
@@ -70,7 +74,7 @@ public class Display extends JFrame {
 
         //Add forbidden zone
         forbiddenZone.setOpaque(true);
-        forbiddenZone.setBackground(new Color(255, 219, 183, 150));
+        forbiddenZone.setBackground(new Color(255, 219, 213, 150));
         add(forbiddenZone);
 
         //set frame visible
@@ -113,15 +117,17 @@ public class Display extends JFrame {
         ImageIcon scaledBakerIcon = new ImageIcon(scaledImage);
 
         bakerLabel = new JLabel(scaledBakerIcon);
-        Point coord = coord(x, y);
+        Point coord = coord(x-1, y-1);
         bakerLabel.setBounds(coord.x, coord.y, newWidth, newHeight);
+        bakerLabel.setBackground(new Color(255, 219, 183, 150));
+        bakerLabel.setOpaque(true);
         bakerLabel.setFocusable(true);
 
         // bakerpanel appears on the right when bakerlabel is clicked
         bakerLabel.addMouseListener(entityControl);
-        bakerLabel.addKeyListener(bakerMovement);
 
         add(bakerLabel);
+        
     }
 
     /**
@@ -223,6 +229,16 @@ public class Display extends JFrame {
     }
 
     /**
+     * Paints the baker and its forbidden zone
+     * @param g Graphics
+     * @param coord_x x coordinate (in the view model) of the baker 
+     * @param coord_y y coordinate (in the view model) of the baker
+     */
+    public void paintForbiddenZone(Graphics g, int coord_x, int coord_y) {
+        forbiddenZone.setBounds(coord_x-TILE_SIZE, coord_y-TILE_SIZE, 3*TILE_SIZE, 3*TILE_SIZE);
+    }
+
+    /**
      * Paints the tiles of the bakery
      * **/
     private void paintTiles() {
@@ -263,17 +279,16 @@ public class Display extends JFrame {
     public void paint(Graphics g) {
         super.paint(g);
         paintTiles();
-        paintForbiddenZone();  
+        paintForbiddenZone(g, bakerLabel.getX(), bakerLabel.getY());  
 
         //Update baker position :
-        int x = bakery.getPlayer().getPosition().getX();
-        int y = bakery.getPlayer().getPosition().getY();
-
-        Point coord = coord(x, y);
-        bakerLabel.setBounds(coord.x, coord.y, TILE_SIZE, TILE_SIZE);
+        // int x = bakery.getPlayer().getPosition().getX();
+        // int y = bakery.getPlayer().getPosition().getY();
+        // Point coord = coord(x, y);
+        // bakerLabel.setBounds(coord.x, coord.y, TILE_SIZE, TILE_SIZE);
         //bakerLabel.setIcon();  TODO ----------- LATER
 
-        //repaintRaccoons();
+        repaintRaccoons();
         repaintBread();
     }
 }
