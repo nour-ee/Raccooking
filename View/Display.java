@@ -1,6 +1,7 @@
 package View;
 import Controller.BakerMovement;
 import Controller.EntityControl;
+import Controller.MovingAnimation;
 import Controller.RaccoonThread;
 import Model.*;
 
