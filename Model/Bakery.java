@@ -26,6 +26,7 @@ public class Bakery {
     public static int BAKERY_H = 10; //height of the grid/bakery
     public static int BAKERY_W = 10;
     public static boolean endOfGame;
+    public static int GOAL; //monetary goal of the game
 
 
     /***************
@@ -36,8 +37,6 @@ public class Bakery {
     private Raccoon[] raccoons; //TODO : change to ArrayList ---------------------------------------------
     private ArrayList<Oven> ovens; //ovens to cook breads
     private String levelFile; //level of the game
-
-    public static int GOAL; //monetary goal of the game
 
 
     /****************

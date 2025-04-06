@@ -1,5 +1,6 @@
 package View;
 
+import Controller.EndGame;
 import Model.Bakery;
 
 import javax.sound.sampled.AudioInputStream;
@@ -72,6 +73,8 @@ public class Begin extends JFrame {
             }
             bakery = new Bakery(panelLevel);
             display.setVisible(true);
+            EndGame end = new EndGame(display);
+            end.start();
         });
         playB.setBounds(BEGIN_W/2-50, 330, 100, 50);
         layeredPane.add(playB,Integer.valueOf(1));
