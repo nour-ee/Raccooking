@@ -179,6 +179,11 @@ public class Bakery {
         //Starting the threads
         RaccoonLife rl = new RaccoonLife(this);
         rl.start();
+
+        //make the tiles next to new baker pos have a nextToBaker
+        for(Tile t : this.neighbours(this.getPlayer().position)){
+            t.setNextToBaker(true);
+        }
     }
 
 

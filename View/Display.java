@@ -59,12 +59,10 @@ public class Display extends JFrame {
         bakerLabel.addKeyListener(bakerMovement);
 
 
-
         // Manage interaction with bakery elements
         entityControl = new EntityControl( bkPanel, this);
-
-        // Add the Baker to the Bakery frame
-        placeBaker();
+        // bakerpanel appears on the right when bakerlabel is clicked
+        bakerLabel.addMouseListener(entityControl);
         //Add raccoons to the Bakery frame
         placeRaccoons();
         //Add bread to the Bakery frame
@@ -74,10 +72,11 @@ public class Display extends JFrame {
         forbiddenZone.setOpaque(true);
         forbiddenZone.setBackground(new Color(255, 219, 213, 150));
         add(forbiddenZone);
+        paintForbiddenZone();
+
 
         //set frame visible
         setVisible(true);
-
 
 
         Redraw redraw = new Redraw(this, getBakerPanel());
@@ -126,12 +125,7 @@ public class Display extends JFrame {
         bakerLabel = new JLabel(scaledBakerIcon);
         Point coord = coord(x-1, y-1);
         bakerLabel.setBounds(coord.x, coord.y, newWidth, newHeight);
-        bakerLabel.setBackground(new Color(255, 219, 183, 150));
-        bakerLabel.setOpaque(true);
         bakerLabel.setFocusable(true);
-
-        // bakerpanel appears on the right when bakerlabel is clicked
-        bakerLabel.addMouseListener(entityControl);
 
         add(bakerLabel);
         
@@ -286,16 +280,18 @@ public class Display extends JFrame {
     public void paint(Graphics g) {
         super.paint(g);
         paintTiles();
-        paintForbiddenZone(g, bakerLabel.getX(), bakerLabel.getY());  
+        
+        paintForbiddenZone();
+        //paintForbiddenZone(g, bakerLabel.getX(), bakerLabel.getY());  
 
         //Update baker position :
-        // int x = bakery.getPlayer().getPosition().getX();
-        // int y = bakery.getPlayer().getPosition().getY();
-        // Point coord = coord(x, y);
-        // bakerLabel.setBounds(coord.x, coord.y, TILE_SIZE, TILE_SIZE);
+        int x = bakery.getPlayer().getPosition().getX();
+        int y = bakery.getPlayer().getPosition().getY();
+        Point coord = coord(x, y);
+        bakerLabel.setBounds(coord.x, coord.y, TILE_SIZE, TILE_SIZE);
         //bakerLabel.setIcon();  TODO ----------- LATER
 
-        repaintRaccoons();
+        //repaintRaccoons();
         repaintBread();
     }
 }
