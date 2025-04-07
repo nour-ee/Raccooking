@@ -77,9 +77,9 @@ public class Baker extends Entity {
      /**
      * Method that increments breads sold
      */
-    public void sellBread(){
+    public void sellBread(int price){
         soldBread++;
-        money+=Bread.PRICE;
+        money+= price;
     }
 
     /**

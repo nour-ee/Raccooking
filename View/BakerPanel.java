@@ -152,12 +152,23 @@ public class BakerPanel extends JPanel {
         buyButton.addActionListener(bakerControl);
         buttonPanel.add(buyButton, gbc);
 
-        JButton AddButton = new JButton("Add Bread");
-        AddButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+
+
+
+        // Create Bread
+        ImageIcon bakerIcon = new ImageIcon(getClass().getResource("/img/cooked.png"));
+        Image scaledImage = bakerIcon.getImage().getScaledInstance(BUTTON_HEIGHT,BUTTON_HEIGHT, Image.SCALE_SMOOTH);
+        ImageIcon breadIcon = new ImageIcon(scaledImage);
+        JButton bakeBread = new JButton(breadIcon);
+        bakeBread.setPreferredSize(new Dimension(BUTTON_HEIGHT, BUTTON_HEIGHT));
         gbc.gridy++;
-        AddButton.setFocusable(false);
-        AddButton.addActionListener(bakerControl);
-        buttonPanel.add(AddButton, gbc);
+        bakeBread.setFocusable(false);
+        bakeBread.addActionListener(bakerControl);
+        buttonPanel.add(bakeBread, gbc);
+        JLabel bakeBreadLabel = new JLabel("1 flour, 1 yeast");
+        gbc.gridx++;
+        buttonPanel.add(bakeBreadLabel, gbc);
+        gbc.gridx--;
 
 
         // Add the buttonPanel to the Bakerpanel

@@ -212,7 +212,7 @@ public class Display extends JFrame {
         for (int i = 0; i < bakery.getOvens().size(); i++) {
             Oven o = bakery.getOvens().get(i);
             if (o.isOccupied()) {
-                Bread b = o.getBread();
+                BakedGoods b = o.getBread();
                 String filename="";
                 switch(b.getState()) {
                     case COOKING:

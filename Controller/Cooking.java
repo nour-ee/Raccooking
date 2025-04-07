@@ -1,21 +1,18 @@
 package Controller;
 
 
-import Model.Bread;
-
-import static Model.Bread.T_BURNT;
-import static Model.Bread.T_COOKED;
+import Model.BakedGoods;
 
 public class Cooking extends Thread{
-    private Bread bread;
+    private BakedGoods bakedGoods;
 
     private boolean out;
 
     /****************
      * CONSTRUCTOR  *
      ****************/
-    public Cooking(Bread b){
-        this.bread = b;
+    public Cooking(BakedGoods b){
+        this.bakedGoods = b;
         this.out = false;
     }
 
@@ -33,20 +30,20 @@ public class Cooking extends Thread{
      */
     @Override
     public void run() {
-        while (bread.getTime()<= T_BURNT && !out) {
+        while (bakedGoods.getTime()<= bakedGoods.getT_burnt() && !out) {
             try {
                 Thread.sleep(100);
             } catch (Exception e) {
 
             }
-            if (bread.getTime() == T_COOKED) {
+            if (bakedGoods.getTime() == bakedGoods.getT_cooked()) {
                 System.out.println("Bread is cooked");
-                bread.setState(Bread.State.COOKED);
-            } else if (bread.getTime() == T_BURNT) {
+                bakedGoods.setState(BakedGoods.State.COOKED);
+            } else if (bakedGoods.getTime() == bakedGoods.getT_burnt()) {
                 System.out.println("Bread is burnt");
-                bread.setState(Bread.State.BURNT);
+                bakedGoods.setState(BakedGoods.State.BURNT);
             }
-            bread.incrTime();
+            bakedGoods.incrTime();
         }
     }
 

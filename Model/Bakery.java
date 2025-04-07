@@ -229,11 +229,11 @@ public class Bakery {
     public void collectBread(){
         for (Oven o : ovens){
             if(o.isOccupied()){
-                if (o.getBread().getState()== Bread.State.COOKED && isCollectible(o)) {
-                    player.sellBread();
+                if (o.getBread().getState()== BakedGoods.State.COOKED && isCollectible(o)) {
+                    player.sellBread(o.getBread().getPrice());
                     o.removeBread();
                 }
-                else if (o.getBread().getState()== Bread.State.BURNT) {
+                else if (o.getBread().getState()== BakedGoods.State.BURNT) {
                     o.removeBread();
                 }
             }
