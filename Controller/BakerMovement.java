@@ -78,7 +78,6 @@ public class BakerMovement implements KeyListener {
             des = bakery.getMap()[pos.getX()+1][pos.getY()]; //will attempt to move right
         }
         System.out.println("Moving ");
-        (new MovingAnimation(bakerLabel, des, pos)).start(); //starts the animation of the player
         bakery.getPlayer().move(des); //moves the player to the new tile
 
     }
