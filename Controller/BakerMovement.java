@@ -2,6 +2,9 @@ package Controller;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+import javax.swing.JLabel;
+
 import Model.Bakery;
 import Model.Tile;
 
@@ -17,11 +20,13 @@ public class BakerMovement implements KeyListener {
      * ATTRIBUTES *
     * *************/
     private Bakery bakery;
+    private JLabel bakerLabel; //the label of the player (baker) that will be moved
 
     /***************
      * CONSTRUCTOR *
      * *************/
-    public BakerMovement(Bakery m) {
+    public BakerMovement(Bakery m, JLabel bL) {
+        this.bakerLabel = bL;
         bakery = m;
     }
 
@@ -41,34 +46,40 @@ public class BakerMovement implements KeyListener {
     public void keyPressed(KeyEvent e) {
 
         Tile pos = bakery.getPlayer().getPosition();
+        Tile des = pos;
 
         //Up or Z : moves the player to the tile above
         if (  (e.getKeyCode() == 38 || e.getKeyCode() == 90)
                 && pos.getY() > 0  ) { //checks if the player is still in the map
             System.out.println("GO UP");
-            bakery.getPlayer().move(bakery.getMap()[pos.getX()][pos.getY()-1]); //will attempt to move upwards
+
+            des = bakery.getMap()[pos.getX()][pos.getY()-1]; //will attempt to move upwards
+
         }
 
         //Down or S : moves the player to the tile below
-        if (  (e.getKeyCode() == 40 || e.getKeyCode() == 83)
+        else if (  (e.getKeyCode() == 40 || e.getKeyCode() == 83)
                 && pos.getY() < bakery.getMap().length -1  ) { //checks if the player is still in the map
             System.out.println("GO DOWN");
-            bakery.getPlayer().move(bakery.getMap()[pos.getX()][pos.getY()+1]); //will attempt to move downwards
+            des =bakery.getMap()[pos.getX()][pos.getY()+1]; //will attempt to move downwards
         }
 
         //Left or Q : moves the player to the tile on the left
-        if (  (e.getKeyCode() == 37 || e.getKeyCode() == 81)
+        else if (  (e.getKeyCode() == 37 || e.getKeyCode() == 81)
                 && pos.getX() > 0  ) { //checks if the player is still in the map
             System.out.println("GO LEFT");
-            bakery.getPlayer().move(bakery.getMap()[pos.getX()-1][pos.getY()]); //will attempt to move left
+            des = bakery.getMap()[pos.getX()-1][pos.getY()]; //will attempt to move left
         }
 
         //Right or D : moves the player to the tile on the right
-        if (  (e.getKeyCode() == 39 || e.getKeyCode() == 68)
+        else if (  (e.getKeyCode() == 39 || e.getKeyCode() == 68)
                 && pos.getX() < bakery.getMap()[0].length - 1  ) { //checks if the player is still in the map
             System.out.println("GO RIGHT");
-            bakery.getPlayer().move(bakery.getMap()[pos.getX()+1][pos.getY()]); //will attempt to move right
+            des = bakery.getMap()[pos.getX()+1][pos.getY()]; //will attempt to move right
         }
+        System.out.println("Moving ");
+        (new MovingAnimation(bakerLabel, des, pos)).start(); //starts the animation of the player
+        bakery.getPlayer().move(des); //moves the player to the new tile
 
     }
 

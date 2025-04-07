@@ -15,7 +15,7 @@ public class MovingAnimation extends Thread {
     private Tile destination; //the tile to move to
     private int current_x; //the x to move from
     private int current_y; //the x to move from
-    private int steps = 10; //number of steps to move from point a to b 
+    private int steps = 25; //number of steps to move from point a to b 
     private int dx; //movement along x axis during 1 step
     private int dy; //movement along y axis during 1 step
     private int delay = RaccoonMovement.DELAY_RACCOONMOVEMENT/steps; //delay between each step
@@ -36,12 +36,14 @@ public class MovingAnimation extends Thread {
      *  METHOD  *
      ************/
     public void run(){
-        for(int i =0; i<steps ; i++){
+        for(int i =0; i<steps+1 ; i++){
+            System.out.println("Moving baker to " + current_x + " " + current_y);
             current_x += dx;
             current_y += dy;
+            //jlabel.setBounds(destination.getX()*Display.TILE_SIZE, destination.getY()*Display.TILE_SIZE, Display.TILE_SIZE, Display.TILE_SIZE);
             jlabel.setBounds(current_x, current_y, Display.TILE_SIZE, Display.TILE_SIZE);
-            // try { Thread.sleep(delay); }
-            // catch (Exception e) { e.printStackTrace(); }
+            try { Thread.sleep(delay); }
+            catch (Exception e) { e.printStackTrace(); }
         }
     }
 
