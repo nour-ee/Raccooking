@@ -108,11 +108,10 @@ public class Baker extends Entity {
         } return true;
     }
 
-    public void spendRessources(){
-        //ressources[0]--; ressources[1]--; ressources[2]--; ressources[3]--;
-        for (String s : ressources.keySet()) {
-            ressources.put(s, ressources.get(s)-1);
-            System.out.println("Ressource "+s+" : "+ressources.get(s));
+    public void spendRessources(HashMap<String, Integer> recipe){
+        for (String ingredient : recipe.keySet()) {
+            ressources.put(ingredient, ressources.get(ingredient) - recipe.get(ingredient));
+            System.out.println("Ressource "+ingredient+" : "+ressources.get(ingredient));
         }
     }
 

@@ -2,6 +2,8 @@ package Model;
 
 import Controller.Cooking;
 
+import java.util.HashMap;
+
 public class BakedGoods {
     // Enum to represent the state of the bread
     public enum State {
@@ -11,7 +13,7 @@ public class BakedGoods {
     /****************
      *  ATTRIBUTES  *
      ****************/
-    private State state ;
+    protected State state ;
     protected Cooking cooking;
     private int time;
     protected int t_cooked=150;
@@ -19,18 +21,16 @@ public class BakedGoods {
     private int price;//selling price of a bread
 
     //ingredients necessary to bake this thing
-    private int[] ingredients = new int[4]; // 0 flour, 1 egg, 2 yeast, 3 butter
 
 
     /****************
      *  CONSTRUCTOR  *
      ****************/
-    public BakedGoods(int p,int[] ingr, int t_c, int t_b){
+    public BakedGoods(int p, int t_c, int t_b){
         this.t_cooked = t_c;
         this.t_burnt = t_b;
         this.price = p;
         state = State.NULL;
-        ingredients=ingr;
         time=0;
     }
 
@@ -78,6 +78,7 @@ public class BakedGoods {
     public void stopThread(){
         cooking.in();
     }
+
 
 
 }

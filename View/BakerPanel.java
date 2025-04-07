@@ -21,6 +21,7 @@ public class BakerPanel extends JPanel {
     private JLabel breadLabel;
     private ArrayList<JLabel> ingredientsLabelsList;    //to store our ingredients labels
                                                         //to update them easily
+
     /*****************
      *   CONSTANTS  *
      *****************/
@@ -67,6 +68,8 @@ public class BakerPanel extends JPanel {
     /***************
      *   METHODS   *
      ***************/
+
+
 
     /**
      * Creates the ressources panel to display money, bread and ingredients
@@ -133,11 +136,13 @@ public class BakerPanel extends JPanel {
         buttonPanel.setBackground(new Color(  202, 200, 196 ));
 
         GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth=2;
         //spaces between buttons
         gbc.insets = new Insets(0, 10, 30, 10);
 
         // Create buttons
         JButton collectButton = new JButton("Collect & Sell");
+        collectButton.setName("Collect & Sell");
         collectButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -146,6 +151,7 @@ public class BakerPanel extends JPanel {
         buttonPanel.add(collectButton, gbc);
 
         JButton buyButton = new JButton("Buy");
+        buyButton.setName("Buy");
         buyButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         gbc.gridy++;
         buyButton.setFocusable(false);
@@ -155,20 +161,24 @@ public class BakerPanel extends JPanel {
 
 
 
+        gbc.gridwidth=1;
         // Create Bread
         ImageIcon bakerIcon = new ImageIcon(getClass().getResource("/img/cooked.png"));
         Image scaledImage = bakerIcon.getImage().getScaledInstance(BUTTON_HEIGHT,BUTTON_HEIGHT, Image.SCALE_SMOOTH);
         ImageIcon breadIcon = new ImageIcon(scaledImage);
         JButton bakeBread = new JButton(breadIcon);
+        bakeBread.setName("BakeBread");
         bakeBread.setPreferredSize(new Dimension(BUTTON_HEIGHT, BUTTON_HEIGHT));
         gbc.gridy++;
         bakeBread.setFocusable(false);
         bakeBread.addActionListener(bakerControl);
         buttonPanel.add(bakeBread, gbc);
+
         JLabel bakeBreadLabel = new JLabel("1 flour, 1 yeast");
         gbc.gridx++;
         buttonPanel.add(bakeBreadLabel, gbc);
         gbc.gridx--;
+
 
 
         // Add the buttonPanel to the Bakerpanel
