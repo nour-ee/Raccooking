@@ -99,6 +99,7 @@ public class Begin extends JFrame {
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
             Clip clip = AudioSystem.getClip();
             clip.open(audioStream);
+            clip.loop(Clip.LOOP_CONTINUOUSLY); // Loop the sound
             clip.start();
         } catch (Exception e) {
             e.printStackTrace();
