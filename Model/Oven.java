@@ -4,14 +4,14 @@ public class Oven extends Tile {
     /****************
     *  ATTRIBUTES  *
     ****************/
-    private Bread bread; // the bread in the oven, when occupied null the rest of the time
+    private BakedGoods bakedGoods; // the bread in the oven, when occupied null the rest of the time
     private boolean occupied; // indicates if the oven is occupied
 
     /****************
     *   GETTERS   *
     ***************/
-    public Bread getBread() {
-        return bread;
+    public BakedGoods getBread() {
+        return bakedGoods;
     }
     public boolean isOccupied() {
         return occupied;
@@ -20,8 +20,8 @@ public class Oven extends Tile {
     /****************
     *  SETTERS   *
     **************/
-    public void setBread(Bread bread) {
-        this.bread = bread;
+    public void setBread(BakedGoods bakedGoods) {
+        this.bakedGoods = bakedGoods;
     }
     public void setOccupied(boolean occupied) {
         this.occupied = occupied;
@@ -35,14 +35,15 @@ public class Oven extends Tile {
         this.accessible = false;
         this.occupied = false;
         this.hasOven=true;
+        this.bakedGoods= new BakedGoods();
     }
 
     /**
      * Method to remove the bread from the oven
      */
     public void removeBread(){
-        this.bread.stopThread();
-        this.bread = null; //the bread still exists even though it's not contained anywhere
+        this.bakedGoods.stopThread();
+        this.bakedGoods = null; //the bread still exists even though it's not contained anywhere
         this.occupied = false;
     }
 
@@ -50,8 +51,23 @@ public class Oven extends Tile {
      * Method to add a bread to the oven
      */
     public void addBread(){
-        this.bread = new Bread();
+        this.bakedGoods = new Bread();
         this.occupied = true;
     }
 
+    /**
+     * Method to add a croissant to the oven
+     */
+    public void addCroissant() {
+        this.bakedGoods = new Croissant();
+        this.occupied = true;
+    }
+
+    /**
+     * Method to add a Brioche to the oven
+     */
+    public void addBrioche() {
+        this.bakedGoods = new Brioche();
+        this.occupied = true;
+    }
 }

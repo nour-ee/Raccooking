@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Baker;
 import Model.Bakery;
+import Model.Bread;
 import Model.Oven;
 import View.BakerPanel;
 
@@ -46,11 +47,25 @@ public class BakerControl implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        switch(e.getActionCommand()){
+        switch(((JButton)e.getSource()).getName()){
+            case "BakeBread" ->{
+                Baker b= bakery.getPlayer();
+                if(Bread.canBake(b.getRessources())){
+                    Optional<Oven> o= bakery.hasFreeOven();
+                    if(o.isPresent()){
+                        o.get().addBread();
+                        b.spendRessources(Bread.getRecipe());
+                    }
+                    else{ System.out.println("No free oven"); }
+                    }
+                    else{System.out.println("Not enough ressources to bake bread");}
+                    break;
+            }
             case "Collect & Sell" -> {
                 System.out.println("Collect");
                 bakery.collectBread();
-                ;break;}
+                ;break;
+            }
             case "Buy" -> {// print combo box
                 // JPanel for the check boxes
                 JPanel panel = new JPanel(new GridLayout(0, 2,10,5));
@@ -93,22 +108,7 @@ public class BakerControl implements ActionListener {
                     }
                 }
                 ;break;}
-
-            //if the player has enough ressources, and if there is a free oven, the player can bake bread
-            case "Add Bread" -> {System.out.println("Add Bread");
-                Baker b= bakery.getPlayer();
-                if(b.canBake()){
-                    Optional<Oven> o= bakery.hasFreeOven();
-                    if(o.isPresent()){
-                        o.get().addBread();
-                        b.spendRessources();
-                    }
-                    else{ System.out.println("No free oven"); }
-                }
-                else{System.out.println("Not enough ressources to bake bread");}
-                break;}
         }
-
     }
 
 

@@ -2,61 +2,33 @@ package Model;
 
 import Controller.Cooking;
 
-public class Bread {
-    // Enum to represent the state of the bread
-    public enum State {
-        COOKING, COOKED, BURNT
-    }
+import java.util.HashMap;
 
-    /****************
-     *  ATTRIBUTES  *
-     ****************/
-    private State state ;
-    private Cooking cooking;
-    private int time;
-    public static final int T_COOKED =150;
-    public static final int T_BURNT =250;
-    public static final int PRICE = 20; //selling price of a bread
+public class Bread extends BakedGoods{
 
+    public static HashMap<String, Integer> recipe;
+    public Bread () {
+        super(5, 120, 200); //A bread sells for 5 and needs 1 flour, 1 yeast
 
-    /****************
-     *  CONSTRUCTOR  *
-     ****************/
-    public Bread() {
-        this.state = State.COOKING;
-        time=0;
+        recipe=new HashMap<String,Integer>();
+        recipe.put("flour", 1);
+        recipe.put("egg", 0);
+        recipe.put("yeast", 1);
+        recipe.put("butter", 0);
+
+        state=State.COOKING;
+
         cooking= new Cooking(this);
         cooking.start();
     }
 
-
-    /**************************
-     *   GETTERS & SETTERS    *
-     **************************/
-    public void setState(State s){ state = s;}
-
-    public State getState() {
-        return state;
-    }
-
-    public int getTime() {
-        return time;
+    public static boolean canBake(HashMap<String, Integer> ingredients) {
+        // Check if the ingredients contain the required amounts
+        return ingredients.get("flour") >= 1 && ingredients.get("yeast") >= 1;
     }
 
 
-    /****************
-     *   METHODS    *
-     ****************/
-    public void incrTime(){time++;}
-    public boolean isCooked(){return state== State.COOKED;}
-
-    /**
-     * Method to kill the thread
-     * when the bread is discarded
-     */
-    public void stopThread(){
-        cooking.in();
+    public static HashMap<String, Integer> getRecipe() {
+        return recipe;
     }
-
-
 }

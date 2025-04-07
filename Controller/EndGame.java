@@ -1,11 +1,7 @@
 package Controller;
 
-import Model.Bread;
 import View.Display;
 import View.EndScreen;
-
-import static Model.Bread.T_BURNT;
-import static Model.Bread.T_COOKED;
 
 public class EndGame extends Thread {
     public static final int TIME = 30;

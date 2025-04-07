@@ -1,9 +1,7 @@
 package View;
 
 import Controller.BakerControl;
-import Controller.EndGame;
 import Model.Bakery;
-import Model.Raccoon;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,16 +18,14 @@ public class BakerPanel extends JPanel {
     private BakerControl bakerControl; // manage buttons actions
 
     private JLabel moneyLabel;
+    private JLabel breadLabel;
     private ArrayList<JLabel> ingredientsLabelsList;    //to store our ingredients labels
                                                         //to update them easily
-    private JProgressBar progressBar; //progress bar to show time left in game
-    public int TIME = EndGame.TIME;
-
     /*****************
      *   CONSTANTS  *
      *****************/
 
-    public static final int HEIGHT = Display.FRAME_H;
+    public static final int HEIGHT = 650;
     public static final int WIDTH = 300;
 
     public static final int BUTTON_HEIGHT = 50;
@@ -66,8 +62,6 @@ public class BakerPanel extends JPanel {
 
         // === buttons Panel ===
         createButtonsPanel();
-
-        createMapPanel();
     }
 
     /***************
@@ -93,6 +87,15 @@ public class BakerPanel extends JPanel {
         gbc2.insets = new Insets(2, 2, 10, 10);
         ressourcesPanel.add(moneyLabel, gbc2);
 
+        // bread label
+        breadLabel = new JLabel("Bread : 50");
+        gbc2.gridx = 0;
+        gbc2.gridy = 1;
+        gbc2.gridwidth = 2;
+        gbc2.insets = new Insets(2, 2, 10, 10);
+        ressourcesPanel.add(breadLabel, gbc2);
+
+
         // ingredients labels
         JLabel ressourcesLabel = new JLabel("Ingrédients :");
         gbc2.gridx = 0; gbc2.gridy =  2;
@@ -102,31 +105,7 @@ public class BakerPanel extends JPanel {
 
         // display the ingredients
         for (int i = 0; i < RESSOURCES.length; i++) {
-            ImageIcon ingredientIcon;
-            switch(RESSOURCES[i]){
-                case "flour":
-                    ingredientIcon = new ImageIcon(getClass().getResource("/img/flour.png"));
-                    break;
-                case "egg":
-                    ingredientIcon = new ImageIcon(getClass().getResource("/img/egg.png"));
-                    break;
-                case "yeast":
-                    ingredientIcon = new ImageIcon(getClass().getResource("/img/yeast.png"));
-                    break;
-                default : // butter
-                    ingredientIcon = new ImageIcon(getClass().getResource("/img/butter.png"));
-                    break;
-            }
-            // Resize the image
-            Image scaledImage = ingredientIcon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-            ingredientIcon = new ImageIcon(scaledImage);
-            // Create the label with the icon and next to the icon " : "+bakerControl.getBakery().getPlayer().getRessources().get(RESSOURCES[i])
-            JLabel ingredientLabel = new JLabel(ingredientIcon);
-            ingredientLabel.setText(" : " + bakerControl.getBakery().getPlayer().getRessources().get(RESSOURCES[i]));
-            ingredientLabel.setIconTextGap(10);
-            ingredientLabel.setHorizontalTextPosition(SwingConstants.RIGHT);
-            ingredientLabel.setVerticalTextPosition(SwingConstants.CENTER);
-
+            JLabel ingredientLabel = new JLabel(RESSOURCES[i] + ": " + bakerControl.getBakery().getPlayer().getRessources().get(RESSOURCES[i]));
             if( i%2 == 0 ) {
                 gbc2.gridx = 0;
                 gbc2.gridy = 3 + i;
@@ -185,58 +164,15 @@ public class BakerPanel extends JPanel {
         this.add(buttonPanel, BorderLayout.SOUTH);
     }
 
-    private void createMapPanel(){
-        JPanel mapPanel = new JPanel();
-        mapPanel.setLayout(new GridBagLayout());
-        mapPanel.setPreferredSize(new Dimension(WIDTH - 40, 300));
-        mapPanel.setBackground(new Color( 182, 179, 175 ));
-
-        GridBagConstraints gbc = new GridBagConstraints();
-        //spaces between buttons
-        gbc.insets = new Insets(0, 10, 30, 10);
-
-        //Label showing GOAL of the bakery
-        JLabel goalLabel = new JLabel("Goal : " + bakerControl.getBakery().GOAL);
-        goalLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        goalLabel.setBounds(0, 0, 200, 50);
-        goalLabel.setForeground(Color.BLACK);
-        goalLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
-        // time label with image and progress bar
-        ImageIcon timeIcon = new ImageIcon(getClass().getResource("/img/time.png"));
-        int newWidthTime = 50;
-        int newHeightTime = 50;
-        Image scaledImageTime = timeIcon.getImage().getScaledInstance(newWidthTime, newHeightTime, Image.SCALE_SMOOTH);
-        ImageIcon scaledTimeIcon = new ImageIcon(scaledImageTime);
-        JLabel timeLabel = new JLabel(scaledTimeIcon);
-
-        // Progress bar
-        progressBar = new JProgressBar();
-        progressBar.setPreferredSize(new Dimension(150, 20));
-        progressBar.setMaximum(TIME); // Valeur maximale
-        progressBar.setValue(EndGame.timeLeft); // Valeur initiale
-        timeLabel.add(progressBar);
-
-        // jpanel with time image and progress bar
-        JPanel timePanel = new JPanel();
-        timePanel.setLayout(new FlowLayout());
-        timePanel.setOpaque(false);
-        timePanel.add(timeLabel);
-        timePanel.add(progressBar);
-
-
-        //this.add(mapPanel);
-
-
-    }
-
     /**
      * Update the ressources panel
      */
     public void update(){
-        moneyLabel.setText("Money:  " + bakerControl.getBakery().getPlayer().getMoney()+"€");
+        moneyLabel.setText("Money:  " + bakerControl.getBakery().getPlayer().getMoney()+"$");
+        breadLabel.setText("Bread: " + bakerControl.getBakery().getPlayer().getSoldBread());
         for ( JLabel j : ingredientsLabelsList) {
-            j.setText(" : " + bakerControl.getBakery().getPlayer().getRessources(). //HashMap des ingrédients du baker
+            j.setText(RESSOURCES[ingredientsLabelsList.indexOf(j)]
+                    + ": " + bakerControl.getBakery().getPlayer().getRessources(). //HashMap des ingrédients du baker
                     get(RESSOURCES[ingredientsLabelsList.indexOf(j)]));
         }
     }
