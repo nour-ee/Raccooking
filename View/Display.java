@@ -59,7 +59,6 @@ public class Display extends JFrame {
         bakerLabel.addKeyListener(bakerMovement);
 
 
-
         // Manage interaction with bakery elements
         entityControl = new EntityControl( bkPanel, this);
         // bakerpanel appears on the right when bakerlabel is clicked
@@ -73,6 +72,8 @@ public class Display extends JFrame {
         forbiddenZone.setOpaque(true);
         forbiddenZone.setBackground(new Color(255, 219, 213, 150));
         add(forbiddenZone);
+        paintForbiddenZone();
+
 
         //set frame visible
         setVisible(true);
