@@ -8,8 +8,8 @@ import static Model.Bread.T_BURNT;
 import static Model.Bread.T_COOKED;
 
 public class EndGame extends Thread {
-    private static final int TIME = 30;
-    private int timeLeft;
+    public static final int TIME = 30;
+    public static int timeLeft;
     private Display display;
 
     public EndGame(Display display) {
