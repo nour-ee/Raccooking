@@ -33,7 +33,7 @@ public class Display extends JFrame {
     }
 
     //constants of our display
-    public static final int TILE_SIZE = 75;   //size of a tile, in pixels (square tile)
+    public static final int TILE_SIZE = 60;   //size of a tile, in pixels (square tile)
     public static final int MARGIN = 10; //margin around the bakery, in pixels
     public static final int FRAME_H = Bakery.BAKERY_H*TILE_SIZE + 2*MARGIN;
     public static final int FRAME_W = Bakery.BAKERY_W*TILE_SIZE + 2*MARGIN;
@@ -44,6 +44,7 @@ public class Display extends JFrame {
     public Display(Bakery bakery) {
         setTitle("Raccooking");
         setSize(FRAME_W+BakerPanel.WIDTH, FRAME_H);
+        System.out.println("FRAME HEIGHT : "+FRAME_H+"  ----   FRAME WIDTH : "+FRAME_W);
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         // Create a bakery

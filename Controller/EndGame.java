@@ -3,9 +3,10 @@ package Controller;
 import View.Display;
 import View.EndScreen;
 
+//Timer to end the game
 public class EndGame extends Thread {
-    private static final int TIME = 30;
-    private int timeLeft;
+    public static final int TIME = 30;
+    public static int timeLeft;
     private Display display;
 
     public EndGame(Display display) {
