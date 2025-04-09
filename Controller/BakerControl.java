@@ -1,15 +1,13 @@
 package Controller;
 
-import Model.Baker;
-import Model.Bakery;
-import Model.Bread;
-import Model.Oven;
+import Model.*;
 import View.BakerPanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 import java.util.Optional;
 
 /** Control the baker panel in particular buttons */
@@ -48,23 +46,21 @@ public class BakerControl implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch(((JButton)e.getSource()).getName()){
-            case "BakeBread" ->{
-                Baker b= bakery.getPlayer();
-                if(Bread.canBake(b.getRessources())){
-                    Optional<Oven> o= bakery.hasFreeOven();
-                    if(o.isPresent()){
-                        o.get().addBread();
-                        b.spendRessources(Bread.getRecipe());
-                    }
-                    else{ System.out.println("No free oven"); }
-                    }
-                    else{System.out.println("Not enough ressources to bake bread");}
-                    break;
+            case "BakeBread"  ->{
+                bake("Bread");
+                break;
+            }
+            case "BakeCroissant" -> {
+                bake("Croissant");
+                break;
+            }
+            case "BakeBrioche" -> {
+                bake("Brioche");
+                break;
             }
             case "Collect & Sell" -> {
-                System.out.println("Collect");
                 bakery.collectBread();
-                ;break;
+                break;
             }
             case "Buy" -> {// print combo box
                 // JPanel for the check boxes
@@ -111,6 +107,19 @@ public class BakerControl implements ActionListener {
         }
     }
 
+public void bake(String type){
+    HashMap<String, Integer> recipe= BakedGoods.getRecipe(type);
+    Baker b= bakery.getPlayer();
+    if(b.canBake(recipe)){
+        Optional<Oven> o= bakery.hasFreeOven();
+        if(o.isPresent()){
+            o.get().addBakedGoods(type);
+            b.spendRessources(recipe);
+        }
+        else{ System.out.println("No free oven"); }
+    }
+    else{System.out.println("Not enough ressources to bake bread");}
+}
 
 }
 

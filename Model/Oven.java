@@ -50,8 +50,22 @@ public class Oven extends Tile {
     /**
      * Method to add a bread to the oven
      */
-    public void addBread(){
-        this.bakedGoods = new Bread();
+    public void addBakedGoods(String type){
+        switch (type){
+            case "Bread" -> {
+                this.bakedGoods = new Bread();
+                break;
+            }
+            case "Croissant" ->{
+                this.bakedGoods = new Croissant();
+                break;
+            }
+            case "Brioche" -> {
+                this.bakedGoods = new Brioche();
+                break;
+            }
+
+        }
         this.occupied = true;
     }
 

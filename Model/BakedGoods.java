@@ -2,6 +2,7 @@ package Model;
 
 import Controller.Cooking;
 
+import java.text.BreakIterator;
 import java.util.HashMap;
 
 public class BakedGoods {
@@ -77,6 +78,24 @@ public class BakedGoods {
      */
     public void stopThread(){
         cooking.in();
+    }
+
+
+    /**
+     * Method to get the recipe of the bread
+     * @return the recipe of the bread
+     */
+    public static HashMap<String, Integer> getRecipe(String type) {
+        switch (type) {
+            case "Bread":
+                return Bread.getRecipe();
+            case "Croissant":
+                return Croissant.getRecipe();
+            case "Brioche":
+                return Brioche.getRecipe();
+            default:
+                return null;
+        }
     }
 
 

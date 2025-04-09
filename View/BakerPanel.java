@@ -163,7 +163,7 @@ public class BakerPanel extends JPanel {
 
         gbc.gridwidth=1;
         // Create Bread
-        ImageIcon bakerIcon = new ImageIcon(getClass().getResource("/img/cooked.png"));
+        ImageIcon bakerIcon = new ImageIcon(getClass().getResource("/img/breadCooked.png"));
         Image scaledImage = bakerIcon.getImage().getScaledInstance(BUTTON_HEIGHT,BUTTON_HEIGHT, Image.SCALE_SMOOTH);
         ImageIcon breadIcon = new ImageIcon(scaledImage);
         JButton bakeBread = new JButton(breadIcon);
@@ -178,6 +178,40 @@ public class BakerPanel extends JPanel {
         gbc.gridx++;
         buttonPanel.add(bakeBreadLabel, gbc);
         gbc.gridx--;
+
+        // Create Croissant
+        ImageIcon croissantIcon = new ImageIcon(getClass().getResource("/img/croissantCooked.png"));
+        Image scaledImage2 = croissantIcon.getImage().getScaledInstance(BUTTON_HEIGHT,BUTTON_HEIGHT, Image.SCALE_SMOOTH);
+        ImageIcon croissantIcon2 = new ImageIcon(scaledImage2);
+        JButton bakeCroissant = new JButton(croissantIcon2);
+        bakeCroissant.setName("BakeCroissant");
+        bakeCroissant.setPreferredSize(new Dimension(BUTTON_HEIGHT, BUTTON_HEIGHT));
+        gbc.gridy++;
+        bakeCroissant.setFocusable(false);
+        bakeCroissant.addActionListener(bakerControl);
+        buttonPanel.add(bakeCroissant, gbc);
+
+        JLabel bakeCroissantLabel = new JLabel("1 flour, 1 egg, 2 butter");
+        gbc.gridx++;
+        buttonPanel.add(bakeCroissantLabel, gbc);
+        gbc.gridx--;
+
+        // Create Brioche
+        ImageIcon briocheIcon = new ImageIcon(getClass().getResource("/img/briocheCooked.png"));
+        Image scaledImage3 = briocheIcon.getImage().getScaledInstance(BUTTON_HEIGHT,BUTTON_HEIGHT, Image.SCALE_SMOOTH);
+        ImageIcon briocheIcon2 = new ImageIcon(scaledImage3);
+        JButton bakeBrioche = new JButton(briocheIcon2);
+        bakeBrioche.setName("BakeBrioche");
+        bakeBrioche.setPreferredSize(new Dimension(BUTTON_HEIGHT, BUTTON_HEIGHT));
+        gbc.gridy++;
+        bakeBrioche.setFocusable(false);
+        bakeBrioche.addActionListener(bakerControl);
+        buttonPanel.add(bakeBrioche, gbc);
+        JLabel bakeBriocheLabel = new JLabel("1 flour, 1 egg, 1 yeast, 1 butter");
+        gbc.gridx++;
+        buttonPanel.add(bakeBriocheLabel, gbc);
+        gbc.gridx--;
+
 
 
 

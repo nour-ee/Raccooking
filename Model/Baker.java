@@ -89,23 +89,19 @@ public class Baker extends Entity {
      */
     public void buy(String s){
         if( money >= 2 ) {
-            /*
-            switch (s) {
-                case "flour" : ressources[0]++; money=money-2; break;
-                case "egg" : ressources[1]++; money=money-2; break;
-                case "yeast" : ressources[2]++; money=money-2; break;
-                case "butter" : ressources[3]++; money=money-2; break;
-            }*/
             ressources.put(s, ressources.get(s)+1); money-=2;
             System.out.println("Ressource "+s+" : "+ressources.get(s));
         }
     }
 
-    public boolean canBake(){
-        //return ressources[0] > 0 && ressources[1] > 0 && ressources[2] > 0 && ressources[3] > 0;
-        for (int i : ressources.values()) {
-            if(i<=0) return false;
-        } return true;
+    public boolean canBake(HashMap<String, Integer> recipe) {
+        // Check if the ingredients contain the required amounts
+        for (String ingredient : recipe.keySet()) {
+            if (ressources.get(ingredient) < recipe.get(ingredient)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void spendRessources(HashMap<String, Integer> recipe){

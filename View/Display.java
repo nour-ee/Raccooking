@@ -7,7 +7,6 @@ import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Display extends JFrame {
@@ -207,17 +206,33 @@ public class Display extends JFrame {
             Oven o = bakery.getOvens().get(i);
             if (o.isOccupied()) {
                 BakedGoods b = o.getBread();
-                String filename="";
+                String filename="/img/";
+                System.out.println(b.getClass().toString());
+                switch(b.getClass().toString()){
+                    case "class Model.Bread" ->{
+                        filename+="bread";
+                        break;
+                    }
+                    case "class Model.Croissant" ->{
+                        filename+="croissant";
+                        break;
+                    }
+                    case "class Model.Brioche" ->{
+                        filename+="brioche";
+                        break;
+                    }
+                }
                 switch(b.getState()) {
                     case COOKING:
-                        filename = "/img/cooking.png";
+                        filename += "Cooking.png";
                         break;
                     case COOKED:
-                        filename = "/img/cooked.png";
+                        filename += "Cooked.png";
                         break;
                     case BURNT:
-                        filename = "/img/burnt.png";
+                        filename += "Burnt.png";
                 }
+                System.out.println("filename: " + filename);
                 ImageIcon breadIcon = new ImageIcon(getClass().getResource(filename));
                 Image scaledImage = breadIcon.getImage().getScaledInstance(TILE_SIZE, TILE_SIZE, Image.SCALE_SMOOTH);
                 ImageIcon scaledBreadIcon = new ImageIcon(scaledImage);
