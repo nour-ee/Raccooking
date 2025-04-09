@@ -59,7 +59,7 @@ public class BakerControl implements ActionListener {
                 break;
             }
             case "Collect & Sell" -> {
-                bakery.collectBread();
+                bakery.collect();
                 break;
             }
             case "Buy" -> {// print combo box

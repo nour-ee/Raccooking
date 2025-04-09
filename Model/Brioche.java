@@ -12,7 +12,7 @@ public class Brioche extends BakedGoods {
         super(20, 120, 200); // A brioche sells for 20 and needs 1 flour, 1 egg, 1 yeast, and 1 butter
         state=State.COOKING;
 
-        Cooking cooking =new Cooking(this);
+        cooking =new Cooking(this);
         cooking.start();
     }
 

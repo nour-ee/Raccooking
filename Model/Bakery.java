@@ -1,19 +1,12 @@
 package Model;
 
 import Controller.RaccoonLife;
-import Controller.RaccoonMovement;
-import View.Animation;
-import View.LevelPanel;
-import View.Redraw;
 
-import javax.swing.tree.FixedHeightLayoutCache;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.Random;
 import java.util.Scanner;
-import java.util.random.RandomGenerator;
 
 /**
  * Classe qui représente la boulangerie
@@ -60,67 +53,7 @@ public class Bakery {
     /********************
      *    CONSTRUCTOR   *
      ********************/
-    /*
-    public Bakery(LevelPanel levelPanel){
 
-        try {
-            Scanner file = new Scanner(new FileInputStream(levelFile));
-            BAKERY_H = file.nextInt();
-            BAKERY_W= file.nextInt();
-            file.nextLine();
-            int goal= file.nextInt();
-            int racoonsNb = file.nextInt();
-            boolean endOfGame = false;
-
-            file.nextLine();
-            //CaseTraversable[] var6 = new CaseTraversable[1];
-            this.map = new Tile[BAKERY_H][BAKERY_W];
-            this.raccoons= new Raccoon[racoonsNb];
-            this.ovens = new ArrayList<>();
-
-            int r=0; //index of raccoons TODO : change to ArrayList ---------------------------------------------
-
-            for(int i = 0; i < this.BAKERY_H; i++) {
-                String line = file.nextLine();
-                for(int j = 0; j < this.BAKERY_W; j++) {
-                    Character c = line.charAt(j);
-                    Tile t;
-                    switch (c) {
-                        case 'B':
-                            t = new Tile(i,j);
-                            Baker baker = new Baker(t, this);
-                            this.player = baker;
-                            break;
-                        case 'O':
-                            t = new Oven(i,j);
-                            this.ovens.add((Oven) t);
-                            break;
-                        case 'R' :
-                            t = new Tile(i,j);
-                            Raccoon raccoon = new Raccoon(t, this);
-                            raccoon.setAge(r);
-                            this.raccoons[r]=raccoon;
-                            r++;
-                            break;
-                        default:
-                            t = new Tile(i,j);
-                    }
-                    this.map[i][j] = (Tile) t;
-                }
-            }
-            //finds the player and makes all neighbour tiles' nextToBaker true
-            //make the tiles next to new baker pos have a nextToBaker
-            for(Tile t : this.neighbours(this.getPlayer().position)){
-                t.setNextToBaker(true);
-            }
-            file.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
-    }
-
-     */
     public Bakery(String filename){
         try {
             Scanner file = new Scanner(new FileInputStream(filename));
@@ -138,7 +71,7 @@ public class Bakery {
             this.ovens = new ArrayList<>();
 
             int r=0; //index of raccoons TODO : change to ArrayList ---------------------------------------------
-
+            int nbOvens = 0;
             for(int i = 0; i < this.BAKERY_H; i++) {
                 String line = file.nextLine();
                 for(int j = 0; j < this.BAKERY_W; j++) {
@@ -151,8 +84,9 @@ public class Bakery {
                             this.player = baker;
                             break;
                         case 'O':
-                            t = new Oven(i,j);
+                            t = new Oven(i,j,nbOvens);
                             this.ovens.add((Oven) t);
+                            nbOvens++;
                             break;
                         case 'R' :
                             t = new Tile(i,j);
@@ -231,15 +165,15 @@ public class Bakery {
     /**
      * Method that collects and sells cooked breads from the ovens and removes burnt ones
      */
-    public void collectBread(){
+    public void collect(){
         for (Oven o : ovens){
             if(o.isOccupied()){
-                if (o.getBread().getState()== BakedGoods.State.COOKED && isCollectible(o)) {
-                    player.sellBread(o.getBread().getPrice());
-                    o.removeBread();
+                if (o.getBakedGoods().getState()== BakedGoods.State.COOKED && isCollectible(o)) {
+                    player.sellBread(o.getBakedGoods().getPrice());
+                    o.removeBakedGoods();
                 }
-                else if (o.getBread().getState()== BakedGoods.State.BURNT) {
-                    o.removeBread();
+                else if (o.getBakedGoods().getState()== BakedGoods.State.BURNT) {
+                    o.removeBakedGoods();
                 }
             }
         }

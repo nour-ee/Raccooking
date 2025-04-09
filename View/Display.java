@@ -44,7 +44,6 @@ public class Display extends JFrame {
     public Display(Bakery bakery) {
         setTitle("Raccooking");
         setSize(FRAME_W+BakerPanel.WIDTH, FRAME_H);
-        System.out.println("FRAME HEIGHT : "+FRAME_H+"  ----   FRAME WIDTH : "+FRAME_W);
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         // Create a bakery
@@ -173,7 +172,6 @@ public class Display extends JFrame {
     private void repaintRaccoons(){
         for(int r=0;r<raccoonLabels.size();r++){
             Raccoon rac = bakery.getRaccoons()[r];
-            //System.out.println(r + ":" + rac.getPosition().getX() + " " + rac.getPosition().getY());
             int x = rac.getPosition().getX();
             int y = rac.getPosition().getY();
 
@@ -206,9 +204,8 @@ public class Display extends JFrame {
         for (int i = 0; i < bakery.getOvens().size(); i++) {
             Oven o = bakery.getOvens().get(i);
             if (o.isOccupied()) {
-                BakedGoods b = o.getBread();
+                BakedGoods b = o.getBakedGoods();
                 String filename="/img/";
-                System.out.println(b.getClass().toString());
                 switch(b.getClass().toString()){
                     case "class Model.Bread" ->{
                         filename+="bread";
@@ -233,7 +230,6 @@ public class Display extends JFrame {
                     case BURNT:
                         filename += "Burnt.png";
                 }
-                System.out.println("filename: " + filename);
                 ImageIcon breadIcon = new ImageIcon(getClass().getResource(filename));
                 Image scaledImage = breadIcon.getImage().getScaledInstance(TILE_SIZE, TILE_SIZE, Image.SCALE_SMOOTH);
                 ImageIcon scaledBreadIcon = new ImageIcon(scaledImage);

@@ -28,8 +28,8 @@ public class BakerPanel extends JPanel {
     public static final int HEIGHT = 650;
     public static final int WIDTH = 300;
 
-    public static final int BUTTON_HEIGHT = 50;
-    public static final int BUTTON_WIDTH = 200;
+    public static final int BUTTON_HEIGHT = 30;
+    public static final int BUTTON_WIDTH = 150;
     public static final String[] RESSOURCES = {"flour", "egg", "yeast", "butter"};
 
 
@@ -133,11 +133,13 @@ public class BakerPanel extends JPanel {
         buttonPanel.setBackground(new Color(  202, 200, 196 ));
 
         GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = 1;
         //spaces between buttons
         gbc.insets = new Insets(0, 10, 30, 10);
 
         // Create buttons
         JButton collectButton = new JButton("Collect & Sell");
+        collectButton.setName("Collect & Sell");
         collectButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -146,6 +148,7 @@ public class BakerPanel extends JPanel {
         buttonPanel.add(collectButton, gbc);
 
         JButton buyButton = new JButton("Buy");
+        buyButton.setName("Buy");
         buyButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         gbc.gridy++;
         buyButton.setFocusable(false);
@@ -153,9 +156,7 @@ public class BakerPanel extends JPanel {
         buttonPanel.add(buyButton, gbc);
 
 
-
-
-        gbc.gridwidth=1;
+        gbc.gridwidth=2;
         // Create Bread
         ImageIcon bakerIcon = new ImageIcon(getClass().getResource("/img/breadCooked.png"));
         Image scaledImage = bakerIcon.getImage().getScaledInstance(BUTTON_HEIGHT,BUTTON_HEIGHT, Image.SCALE_SMOOTH);
@@ -201,6 +202,7 @@ public class BakerPanel extends JPanel {
         bakeBrioche.setFocusable(false);
         bakeBrioche.addActionListener(bakerControl);
         buttonPanel.add(bakeBrioche, gbc);
+
         JLabel bakeBriocheLabel = new JLabel("1 flour, 1 egg, 1 yeast, 1 butter");
         gbc.gridx++;
         buttonPanel.add(bakeBriocheLabel, gbc);

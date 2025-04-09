@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.random.RandomGenerator;
 
-import javax.crypto.spec.PSource;
-
 public class Raccoon extends Entity {
     public static int MAX_AGE = 50;
     /****************
@@ -79,7 +77,7 @@ public class Raccoon extends Entity {
      *@param o the oven from which the raccoon will eat the bread
      */
     public void eatBread(Oven o){
-        o.removeBread();
+        o.removeBakedGoods();
         this.nb_bread++;
     }
     
@@ -96,7 +94,7 @@ public class Raccoon extends Entity {
         for(Tile t: this.bakery.neighbours(position)){
             if(t.hasOven()){
                 Oven o = (Oven)t;
-                if(o.isOccupied() && o.getBread().isCooked()){
+                if(o.isOccupied() && o.getBakedGoods().isCooked()){
                     oven = o;
                 }
             }

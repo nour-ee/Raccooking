@@ -10,7 +10,7 @@ public class Oven extends Tile {
     /****************
     *   GETTERS   *
     ***************/
-    public BakedGoods getBread() {
+    public BakedGoods getBakedGoods() {
         return bakedGoods;
     }
     public boolean isOccupied() {
@@ -30,18 +30,17 @@ public class Oven extends Tile {
     /****************
     * CONSTRUCTOR   *
     *****************/
-    public Oven(int x, int y) {
+    public Oven(int x, int y, int id){
         super(x, y);
         this.accessible = false;
         this.occupied = false;
         this.hasOven=true;
-        this.bakedGoods= new BakedGoods();
     }
 
     /**
      * Method to remove the bread from the oven
      */
-    public void removeBread(){
+    public void removeBakedGoods(){
         this.bakedGoods.stopThread();
         this.bakedGoods = null; //the bread still exists even though it's not contained anywhere
         this.occupied = false;
@@ -54,6 +53,7 @@ public class Oven extends Tile {
         switch (type){
             case "Bread" -> {
                 this.bakedGoods = new Bread();
+
                 break;
             }
             case "Croissant" ->{
