@@ -18,7 +18,6 @@ public class BakerPanel extends JPanel {
     private BakerControl bakerControl; // manage buttons actions
 
     private JLabel moneyLabel;
-    private JLabel breadLabel;
     private ArrayList<JLabel> ingredientsLabelsList;    //to store our ingredients labels
                                                         //to update them easily
     /*****************
@@ -28,7 +27,7 @@ public class BakerPanel extends JPanel {
     public static final int HEIGHT = 650;
     public static final int WIDTH = 300;
 
-    public static final int BUTTON_HEIGHT = 30;
+    public static final int BUTTON_HEIGHT = 40;
     public static final int BUTTON_WIDTH = 150;
     public static final String[] RESSOURCES = {"flour", "egg", "yeast", "butter"};
 
@@ -87,14 +86,6 @@ public class BakerPanel extends JPanel {
         gbc2.insets = new Insets(2, 2, 10, 10);
         ressourcesPanel.add(moneyLabel, gbc2);
 
-        // bread label
-        breadLabel = new JLabel("Bread : 50");
-        gbc2.gridx = 0;
-        gbc2.gridy = 1;
-        gbc2.gridwidth = 2;
-        gbc2.insets = new Insets(2, 2, 10, 10);
-        ressourcesPanel.add(breadLabel, gbc2);
-
 
         // ingredients labels
         JLabel ressourcesLabel = new JLabel("Ingrédients :");
@@ -105,7 +96,8 @@ public class BakerPanel extends JPanel {
 
         // display the ingredients
         for (int i = 0; i < RESSOURCES.length; i++) {
-            JLabel ingredientLabel = new JLabel(RESSOURCES[i] + ": " + bakerControl.getBakery().getPlayer().getRessources().get(RESSOURCES[i]));
+            JLabel ingredientLabel = new JLabel(ressourceImage(RESSOURCES[i]) + ": " + bakerControl.getBakery().getPlayer().getRessources().get(RESSOURCES[i]));
+            ingredientLabel.setIcon(ressourceImage(RESSOURCES[i]));
             if( i%2 == 0 ) {
                 gbc2.gridx = 0;
                 gbc2.gridy = 3 + i;
@@ -133,9 +125,9 @@ public class BakerPanel extends JPanel {
         buttonPanel.setBackground(new Color(  202, 200, 196 ));
 
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridwidth = 1;
+        gbc.gridwidth = 2;
         //spaces between buttons
-        gbc.insets = new Insets(0, 10, 30, 10);
+        gbc.insets = new Insets(0, 10, 10, 10);
 
         // Create buttons
         JButton collectButton = new JButton("Collect & Sell");
@@ -156,7 +148,7 @@ public class BakerPanel extends JPanel {
         buttonPanel.add(buyButton, gbc);
 
 
-        gbc.gridwidth=2;
+        gbc.gridwidth=1;
         // Create Bread
         ImageIcon bakerIcon = new ImageIcon(getClass().getResource("/img/breadCooked.png"));
         Image scaledImage = bakerIcon.getImage().getScaledInstance(BUTTON_HEIGHT,BUTTON_HEIGHT, Image.SCALE_SMOOTH);
@@ -210,9 +202,19 @@ public class BakerPanel extends JPanel {
 
 
 
-
         // Add the buttonPanel to the Bakerpanel
         this.add(buttonPanel, BorderLayout.SOUTH);
+    }
+
+    /**
+     * Method to get the image of the ingredient
+     * @param name the name of the ingredient
+     * @return the image of the ingredient
+     */
+    private ImageIcon ressourceImage(String name){
+        ImageIcon ressourceIcon = new ImageIcon(getClass().getResource("/img/"+name+".png"));
+        Image scaledImage = ressourceIcon.getImage().getScaledInstance(20,20, Image.SCALE_SMOOTH);
+        return new ImageIcon(scaledImage);
     }
 
     /**
@@ -220,7 +222,6 @@ public class BakerPanel extends JPanel {
      */
     public void update(){
         moneyLabel.setText("Money:  " + bakerControl.getBakery().getPlayer().getMoney()+"$");
-        breadLabel.setText("Bread: " + bakerControl.getBakery().getPlayer().getSoldBread());
         for ( JLabel j : ingredientsLabelsList) {
             j.setText(RESSOURCES[ingredientsLabelsList.indexOf(j)]
                     + ": " + bakerControl.getBakery().getPlayer().getRessources(). //HashMap des ingrédients du baker
