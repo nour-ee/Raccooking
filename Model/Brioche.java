@@ -9,7 +9,11 @@ public class Brioche extends BakedGoods {
     public static final HashMap<String, Integer> RECIPE=Brioche.init();
 
     public Brioche() {
-        super(20, 120, 200); // A brioche sells for 20 and needs 1 flour, 1 egg, 1 yeast, and 1 butter
+        // A brioche sells for 20 euros
+        // It cooks for 12 seconds
+        // It burns after 24 seconds
+        // It needs 1 flour, 1 egg, 1 yeast and 1 butter
+        super(20, 12, 24); 
         state=State.COOKING;
 
         cooking =new Cooking(this);

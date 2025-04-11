@@ -3,7 +3,7 @@ package Controller;
 import Model.*;
 
 public class RaccoonLife extends Thread {
-    int DELAY = 100;
+    int DELAY = 1000;
     private Bakery map;
 
     /***************
@@ -18,7 +18,7 @@ public class RaccoonLife extends Thread {
      * If they are not, they will be removed from the map and a new one will be created
      */
     public void run(){
-        while( !map.endOfGame ){
+        while( !Bakery.endOfGame ){
             map.checkRaccoons();
             try { Thread.sleep(DELAY); }
             catch (Exception e) { e.printStackTrace(); }

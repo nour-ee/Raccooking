@@ -1,16 +1,11 @@
 package Controller;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import javax.imageio.plugins.jpeg.JPEGHuffmanTable;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import Model.Bakery;
 import Model.Raccoon;
 import Model.Tile;
-import View.RaccoonPanel;
 
 public class RaccoonMovement extends Thread {
     public static final int DELAY_RACCOONMOVEMENT = 1500;

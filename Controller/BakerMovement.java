@@ -20,13 +20,10 @@ public class BakerMovement implements KeyListener {
      * ATTRIBUTES *
     * *************/
     private Bakery bakery;
-    private JLabel bakerLabel; //the label of the player (baker) that will be moved
-
     /***************
      * CONSTRUCTOR *
      * *************/
-    public BakerMovement(Bakery m, JLabel bL) {
-        this.bakerLabel = bL;
+    public BakerMovement(Bakery m) {
         bakery = m;
     }
 

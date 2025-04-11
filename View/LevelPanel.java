@@ -1,7 +1,5 @@
 package View;
 
-import Model.Bakery;
-
 import javax.swing.*;
 import java.awt.*;
 

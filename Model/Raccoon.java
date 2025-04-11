@@ -88,8 +88,6 @@ public class Raccoon extends Entity {
      * @return the oven with a cooked bread that is the closest to the tile
      */
     public Oven closestReadyBread(){
-        int x = this.position.getX();
-        int y = this.position.getY();
         Oven oven = null;
         for(Tile t: this.bakery.neighbours(position)){
             if(t.hasOven()){

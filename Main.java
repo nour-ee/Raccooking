@@ -1,7 +1,3 @@
-import Controller.RaccoonLife;
-import Controller.RaccoonMovement;
-import Controller.RaccoonThread;
-import Model.Bakery;
 import View.*;
 
 public class Main {
@@ -16,7 +12,7 @@ public class Main {
         Display display = new Display(bakery);
         System.out.println(bakery.getLevelFile());
         */
-        Begin begin = new Begin();
+         new Begin();
 
 
 

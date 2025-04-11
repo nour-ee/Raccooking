@@ -8,7 +8,11 @@ public class Bread extends BakedGoods{
 
     public static final HashMap<String, Integer> RECIPE=Bread.init();
     public Bread () {
-        super(5, 120, 200); //A bread sells for 5 and needs 1 flour, 1 yeast0);
+        // A breads sells for 5 euros
+        // It cooks for 15 seconds
+        // It burns after 30 seconds
+        // It needs 1 flour, 0 egg, 1 yeast and 0 butter
+        super(5, 15, 30); 
         state=State.COOKING;
 
         cooking= new Cooking(this);

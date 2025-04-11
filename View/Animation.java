@@ -5,8 +5,8 @@ import javax.swing.*;
 
 public class Animation extends Thread {
     private LevelPanel levelPanel;
-    private static final int MOVE = 5;
-    private static final int DELAY = 10;
+    private static final int MOVE = 5; // pixels
+    private static final int DELAY = 1000; // milliseconds
 
     public Animation(LevelPanel panel) {
         this.levelPanel = panel;

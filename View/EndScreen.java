@@ -1,11 +1,9 @@
 package View;
 
-import Model.Baker;
 import Model.Bakery;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 
 public class EndScreen extends JFrame {
 
@@ -15,8 +13,6 @@ public class EndScreen extends JFrame {
     private Display display;
     private Bakery bakery;
     private int GOAL;
-    private Baker player;
-
     public static final int END_W = 800;
     public static final int END_H = 600;
 
@@ -26,8 +22,8 @@ public class EndScreen extends JFrame {
     public EndScreen(Display display) {
         this.display = display;
         this.bakery = display.getBakery();
-        this.player = bakery.getPlayer();
-        this.GOAL = bakery.GOAL;
+        bakery.getPlayer();
+        this.GOAL = Bakery.GOAL;
 
         System.out.println("GOAL : " + GOAL);
 

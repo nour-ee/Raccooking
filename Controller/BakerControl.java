@@ -13,10 +13,6 @@ import java.util.Optional;
 /** Control the baker panel in particular buttons */
 public class BakerControl implements ActionListener {
 
-    /****************
-     *  ATTRIBUTES  *
-     ****************/
-    private BakerPanel bkpanel;
     private Bakery bakery;
 
     /****************
@@ -30,7 +26,6 @@ public class BakerControl implements ActionListener {
      *    CONSTRUCTOR   *
      ********************/
     public BakerControl(BakerPanel p, Bakery bakery){
-        this.bkpanel = p;
         this.bakery = bakery;
 
     }
