@@ -1,4 +1,7 @@
-package View;
+package View.Threads;
+
+import View.BakerPanel;
+import View.Display;
 
 public class Redraw extends Thread{
     private Display myDisplay;

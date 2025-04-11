@@ -4,6 +4,7 @@ import Controller.EntityControl;
 import Controller.RaccoonMovement;
 import Controller.RaccoonThread;
 import Model.*;
+import View.Threads.Redraw;
 
 import javax.swing.*;
 import java.awt.*;

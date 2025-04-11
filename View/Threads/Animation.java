@@ -1,7 +1,9 @@
 
-package View;
+package View.Threads;
 
 import javax.swing.*;
+
+import View.LevelPanel;
 
 public class Animation extends Thread {
     private LevelPanel levelPanel;

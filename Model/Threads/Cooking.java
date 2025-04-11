@@ -1,4 +1,4 @@
-package Controller;
+package Model.Threads;
 
 
 import Model.BakedGoods;

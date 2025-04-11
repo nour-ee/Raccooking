@@ -1,8 +1,8 @@
 package Model;
 
-import Controller.Cooking;
-
 import java.util.HashMap;
+
+import Model.Threads.Cooking;
 
 public class BakedGoods {
     // Enum to represent the state of the bread

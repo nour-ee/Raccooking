@@ -1,7 +1,8 @@
 package Model;
 
-import Controller.Cooking;
 import java.util.HashMap;
+
+import Model.Threads.Cooking;
 
 
 public class Croissant extends BakedGoods{
