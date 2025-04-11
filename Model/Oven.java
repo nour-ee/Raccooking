@@ -20,7 +20,7 @@ public class Oven extends Tile {
     /****************
     *  SETTERS   *
     **************/
-    public void setBread(BakedGoods bakedGoods) {
+    public void setBakedGoods(BakedGoods bakedGoods) {
         this.bakedGoods = bakedGoods;
     }
     public void setOccupied(boolean occupied) {
@@ -53,7 +53,6 @@ public class Oven extends Tile {
         switch (type){
             case "Bread" -> {
                 this.bakedGoods = new Bread();
-
                 break;
             }
             case "Croissant" ->{
@@ -66,22 +65,6 @@ public class Oven extends Tile {
             }
 
         }
-        this.occupied = true;
-    }
-
-    /**
-     * Method to add a croissant to the oven
-     */
-    public void addCroissant() {
-        this.bakedGoods = new Croissant();
-        this.occupied = true;
-    }
-
-    /**
-     * Method to add a Brioche to the oven
-     */
-    public void addBrioche() {
-        this.bakedGoods = new Brioche();
         this.occupied = true;
     }
 }

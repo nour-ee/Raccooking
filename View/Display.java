@@ -222,6 +222,7 @@ public class Display extends JFrame {
                     default:
                         break;
                 }
+                System.out.println(filename);
                 ImageIcon breadIcon = new ImageIcon(getClass().getResource(filename));
                 Image scaledImage = breadIcon.getImage().getScaledInstance(TILE_SIZE, TILE_SIZE, Image.SCALE_SMOOTH);
                 ImageIcon scaledBreadIcon = new ImageIcon(scaledImage);
