@@ -22,7 +22,7 @@ public class Bakery {
     public static final int NB_RACCOONS = 5; //number of raccoons on the map (might change in later versions)
     public static int BAKERY_H = 10; //height of the grid/bakery
     public static int BAKERY_W = 10;
-    public static boolean endOfGame;
+    public static boolean endOfGame = false;
     public static int GOAL; //monetary goal of the game
 
 
@@ -61,7 +61,6 @@ public class Bakery {
             file.nextLine();
             GOAL= file.nextInt();
             int racoonsNb = file.nextInt();
-            boolean endOfGame = false;
 
             file.nextLine();
             //CaseTraversable[] var6 = new CaseTraversable[1];

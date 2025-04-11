@@ -3,8 +3,6 @@ package Controller;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import javax.swing.JLabel;
-
 import Model.Bakery;
 import Model.Tile;
 
