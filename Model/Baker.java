@@ -48,7 +48,7 @@ public class Baker extends Entity {
      ****************/
 
     /**
-     * Method to move the player
+     * Move the player to a certain tile
      * @param c the tile to move to
      */
     @Override
@@ -75,7 +75,8 @@ public class Baker extends Entity {
     }
 
      /**
-     * Method that increments breads sold
+     * Counts the number of breads sold
+      * @param price the price of the bread
      */
     public void sellBread(int price){
         soldBread++;
@@ -83,14 +84,27 @@ public class Baker extends Entity {
     }
 
     /**
-     * Method to buy ressources
+     * Buy a selected ressource
      * @param s string representing the ressource to buy
      *          "flour", "egg", "yeast", "butter"
      */
-    public void buy(String s){
-        if( money >= 2 ) {
-            ressources.put(s, ressources.get(s)+1); money-=2;
-            System.out.println("Ressource "+s+" : "+ressources.get(s));
+    public void buy(String s, int quantity){
+        boolean bought = false;
+
+        switch (s) {
+            case "flour" :
+                if(money >= 2){ bought = true; ressources.put(s, ressources.get(s)+quantity); money-=2*quantity; } break;
+            case "egg" :
+                if(money >= 4){ bought = true; ressources.put(s, ressources.get(s)+quantity); money-=3*quantity; } break;
+            case "yeast" :
+                if(money >= 5){ bought = true; ressources.put(s, ressources.get(s)+quantity); money-=5*quantity; } break;
+            case "butter" :
+                if(money >= 3){ bought = true; ressources.put(s, ressources.get(s)+quantity); money-=4*quantity; } break;
+        }
+
+        //Small debug message
+        if( bought ) {
+            System.out.println("Ressource "+s+" achetée : "+ressources.get(s));
         }
     }
 

@@ -28,7 +28,6 @@ public class Display extends JFrame {
     private ArrayList<JLabel> raccoonLabels = new ArrayList<JLabel>();
     private ArrayList<RaccoonPanel> raccoonPanels = new ArrayList<RaccoonPanel>();
     private ArrayList<JLabel> breadLabels = new ArrayList<JLabel>();
-
     public ArrayList<JLabel> getRaccoonJLabels() {
         return raccoonLabels;
     }

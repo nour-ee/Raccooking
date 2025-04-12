@@ -59,17 +59,25 @@ public class BakerControl implements ActionListener {
             }
             case "Buy" -> {// print combo box
                 // JPanel for the check boxes
-                JPanel panel = new JPanel(new GridLayout(0, 2,10,5));
+                JPanel panel = new JPanel(new GridLayout(0, 3,10,5));
 
                 // Create the check boxes
                 JCheckBox[] checkBoxes = new JCheckBox[BakerPanel.RESSOURCES.length];
                 JSpinner[] spinners = new JSpinner[BakerPanel.RESSOURCES.length]; // add quantity of ressources
+                JLabel[] prices = new JLabel[BakerPanel.RESSOURCES.length]; // add prices of ressources
 
                 for (int i = 0; i < BakerPanel.RESSOURCES.length; i++) {
                     checkBoxes[i] = new JCheckBox(BakerPanel.RESSOURCES[i]);
                     JSpinner spinner = new JSpinner(new SpinnerNumberModel(1,0 , 100, 1));
                     spinner.setEnabled(false); // disable spinner by default
                     spinners[i] = spinner;
+                    JLabel price;
+                    switch (BakerPanel.RESSOURCES[i]){
+                        case "flour" : price = new JLabel("2€"); prices[i] = price; break;
+                        case "egg" : price = new JLabel("4€"); prices[i] = price; break;
+                        case "yeast" : price = new JLabel("5€"); prices[i] = price; break;
+                        case "butter" : price = new JLabel("3€"); prices[i] = price; break;
+                    }
 
                     checkBoxes[i].addItemListener(evt -> {
                         JCheckBox source = (JCheckBox) evt.getSource();
@@ -82,6 +90,7 @@ public class BakerControl implements ActionListener {
                     });
                     panel.add(checkBoxes[i]);
                     panel.add(spinner);
+                    panel.add(prices[i]);
                 }
 
                 // Show the dialog with the check boxes
@@ -92,9 +101,10 @@ public class BakerControl implements ActionListener {
 
                 // Action to do if the user click on OK
                 if (result == JOptionPane.OK_OPTION) {
-                    for (JCheckBox checkBox : checkBoxes) {
-                        if (checkBox.isSelected()) {
-                            bakery.getPlayer().buy(checkBox.getText());
+                    for (int i = 0; i < checkBoxes.length; i++) {
+                    //for (JCheckBox checkBox : checkBoxes) {
+                        if (checkBoxes[i].isSelected()) {
+                            bakery.getPlayer().buy(checkBoxes[i].getText(), (Integer) spinners[i].getValue());
                         }
                     }
                 }

@@ -74,8 +74,6 @@ public class BakerPanel extends JPanel {
 
     /**
      * Creates the ressources panel to display money, bread and ingredients
-     *
-     * @return
      */
     private JPanel createRessourcesPanel() {
         {
@@ -87,7 +85,7 @@ public class BakerPanel extends JPanel {
             GridBagConstraints gbc2 = new GridBagConstraints();
 
             // money label
-            moneyLabel = new JLabel("Money :  " + bakerControl.getBakery().getPlayer().getMoney() + "$");
+            moneyLabel = new JLabel("Money :  " + bakerControl.getBakery().getPlayer().getMoney() + "€");
             gbc2.gridx = 0;
             gbc2.gridy = 0;
             gbc2.gridwidth = 2;
@@ -183,7 +181,7 @@ public class BakerPanel extends JPanel {
     }
 
     /**
-     * Method to get the image of the ingredient
+     * Gets the name of the image of the ingredient
      * @param name the name of the ingredient
      * @return the image of the ingredient
      */
