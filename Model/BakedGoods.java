@@ -7,7 +7,7 @@ import Model.Threads.Cooking;
 public class BakedGoods {
     // Enum to represent the state of the bread
     public enum State {
-        COOKING, COOKED, BURNT
+        NULL, COOKING, COOKED, BURNT
     }
 
     /****************
@@ -16,8 +16,8 @@ public class BakedGoods {
     protected State state ;
     protected Cooking cooking;
     private int time;
-    protected int t_cooked;
-    protected int  t_burnt;
+    protected int t_cooked=150;
+    protected int  t_burnt=300;
     private int price;//selling price of a bread
 
     //ingredients necessary to bake this thing
@@ -30,6 +30,7 @@ public class BakedGoods {
         this.t_cooked = t_c;
         this.t_burnt = t_b;
         this.price = p;
+        this.state = null;
         time=0; // time is initialized to 0, seconds
     }
 
