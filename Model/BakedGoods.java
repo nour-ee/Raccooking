@@ -1,9 +1,8 @@
 package Model;
 
-import Controller.Cooking;
-
-import java.text.BreakIterator;
 import java.util.HashMap;
+
+import Model.Threads.Cooking;
 
 public class BakedGoods {
     // Enum to represent the state of the bread
@@ -18,7 +17,7 @@ public class BakedGoods {
     protected Cooking cooking;
     private int time;
     protected int t_cooked=150;
-    protected int  t_burnt =250;
+    protected int  t_burnt =300;
     private int price;//selling price of a bread
 
     //ingredients necessary to bake this thing
@@ -32,7 +31,7 @@ public class BakedGoods {
         this.t_burnt = t_b;
         this.price = p;
         state = State.NULL;
-        time=0;
+        time=0; // time is initialized to 0, seconds
     }
 
     public BakedGoods(){

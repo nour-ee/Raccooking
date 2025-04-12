@@ -1,8 +1,9 @@
 package View;
 
-import Model.Bakery;
-
 import javax.swing.*;
+
+import View.Threads.Animation;
+
 import java.awt.*;
 
 public class LevelPanel extends JPanel {

@@ -11,7 +11,6 @@ abstract class Entity {
      *  ATTRIBUTES  *
      ****************/
     public Tile position; //current position of the entity
-    //TODO : change to private --------------------------------------------
 
     /****************
      *    METHODS   *

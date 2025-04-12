@@ -5,13 +5,13 @@ import View.EndScreen;
 
 //Timer to end the game
 public class EndGame extends Thread {
-    public static final int TIME = 30;
+    public static final int TIME = 40; // in seconds
     public static int timeLeft;
     private Display display;
 
     public EndGame(Display display) {
         this.display = display;
-        this.timeLeft = TIME;
+        EndGame.timeLeft = TIME;
     }
 
     @Override

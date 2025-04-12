@@ -1,14 +1,19 @@
 package Model;
 
-import Controller.Cooking;
 import java.util.HashMap;
+
+import Model.Threads.Cooking;
 
 
 public class Croissant extends BakedGoods{
 
     public static final HashMap<String, Integer> RECIPE=Croissant.init();
     public Croissant () {
-        super(15, 120, 200); //A croissant sells for 15 and needs 1 flour, 1 egg, and 2 butter
+        // A croissant sells for 15 euros
+        // It cooks for 12 seconds
+        // It burns after 30 seconds
+        // It needs 1 flour, 1 egg, 0 yeast and 2 butter
+        super(15, 12, 30); 
         state=State.COOKING;
 
         cooking= new Cooking(this);

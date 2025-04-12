@@ -1,4 +1,4 @@
-package Controller;
+package Model.Threads;
 
 
 import Model.BakedGoods;
@@ -32,7 +32,7 @@ public class Cooking extends Thread{
     public void run() {
         while (bakedGoods.getTime()<= bakedGoods.getT_burnt() && !out) {
             try {
-                Thread.sleep(100);
+                Thread.sleep(1000); // Sleep for 1 second
             } catch (Exception e) {
 
             }
@@ -43,7 +43,7 @@ public class Cooking extends Thread{
                 System.out.println("Bread is burnt");
                 bakedGoods.setState(BakedGoods.State.BURNT);
             }
-            bakedGoods.incrTime();
+            bakedGoods.incrTime(); 
         }
     }
 

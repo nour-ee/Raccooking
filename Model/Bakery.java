@@ -9,11 +9,10 @@ import java.util.Optional;
 import java.util.Scanner;
 
 /**
- * Classe qui représente la boulangerie
- * aka la carte du jeu :
- * Contient un tableau 2D de cases, un joueur
- * et un tableau de ratons laveurs
- * (pour l'instant)
+ * Class that represents the bakery
+ * aka the game map:
+ * contains a 2D table of Tiles, a player
+ * and a table of raccoons
  */
 
 public class Bakery {
@@ -23,7 +22,7 @@ public class Bakery {
     public static final int NB_RACCOONS = 5; //number of raccoons on the map (might change in later versions)
     public static int BAKERY_H = 10; //height of the grid/bakery
     public static int BAKERY_W = 10;
-    public static boolean endOfGame;
+    public static boolean endOfGame = false;
     public static int GOAL; //monetary goal of the game
 
 
@@ -32,7 +31,7 @@ public class Bakery {
      ***************/
     private Tile[][] map;
     private Baker player;
-    private Raccoon[] raccoons; //TODO : change to ArrayList ---------------------------------------------
+    private Raccoon[] raccoons; //raccoons on the map
     private ArrayList<Oven> ovens; //ovens to cook breads
 
 
@@ -62,7 +61,6 @@ public class Bakery {
             file.nextLine();
             GOAL= file.nextInt();
             int racoonsNb = file.nextInt();
-            boolean endOfGame = false;
 
             file.nextLine();
             //CaseTraversable[] var6 = new CaseTraversable[1];
@@ -70,11 +68,11 @@ public class Bakery {
             this.raccoons= new Raccoon[racoonsNb];
             this.ovens = new ArrayList<>();
 
-            int r=0; //index of raccoons TODO : change to ArrayList ---------------------------------------------
+            int r=0; //raccoon index
             int nbOvens = 0;
-            for(int i = 0; i < this.BAKERY_H; i++) {
+            for(int i = 0; i < Bakery.BAKERY_H; i++) {
                 String line = file.nextLine();
-                for(int j = 0; j < this.BAKERY_W; j++) {
+                for(int j = 0; j < Bakery.BAKERY_W; j++) {
                     Character c = line.charAt(j);
                     Tile t;
                     switch (c) {
