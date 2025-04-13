@@ -20,6 +20,7 @@ public class EndScreen extends JFrame {
      *  CONSTRUCTOR *
      ****************/
     public EndScreen(Display display) {
+        Begin.playSound.stop(); // stop the sound
         this.display = display;
         this.bakery = display.getBakery();
         bakery.getPlayer();

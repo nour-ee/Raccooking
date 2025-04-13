@@ -13,6 +13,7 @@ import java.io.File;
 public class Begin extends JFrame {
 
     private boolean sound;
+    public static Clip playSound; // sound when the game starts
 
     //private JPanel panelButton; // panel for the button
     private LevelPanel levelPanel; // panel for the level
@@ -97,10 +98,10 @@ public class Begin extends JFrame {
         File file = new File("sound/sound_play.wav");
         try {
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioStream);
-            clip.loop(Clip.LOOP_CONTINUOUSLY); // Loop the sound
-            clip.start();
+            playSound = AudioSystem.getClip();
+            playSound.open(audioStream);
+            playSound.loop(Clip.LOOP_CONTINUOUSLY); // Loop the sound
+            playSound.start();
         } catch (Exception e) {
             e.printStackTrace();
         }

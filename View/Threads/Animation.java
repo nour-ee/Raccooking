@@ -10,6 +10,8 @@ public class Animation extends Thread {
     private static final int MOVE = 5; // pixels
     private static final int DELAY = 1000; // milliseconds
 
+    private static final int DELAY_MOVE = 100; // milliseconds
+
     public Animation(LevelPanel panel) {
         this.levelPanel = panel;
     }
@@ -24,20 +26,20 @@ public class Animation extends Thread {
             }
 
             if (levelPanel.getNext()) {
-                moveButton("left");
+                moveLabel("left");
                 levelPanel.setNext(false);
                 levelPanel.updateLevel(1);
             }
             else if (levelPanel.getPrev()) {
-                moveButton("right");
+                moveLabel("right");
                 levelPanel.setPrev(false);
                 levelPanel.updateLevel(-1);
             }
         }
     }
 
-    // Move the level button to the right or left
-    private void moveButton(String direction) {
+    // Move the level label to the right or left
+    private void moveLabel(String direction) {
         JLabel levelLabel = levelPanel.getLevelLabel();
 
         // Move the label until it reaches the end of the panel
@@ -55,7 +57,7 @@ public class Animation extends Thread {
             levelPanel.repaint();
 
             try {
-                Thread.sleep(DELAY); // Delay between each move
+                Thread.sleep(DELAY_MOVE); // Delay between each move
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
