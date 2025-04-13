@@ -12,7 +12,7 @@ import java.io.File;
 
 public class Begin extends JFrame {
 
-    private boolean sound;
+    public static boolean sound;
     public static Clip playSound; // sound when the game starts
 
     //private JPanel panelButton; // panel for the button
@@ -20,6 +20,7 @@ public class Begin extends JFrame {
 
     public static final int BEGIN_W = 800;
     public static final int BEGIN_H = 600;
+
 
     /****************
      *  CONSTRUCTOR *

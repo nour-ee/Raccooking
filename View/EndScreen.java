@@ -20,7 +20,9 @@ public class EndScreen extends JFrame {
      *  CONSTRUCTOR *
      ****************/
     public EndScreen(Display display) {
+        if(Begin.sound){
         Begin.playSound.stop(); // stop the sound
+        }
         this.display = display;
         this.bakery = display.getBakery();
         bakery.getPlayer();
@@ -47,27 +49,35 @@ public class EndScreen extends JFrame {
         // text that shows the amount of money the player has
         JLabel moneyLabel = new JLabel("Goal : "+GOAL+"€    Your earnings : " + money + "€");
         moneyLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        moneyLabel.setBounds(END_W / 2 - 180, END_H / 2 - 40, 350, 50);
+        moneyLabel.setBounds(END_W / 2 - 180, 0, 350, 50);
         moneyLabel.setForeground(Color.BLACK);
-        //moneyLabel.setOpaque(true);
+        //moneyLabel.setOpaque(false);
         moneyLabel.setHorizontalAlignment(SwingConstants.CENTER);
         layeredPane.add(moneyLabel, Integer.valueOf(1));
 
         //if the player has more than bakery.GOAL money, show "You win !" else show "You don't have enough money... Game over :("
         if (money >= GOAL) {
-            JLabel winLabel = new JLabel("You win !");
+            //add background image
+            JLabel winBackground = new JLabel(createBackgroundImage("win3"));
+            winBackground.setBounds(0, 0, END_W, END_H);
+            layeredPane.add(winBackground, Integer.valueOf(0));
+            JLabel winLabel = new JLabel("YOU WIN !");
             winLabel.setFont(new Font("Arial", Font.BOLD, 20));
-            winLabel.setBounds(END_W / 2 - 180, END_H / 2 -20, 300, 50);
+            winLabel.setBounds(END_W / 2 , END_H/12, 300, 50);
             winLabel.setForeground(Color.BLACK);
-            //winLabel.setOpaque(true);
+            //winLabel.setOpaque(false);
             winLabel.setHorizontalAlignment(SwingConstants.CENTER);
             layeredPane.add(winLabel, Integer.valueOf(1));
         } else {
+            //add background image
+            JLabel loseBackground = new JLabel(createBackgroundImage("lose"));
+            loseBackground.setBounds(0, 0, END_W, END_H);
+            layeredPane.add(loseBackground, Integer.valueOf(0));
             JLabel loseLabel = new JLabel("You don't have enough money... Game over :(");
             loseLabel.setFont(new Font("Arial", Font.BOLD, 20));
-            loseLabel.setBounds(END_W / 2 - 260, END_H / 2 + 30, 500, 50);
+            loseLabel.setBounds(END_W / 2 - 260, END_H/20, 500, 50);
             loseLabel.setForeground(Color.BLACK);
-            //loseLabel.setOpaque(true);
+            loseLabel.setOpaque(false);
             loseLabel.setHorizontalAlignment(SwingConstants.CENTER);
             layeredPane.add(loseLabel, Integer.valueOf(1));
         }
@@ -93,5 +103,11 @@ public class EndScreen extends JFrame {
         setVisible(true);
     }
 
+    private ImageIcon createBackgroundImage(String name) {
+        ImageIcon icon = new ImageIcon(getClass().getResource("/img/"+name+".png"));
+        Image img = icon.getImage();
+        Image newImg = img.getScaledInstance(END_W, END_H, Image.SCALE_SMOOTH);
+        return new ImageIcon(newImg);
+    }
 
 }
