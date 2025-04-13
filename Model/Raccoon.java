@@ -47,6 +47,8 @@ public class Raccoon extends Entity {
         this.age = 0;
         this.bakery = b;
         this.nb_bread = 0;
+        this.nb_croissant = 0;
+        this.nb_brioche = 0;
         this.on_the_run = false;
     }
 
@@ -81,10 +83,22 @@ public class Raccoon extends Entity {
      *@param o the oven from which the raccoon will eat the bread
      */
     public void eatGoods(Oven o){
+        switch(o.getBakedGoods().getClass().toString()){
+            case "class Model.Bread" ->{
+                this.nb_bread+=1;
+            }
+            case "class Model.Croissant" ->{
+                this.nb_croissant+=1;
+            }
+            case "class Model.Brioche" ->{
+                this.nb_brioche+=1;
+            }
+            default -> {
+                System.out.println("bread not eaten");
+            }
+        }
         o.removeBakedGoods();
-        if(o.getBakedGoods() instanceof Bread){this.nb_bread++;}
-        else if(o.getBakedGoods() instanceof Croissant){this.nb_croissant++;}
-        else if(o.getBakedGoods() instanceof Brioche){this.nb_brioche++;}
+
     }
     
 
@@ -95,7 +109,7 @@ public class Raccoon extends Entity {
      */
     public Oven closestReadyBread(){
         Oven oven = null;
-        for(Tile t: this.bakery.neighbours(position)){
+        for(Tile t: this.bakery.tilesWithinRadius(this.position, 2)){
             if(t.hasOven()){
                 Oven o = (Oven)t;
                 if(o.isOccupied() && o.getBakedGoods().isCooked()){
@@ -115,34 +129,23 @@ public class Raccoon extends Entity {
         if(o.getX()>position.getX()){ //oven is to the right of the raccoon
             if(bakery.getMap()[position.getX()+1][position.getY()].isAccessibleToRaccoon()){
                 return bakery.getMap()[position.getX()+1][position.getY()];
-            }else{
-                return position;
             }
+            
         }else if (o.getX()<position.getX()){ //oven is to the left of the raccoon
             if(bakery.getMap()[position.getX()-1][position.getY()].isAccessibleToRaccoon()){
                 return bakery.getMap()[position.getX()-1][position.getY()];
-            }else{
-                return position;
             }
-        }else{// o.x == pos.x
-            if(o.getY()-1>position.getY()){ //oven above the raccoon
-                if(bakery.getMap()[position.getX()][position.getY()+1].isAccessibleToRaccoon()){
-                    return bakery.getMap()[position.getX()][position.getY()+1];
-                }else{
-                    return position;
-                }
-            }else if(o.getY()-1<position.getY()){ //oven below the raccoon
-                if(bakery.getMap()[position.getX()][position.getY()-1].isAccessibleToRaccoon()){
-                    return bakery.getMap()[position.getX()][position.getY()-1];
-                }else{
-                    return position;
-                }
-
-            }else{ //eats bread or croissant or brioche and stays where it is
-                this.eatGoods(o);
-                return position;
+        }else if(o.getY()-1>position.getY()){ //oven above the raccoon
+            if(bakery.getMap()[position.getX()][position.getY()+1].isAccessibleToRaccoon()){
+                return bakery.getMap()[position.getX()][position.getY()+1];
             }
+        }else if (o.getY()-1<position.getY()) { //oven below the raccoon
+            if(bakery.getMap()[position.getX()][position.getY()-1].isAccessibleToRaccoon()){
+                return bakery.getMap()[position.getX()][position.getY()-1];
+            }
+              
         }
+        return position; //if no move is possible, return the current position
     }
 
     /**
@@ -195,9 +198,13 @@ public class Raccoon extends Entity {
         Oven o = closestReadyBread(); 
         if (this.is_on_the_run()){
             return moveAwayFromBaker();
-        }else if(o != null){
-            //if a bread is cooked moves towards it
-            return moveTowardsBread(o);
+        }else if(o != null){ // a baked goods is cooked
+            if(bakery.isCollectible(o, this.getPosition())){ //if bread is in front of it it ears it
+                bakery.steal(o, this);
+                return position;
+            }else{ // not yet close enough so it moves towards it
+                return moveTowardsBread(o);
+            }
         } else { //if no bread is ready to be eaten, move randomly
             return randomNeighbour();
         }

@@ -155,9 +155,9 @@ public class Bakery {
      * @param t the tile to check
      * @return true if the tile is collectible, false otherwise
      */
-    public boolean isCollectible(Tile t){
-        return Math.abs(t.getY() - player.getPosition().getY())==1  && t.getX()==player.getPosition().getX() ||
-                Math.abs(t.getX() - player.getPosition().getX())==1  && t.getY()==player.getPosition().getY();
+    public boolean isCollectible(Tile t, Tile pos){
+        return Math.abs(t.getY() - pos.getY())==1  && t.getX()==pos.getX() ||
+                Math.abs(t.getX() - pos.getX())==1  && t.getY()==pos.getY();
     }
 
     /**
@@ -166,7 +166,7 @@ public class Bakery {
     public void collect(){
         for (Oven o : ovens){
             if(o.isOccupied()){
-                if (o.getBakedGoods().getState()== BakedGoods.State.COOKED && isCollectible(o)) {
+                if (o.getBakedGoods().getState()== BakedGoods.State.COOKED && isCollectible(o, player.getPosition())) {
                     player.sellBread(o.getBakedGoods().getPrice());
                     o.removeBakedGoods();
                 }
@@ -175,6 +175,18 @@ public class Bakery {
                 }
             }
         }
+    }
+
+    /**
+     * Method that allows a racoon to steal a baked goods
+     */
+    public void steal(Oven o, Raccoon r){
+        if(o.isOccupied()){
+            if(o.getBakedGoods().getState()== BakedGoods.State.COOKED ){
+                System.out.println("Raccoon "+r.getAge()+" stole a bread from oven ");
+                r.eatGoods(o);
+            }
+        }  
     }
 
     /**
@@ -209,6 +221,26 @@ public class Bakery {
         }
         return n.toArray(new Tile[0]);
     }
+
+    /**
+     * Method that all tiles within a i radius
+     * @param t the tile from which are looking for neih´gbour
+     * @param i the radius
+     * @return an array of tiles within a i radius
+     */
+    public Tile[] tilesWithinRadius(Tile t, int i){
+        ArrayList<Tile> n = new ArrayList<>();
+        for (int x = -i; x < i+1; x++){
+            for (int y = -i; y < i+1; y++){
+                if (t.getX()+x >= 0 && t.getX()+x < BAKERY_W && t.getY()+y >= 0 && t.getY()+y < BAKERY_H){
+                    Tile c = map[t.getX()+x][t.getY()+y];
+                    n.add(c);
+                }
+            }
+        }
+        return n.toArray(new Tile[0]);
+    }
+
 
 
     /**

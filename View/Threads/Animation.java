@@ -10,7 +10,7 @@ public class Animation extends Thread {
     private static final int MOVE = 5; // pixels
     private static final int DELAY = 1000; // milliseconds
 
-    private static final int DELAY_MOVE = 100; // milliseconds
+    private static final int DELAY_MOVE = 15; // milliseconds
 
     public Animation(LevelPanel panel) {
         this.levelPanel = panel;
