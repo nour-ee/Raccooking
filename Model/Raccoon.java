@@ -12,6 +12,8 @@ public class Raccoon extends Entity {
     private Bakery bakery ;
     private int age = 0; // correspons to the life of the raccoon
     private int nb_bread; // number of bread stolen by the raccoon
+    private int nb_croissant; // number of croissant stolen by the raccoon
+    private int nb_brioche; // number of brioche stolen by the raccoon
     private boolean on_the_run = false; // if the baker is within a certain radius, making the raccoon run away
     
     public int getAge() {
@@ -27,6 +29,8 @@ public class Raccoon extends Entity {
     public int getBread() { 
         return nb_bread;
     }
+    public int getCroissant() {return nb_croissant;}
+    public int getBrioche() {return nb_brioche;}
     public boolean is_on_the_run(){
         return this.on_the_run;
     }
@@ -73,12 +77,14 @@ public class Raccoon extends Entity {
     }   
 
     /**
-     * Method that makes the raccoon eat the bread
+     * Method that makes the raccoon eat the good
      *@param o the oven from which the raccoon will eat the bread
      */
-    public void eatBread(Oven o){
+    public void eatGoods(Oven o){
         o.removeBakedGoods();
-        this.nb_bread++;
+        if(o.getBakedGoods() instanceof Bread){this.nb_bread++;}
+        else if(o.getBakedGoods() instanceof Croissant){this.nb_croissant++;}
+        else if(o.getBakedGoods() instanceof Brioche){this.nb_brioche++;}
     }
     
 
@@ -132,8 +138,8 @@ public class Raccoon extends Entity {
                     return position;
                 }
 
-            }else{ //eats bread and stays where it is
-                this.eatBread(o);
+            }else{ //eats bread or croissant or brioche and stays where it is
+                this.eatGoods(o);
                 return position;
             }
         }
