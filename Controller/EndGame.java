@@ -1,17 +1,19 @@
 package Controller;
 
+import Model.Bakery;
 import View.Begin;
 import View.Display;
 import View.EndScreen;
 
 //Timer to end the game
 public class EndGame extends Thread {
-    public static final int TIME = 40; // in seconds
+    public static int TIME ; // in seconds
     public static int timeLeft;
     private Display display;
 
     public EndGame(Display display) {
         this.display = display;
+        TIME= Bakery.MAXTIME;
         EndGame.timeLeft = TIME;
     }
 

@@ -19,9 +19,9 @@ public class Bakery {
     /***************
     *  CONSTANTS   *
     ****************/
-    public static final int NB_RACCOONS = 5; //number of raccoons on the map (might change in later versions)
     public static int BAKERY_H = 10; //height of the grid/bakery
     public static int BAKERY_W = 10;
+    public static int MAXTIME; //max time of the game
     public static boolean endOfGame = false;
     public static int GOAL; //monetary goal of the game
 
@@ -42,12 +42,6 @@ public class Bakery {
     public Baker getPlayer() { return player; }
     public Raccoon[] getRaccoons() { return raccoons; }
     public ArrayList<Oven> getOvens() { return ovens; }
-    //public String getLevelFile() { return levelFile; }
-
-    /****************
-     *    SETTERS   *
-     ****************/
-    //public void setLevel(int level) { this.levelFile = "levels/level"+level+".txt"; }
 
     /********************
      *    CONSTRUCTOR   *
@@ -61,6 +55,8 @@ public class Bakery {
             file.nextLine();
             GOAL= file.nextInt();
             int racoonsNb = file.nextInt();
+            MAXTIME= file.nextInt();
+
 
             file.nextLine();
             //CaseTraversable[] var6 = new CaseTraversable[1];

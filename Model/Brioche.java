@@ -13,11 +13,7 @@ public class Brioche extends BakedGoods {
         // It cooks for 12 seconds
         // It burns after 24 seconds
         // It needs 1 flour, 1 egg, 1 yeast and 1 butter
-        super(20, 12, 24); 
-        state=State.COOKING;
-
-        cooking =new Cooking(this);
-        cooking.start();
+        super(20, 12, 24);
     }
 
     public static HashMap<String, Integer> getRecipe() {

@@ -31,7 +31,10 @@ public class BakedGoods {
         this.t_burnt = t_b;
         this.price = p;
         time=0; // time is initialized to 0, seconds
-    }
+        state=State.COOKING;
+
+        cooking= new Cooking(this);
+        cooking.start();    }
 
 
     /**************************

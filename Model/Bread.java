@@ -14,9 +14,6 @@ public class Bread extends BakedGoods{
         // It needs 1 flour, 0 egg, 1 yeast and 0 butter
         super(5, 15, 30); 
         state=State.COOKING;
-
-        cooking= new Cooking(this);
-        cooking.start();
     }
 
     public static boolean canBake(HashMap<String, Integer> ingredients) {

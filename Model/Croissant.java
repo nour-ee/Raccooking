@@ -13,11 +13,7 @@ public class Croissant extends BakedGoods{
         // It cooks for 12 seconds
         // It burns after 30 seconds
         // It needs 1 flour, 1 egg, 0 yeast and 2 butter
-        super(15, 12, 30); 
-        state=State.COOKING;
-
-        cooking= new Cooking(this);
-        cooking.start();
+        super(15, 12, 30);
     }
 
     public static HashMap<String, Integer> getRecipe() {
