@@ -10,7 +10,11 @@ import java.awt.*;
     public class RaccoonPanel extends JPanel {
         private JProgressBar progressBar; // can be used to manage the progress of the raccoon in the frame (time before disappearing)
         private Raccoon raccoon ; // the raccoon is it connected to
-        public Raccoon getRaccoon() {return raccoon;}
+
+        private JLabel breadLabel;
+        private JLabel croissantLabel;
+        private JLabel briocheLabel;
+
         public static final int HEIGHT = BakerPanel.HEIGHT;
         public static final int WIDTH = BakerPanel.WIDTH;
 
@@ -88,7 +92,7 @@ import java.awt.*;
             GridBagConstraints gbcGoods = new GridBagConstraints();
 
             // bread label with image and number
-            JLabel breadLabel = new JLabel(createEntityIcon("breadCooked.png", 50, 50));
+            breadLabel = new JLabel(createEntityIcon("breadCooked.png", 50, 50));
             gbcGoods.gridx = 0;
             gbcGoods.gridy = 1;
             gbcGoods.insets = new Insets(2, 2, 10, 10);
@@ -97,7 +101,7 @@ import java.awt.*;
             goodsPanel.add(breadLabel, gbcGoods);
 
             // croissant label with image and number
-            JLabel croissantLabel = new JLabel(createEntityIcon("croissantCooked.png", 50, 50));
+            croissantLabel = new JLabel(createEntityIcon("croissantCooked.png", 50, 50));
             gbcGoods.gridx = 1;
             gbcGoods.gridy = 1;
             gbcGoods.insets = new Insets(2, 2, 10, 10);
@@ -106,7 +110,7 @@ import java.awt.*;
             goodsPanel.add(croissantLabel, gbcGoods);
 
             // brioche label with image and number
-            JLabel briocheLabel = new JLabel(createEntityIcon("briocheCooked.png", 50, 50));
+            briocheLabel = new JLabel(createEntityIcon("briocheCooked.png", 50, 50));
             gbcGoods.gridx = 2;
             gbcGoods.gridy = 1;
             gbcGoods.insets = new Insets(2, 2, 10, 10);
@@ -123,6 +127,16 @@ import java.awt.*;
             Image imgIcon = icon.getImage();
             Image newImg = imgIcon.getScaledInstance(width, height, Image.SCALE_SMOOTH);
             return new ImageIcon(newImg);
+        }
+
+        public void update() {
+            // update the progress bar
+            progressBar.setValue(Raccoon.MAX_AGE-this.raccoon.getAge());
+            // update the goods panel
+            breadLabel.setText(""+raccoon.getBread());
+            croissantLabel.setText(""+raccoon.getCroissant());
+            briocheLabel.setText(""+raccoon.getBrioche());
+
         }
     }
 
