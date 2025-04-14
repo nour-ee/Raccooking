@@ -1,8 +1,14 @@
 package Controller;
 
 import Model.*;
-
+/** Class to manage the raccoon life
+ * It will check if the raccoons are still alive and remove them from the map if they are not
+ **/
 public class RaccoonLife extends Thread {
+
+    /****************
+     *  ATTRIBUTES  *
+     ****************/
     int DELAY = 1000;
     private Bakery map;
 

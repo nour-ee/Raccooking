@@ -1,10 +1,17 @@
 package Model;
 
 import java.util.HashMap;
-
+/**
+ * Class to manage the bread
+ * It will manage the state of the bread and the time it takes to cook it
+ * It will also manage the price of the bread and the recipe
+ */
 public class Bread extends BakedGoods{
 
     public static final HashMap<String, Integer> RECIPE=Bread.init();
+    /*************
+     * CONSTRUCTOR
+     ***********/
     public Bread () {
         // A breads sells for 20 euros
         // It cooks for 15 seconds
@@ -14,16 +21,19 @@ public class Bread extends BakedGoods{
         state=State.COOKING;
     }
 
-    public static boolean canBake(HashMap<String, Integer> ingredients) {
-        // Check if the ingredients contain the required amounts
-        return ingredients.get("flour") >= 1 && ingredients.get("yeast") >= 1;
-    }
-
+    /**
+     * Method to get the recipe of the bread
+     * @return the recipe of the bread
+     */
 
     public static HashMap<String, Integer> getRecipe() {
         return RECIPE;
     }
 
+    /**
+     * Method to initialize the recipe of the bread
+     * @return the recipe of the bread in a HashMap
+     */
     public static HashMap<String, Integer> init(){
         HashMap<String, Integer> recipe = new HashMap<>();
         recipe.put("flour", 1);

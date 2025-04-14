@@ -5,7 +5,9 @@ import View.Display;
 
 
 import javax.swing.JLabel;
-
+/**
+ * Class to manage the animation of the raccoon
+ * */
 public class MovingAnimation extends Thread {
 
     /****************

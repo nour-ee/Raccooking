@@ -4,18 +4,37 @@ package View.Threads;
 import javax.swing.*;
 
 import View.LevelPanel;
-
+/**
+ * Animation class to manage the animation of the level label
+ * It will move the label to the left or right depending on the user input
+ * It will also update the level of the game
+ */
 public class Animation extends Thread {
+    /****************
+     *  ATTRIBUTES  *
+     ****************/
     private LevelPanel levelPanel;
+
+    /****************
+     *  CONSTANTS   *
+     ****************/
     private static final int MOVE = 5; // pixels
     private static final int DELAY = 1000; // milliseconds
 
     private static final int DELAY_MOVE = 15; // milliseconds
 
+    /****************
+     *  CONSTRUCTOR  *
+     ****************/
     public Animation(LevelPanel panel) {
         this.levelPanel = panel;
     }
 
+    /**
+     * Method to run the animation
+     * It will move the label to the left or right depending on the user input
+     * It will also update the level of the game
+     */
     @Override
     public void run() {
         while (true) {
@@ -38,7 +57,10 @@ public class Animation extends Thread {
         }
     }
 
-    // Move the level label to the right or left
+    /**
+     * Method to move the level label to the left or right
+     * @param direction the direction to move the label
+     */
     private void moveLabel(String direction) {
         JLabel levelLabel = levelPanel.getLevelLabel();
 

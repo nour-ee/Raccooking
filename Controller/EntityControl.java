@@ -44,7 +44,6 @@ public class EntityControl extends MouseAdapter {
         ArrayList<JLabel> raccoonLabels = display.getRaccoonLabels();
 
         if (source == bakerLabel) { // Verify if the click comes from the baker label
-            System.out.println("Baker clicked!");
             setAllNonVisible();
             bkPanel.setBounds(Display.FRAME_W, 0, BakerPanel.WIDTH, BakerPanel.HEIGHT);
             bkPanel.requestFocus();
@@ -54,7 +53,6 @@ public class EntityControl extends MouseAdapter {
             for(int i =0; i<raccoonLabels.size();i++){
                 RaccoonPanel rc = display.getRaccoonPanels().get(i);
                 if(source == raccoonLabels.get(i)){
-                    System.out.println("Raccoon clicked!");
                     bkPanel.setVisible(false);
                     setNonVisible(i);
                     rc.setBounds(Display.FRAME_W, 0, RaccoonPanel.WIDTH, RaccoonPanel.HEIGHT); // Position the panel off-screen to the right

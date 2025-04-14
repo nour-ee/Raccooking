@@ -3,7 +3,11 @@ package Model;
 import java.util.HashMap;
 
 import Model.Threads.Cooking;
-
+/**
+ * Class to manage the baked goods
+ * It will manage the state of the goods and the time it takes to cook it
+ * It will also manage the price of the goods
+ */
 public class BakedGoods {
     // Enum to represent the state of the bread
     public enum State {
@@ -20,7 +24,6 @@ public class BakedGoods {
     protected int  t_burnt;
     private int price;//selling price of a bread
 
-    //ingredients necessary to bake this thing
 
 
     /****************

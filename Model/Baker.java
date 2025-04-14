@@ -22,8 +22,6 @@ public class Baker extends Entity {
      ****************/
     public Tile getPosition() { return position; }
     public int getMoney() { return money; }
-    public int getSoldBread() { return soldBread; }
-    public Tile getTile() { return position; }
     public HashMap<String, Integer> getRessources() { return ressources; }
     public Bakery getBakery() { return bakery; }
 
@@ -35,8 +33,6 @@ public class Baker extends Entity {
         this.position = c;
         c.BakerArrived();
         this.money = 50;
-        //this.ressources = new int[4];
-        //for(int i = 0; i<4; i++) ressources[i] = 10;
         this.ressources = new HashMap<>();
         ressources.put("flour", 5); ressources.put("egg", 5);
         ressources.put("yeast", 5); ressources.put("butter", 5);
@@ -70,7 +66,6 @@ public class Baker extends Entity {
             for(Raccoon r : bakery.raccoonsNextTo(c)){
                 r.set_on_the_run(true);
             }
-            System.out.println("Position du joueur : "+position.getX()+" "+position.getY());
         }
     }
 
@@ -108,6 +103,11 @@ public class Baker extends Entity {
         }
     }
 
+    /**
+     * Method to check if the baker can bake a certain recipe
+     * @param recipe the recipe to check
+     * @return true if the baker can bake the recipe, false otherwise
+     */
     public boolean canBake(HashMap<String, Integer> recipe) {
         // Check if the ingredients contain the required amounts
         for (String ingredient : recipe.keySet()) {
@@ -118,12 +118,14 @@ public class Baker extends Entity {
         return true;
     }
 
+/**
+     * Method to spend the ressources
+     * @param recipe the recipe to spend
+     */
     public void spendRessources(HashMap<String, Integer> recipe){
         for (String ingredient : recipe.keySet()) {
             ressources.put(ingredient, ressources.get(ingredient) - recipe.get(ingredient));
             System.out.println("Ressource "+ingredient+" : "+ressources.get(ingredient));
         }
     }
-
-
 }

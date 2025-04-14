@@ -3,8 +3,16 @@ package Model;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.random.RandomGenerator;
-
+/**
+ * Class that represents the raccoon
+ * It will manage the position of the raccoon
+ * and the number of bread , croissant and brioche it has stolen
+ * It will also manage the age of the raccoon
+ */
 public class Raccoon extends Entity {
+    /****************
+     *  CONSTANTS   *
+     ****************/
     public static int MAX_AGE = 50;
     /****************
      *  ATTRIBUTES  *
@@ -15,7 +23,10 @@ public class Raccoon extends Entity {
     private int nb_croissant; // number of croissant stolen by the raccoon
     private int nb_brioche; // number of brioche stolen by the raccoon
     private boolean on_the_run = false; // if the baker is within a certain radius, making the raccoon run away
-    
+
+    /****************
+     *    GETTERS   *
+     ****************/
     public int getAge() {
         return age;
     }
@@ -209,6 +220,4 @@ public class Raccoon extends Entity {
             return randomNeighbour();
         }
     }
-
-
 }

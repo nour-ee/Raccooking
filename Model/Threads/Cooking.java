@@ -2,7 +2,10 @@ package Model.Threads;
 
 
 import Model.BakedGoods;
-
+/**
+ * Class to manage the cooking of the goods
+ * It will cook the goods and set its state
+ */
 public class Cooking extends Thread{
     private BakedGoods bakedGoods;
 
@@ -20,7 +23,6 @@ public class Cooking extends Thread{
     /****************
      *   METHODS    *
      ****************/
-
     public void in(){
         out = true;
     }
@@ -37,16 +39,12 @@ public class Cooking extends Thread{
 
             }
             if (bakedGoods.getTime() == bakedGoods.getT_cooked()) {
-                System.out.println("Bread is cooked");
                 bakedGoods.setState(BakedGoods.State.COOKED);
             } else if (bakedGoods.getTime() == bakedGoods.getT_burnt()) {
-                System.out.println("Bread is burnt");
                 bakedGoods.setState(BakedGoods.State.BURNT);
             }
             bakedGoods.incrTime(); 
         }
     }
-
-
 
 }

@@ -6,8 +6,15 @@ import javax.swing.JLabel;
 import Model.Bakery;
 import Model.Raccoon;
 import Model.Tile;
-
+/**
+ * Class to manage the raccoon movement
+ * It will move the raccoons and increment their age
+ **/
 public class RaccoonMovement extends Thread {
+
+    /****************
+     *  ATTRIBUTES  *
+     ****************/
     public static final int DELAY_RACCOONMOVEMENT = 1500;
     private Bakery map;
     private ArrayList<JLabel> raccoonLabels;

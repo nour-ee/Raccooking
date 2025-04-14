@@ -60,7 +60,6 @@ public class Bakery {
 
 
             file.nextLine();
-            //CaseTraversable[] var6 = new CaseTraversable[1];
             this.map = new Tile[BAKERY_H][BAKERY_W];
             this.raccoons= new Raccoon[racoonsNb];
             this.ovens = new ArrayList<>();
@@ -88,7 +87,6 @@ public class Bakery {
                             Raccoon raccoon = new Raccoon(t, this);
                             raccoon.setAge(r);
                             this.raccoons[r]=raccoon;
-                            System.out.println("Raccoon "+r+" created at "+i+" "+j);
                             r++;
                             break;
                         case 'S':
@@ -263,11 +261,9 @@ public class Bakery {
         int money=player.getMoney();
         if(money>=GOAL){
             endOfGame = true;
-            System.out.println("You won!");
         }
         else if (money<=0 && allOvensEmpty()){
             endOfGame = true;
-           System.out.println("You lost!");
         }
     }
 }

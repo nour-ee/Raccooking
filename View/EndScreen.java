@@ -4,7 +4,11 @@ import Model.Bakery;
 
 import javax.swing.*;
 import java.awt.*;
-
+/**
+ * Class to manage the end of the game
+ * It will create the frame and the buttons
+ * It will also manage the sound of the game
+ */
 public class EndScreen extends JFrame {
 
     /****************
@@ -28,7 +32,6 @@ public class EndScreen extends JFrame {
         bakery.getPlayer();
         this.GOAL = Bakery.GOAL;
 
-        System.out.println("GOAL : " + GOAL);
 
         this.display.setVisible(false);
 
@@ -102,7 +105,10 @@ public class EndScreen extends JFrame {
 
         setVisible(true);
     }
-
+    /** Method to create the background image
+     * @param name the name of the image
+     * @return the image icon
+     */
     private ImageIcon createBackgroundImage(String name) {
         ImageIcon icon = new ImageIcon(getClass().getResource("/img/"+name+".png"));
         Image img = icon.getImage();

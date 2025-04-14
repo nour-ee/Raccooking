@@ -102,7 +102,6 @@ public class BakerControl implements ActionListener {
                 // Action to do if the user click on OK
                 if (result == JOptionPane.OK_OPTION) {
                     for (int i = 0; i < checkBoxes.length; i++) {
-                    //for (JCheckBox checkBox : checkBoxes) {
                         if (checkBoxes[i].isSelected()) {
                             bakery.getPlayer().buy(checkBoxes[i].getText(), (Integer) spinners[i].getValue());
                         }
@@ -111,7 +110,10 @@ public class BakerControl implements ActionListener {
                 ;break;}
         }
     }
-
+/**
+     * Method to bake a type of bread
+     * @param type the type of bread to bake
+     */
 public void bake(String type){
     HashMap<String, Integer> recipe= BakedGoods.getRecipe(type);
     Baker b= bakery.getPlayer();
@@ -123,7 +125,7 @@ public void bake(String type){
         }
         else{ System.out.println("No free oven"); }
     }
-    else{System.out.println("Not enough ressources to bake bread");}
+    else{System.out.println("Not enough ressources to bake it");}
 }
 
 }

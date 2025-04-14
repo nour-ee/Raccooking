@@ -2,10 +2,20 @@ package Model;
 
 import java.util.HashMap;
 
-
+/**
+ * Class to manage the croissant
+ * It will manage the state of the croissant and the time it takes to cook it
+ * It will also manage the price of the croissant and the recipe
+ */
 public class Croissant extends BakedGoods{
-
+    /*************
+     * CONSTANTS
+     ************/
     public static final HashMap<String, Integer> RECIPE=Croissant.init();
+
+    /*************
+     * CONSTRUCTOR
+     *************/
     public Croissant () {
         // A croissant sells for 28 euros
         // It cooks for 12 seconds
@@ -14,10 +24,18 @@ public class Croissant extends BakedGoods{
         super(28, 12, 30);
     }
 
+    /**
+     * Method to get the recipe of the croissant
+     * @return the recipe of the croissant
+     */
     public static HashMap<String, Integer> getRecipe() {
         return RECIPE;
     }
 
+    /**
+     * Method to initialize the recipe of the croissant
+     * @return the recipe of the croissant in a HashMap
+     */
     public static HashMap<String, Integer> init(){
         HashMap<String, Integer> recipe = new HashMap<>();
         recipe.put("flour", 1);

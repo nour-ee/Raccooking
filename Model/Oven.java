@@ -17,15 +17,6 @@ public class Oven extends Tile {
         return occupied;
     }
 
-    /****************
-    *  SETTERS   *
-    **************/
-    public void setBakedGoods(BakedGoods bakedGoods) {
-        this.bakedGoods = bakedGoods;
-    }
-    public void setOccupied(boolean occupied) {
-        this.occupied = occupied;
-    }
 
     /****************
     * CONSTRUCTOR   *

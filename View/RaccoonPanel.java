@@ -8,16 +8,24 @@ import java.awt.*;
 
     /** Panel for the raccoon */
     public class RaccoonPanel extends JPanel {
+        /****************
+         *  ATTRIBUTES  *
+         ****************/
         private JProgressBar progressBar; // can be used to manage the progress of the raccoon in the frame (time before disappearing)
         private Raccoon raccoon ; // the raccoon is it connected to
-
         private JLabel breadLabel;
         private JLabel croissantLabel;
         private JLabel briocheLabel;
 
+        /****************
+         *  CONSTANTS   *
+         ****************/
         public static final int HEIGHT = BakerPanel.HEIGHT;
         public static final int WIDTH = BakerPanel.WIDTH;
 
+        /****************
+         *  CONSTRUCTOR  *
+         ****************/
         public RaccoonPanel(Raccoon r) {
             this.setLayout(new BorderLayout());
             this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -41,10 +49,13 @@ import java.awt.*;
 
         }
 
-        public JProgressBar getProgressBar() {
-            return progressBar;
-        }
-
+        /****************
+         *  METHODS      *
+         ****************/
+        /**
+         * Method to create the info panel
+         * It will create the panel with the time and the goods
+         */
 
         private void createInfoPanel() {
             // === info Panel  ===
@@ -82,7 +93,10 @@ import java.awt.*;
             this.add(infoPanel, BorderLayout.CENTER);
 
         }
-
+        /**
+         * Method to create the goods panel
+         * It will create the panel with the goods of the raccoon
+         */
         public JPanel createGoodsPanel() {
             // === goods Panel  ===
             JPanel goodsPanel = new JPanel();
@@ -120,7 +134,11 @@ import java.awt.*;
 
             return goodsPanel;
         }
-
+        /**
+         * Method to create the background image
+         * @param name : name of the image
+         * @return : the image icon
+         */
         private ImageIcon createEntityIcon(String name , int width, int height) {
             ImageIcon icon = new ImageIcon(getClass().getResource("/img/" + name));
             // Resize the image
@@ -129,6 +147,9 @@ import java.awt.*;
             return new ImageIcon(newImg);
         }
 
+        /**
+         * Method to update the raccoon panel
+         */
         public void update() {
             // update the progress bar
             progressBar.setValue(Raccoon.MAX_AGE-this.raccoon.getAge());
@@ -136,7 +157,6 @@ import java.awt.*;
             breadLabel.setText(""+raccoon.getBread());
             croissantLabel.setText(""+raccoon.getCroissant());
             briocheLabel.setText(""+raccoon.getBrioche());
-
         }
     }
 

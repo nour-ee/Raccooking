@@ -6,7 +6,10 @@ import View.Threads.Redraw;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-
+/**
+ * Class to manage the display of the game
+ * It will create the frame and the panels
+ */
 public class Display extends JFrame {
 
     /****************
@@ -25,9 +28,7 @@ public class Display extends JFrame {
     private ArrayList<JLabel> raccoonLabels = new ArrayList<JLabel>();
     private ArrayList<RaccoonPanel> raccoonPanels = new ArrayList<RaccoonPanel>();
     private ArrayList<JLabel> breadLabels = new ArrayList<JLabel>();
-    public ArrayList<JLabel> getRaccoonJLabels() {
-        return raccoonLabels;
-    }
+
 
     //constants of our display
     public static final int TILE_SIZE = 60;   //size of a tile, in pixels (square tile)
@@ -90,7 +91,6 @@ public class Display extends JFrame {
     /****************
      *    GETTERS   *
      ****************/
-    //public RaccoonPanel getRaccoonPanel() {return rcPanel;}
     public JLabel getBakerLabel() {return bakerLabel;}
     public BakerPanel getBakerPanel() {return bkPanel;}
     public ArrayList<JLabel> getRaccoonLabels() {return raccoonLabels;}

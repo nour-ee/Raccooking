@@ -3,7 +3,7 @@ package Controller;
 import View.RaccoonPanel;
 
 
-/** Thread to update the progress bar */
+/** Thread to update the progress bar and goods stolen */
 public class RaccoonThread extends Thread{
     /****************
      *  ATTRIBUTES  *
@@ -26,7 +26,7 @@ public class RaccoonThread extends Thread{
     @Override
     public void run() {
         while (true) {
-            raccoonPanel.update();
+            raccoonPanel.update(); // Update the progress bar and the number of items stolen
             try {
                 Thread.sleep(1500);
             } catch (InterruptedException e) {

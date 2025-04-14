@@ -1,5 +1,10 @@
 package Model;
 
+/**
+ * Class to manage the tiles of the map
+ * It will manage the state of the tile and its position on the map
+ * It will also manage the entities on the tile (baker, racoon, oven)
+ */
 public class Tile {
 
     /****************
@@ -35,7 +40,6 @@ public class Tile {
     /*************************************
      *              SETTERS
      *************************************/
-    public void setAccessible(boolean b) { this.accessible = b; }
     public void setNextToBaker(boolean b) { this.nextToBaker = b; }
     public void BakerArrived() { this.hasBaker = true; }
     public void BakerHasLeft() { this.hasBaker = false; }

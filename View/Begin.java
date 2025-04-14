@@ -8,13 +8,16 @@ import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-
+/**
+ * Class to manage the beginning of the game
+ * It will create the frame and the buttons
+ * It will also manage the sound of the game
+ */
 public class Begin extends JFrame {
 
     public static boolean sound;
     public static Clip playSound; // sound when the game starts
 
-    //private JPanel panelButton; // panel for the button
     private LevelPanel levelPanel; // panel for the level
 
     public static final int BEGIN_W = 800;
@@ -60,6 +63,9 @@ public class Begin extends JFrame {
         createSoundButton(new ImageIcon("img/sound-on.png"),layeredPane);
         setVisible(true);
     }
+    /****************
+     *  METHODS   *
+     ****************/
 
     /** Create the play button*/
     public void createPlayButton(JLayeredPane layeredPane) {
@@ -70,7 +76,7 @@ public class Begin extends JFrame {
                 PlaySound();
             }
             Bakery b=new Bakery("levels/"+levelPanel.getCurrentLevel()+".txt");
-            new Display(b);
+            new Display(b); // create the display
 
         });
         playB.setBounds(BEGIN_W/2-50, 330, 100, 50);
@@ -93,6 +99,8 @@ public class Begin extends JFrame {
         soundB.setBounds(BEGIN_W/2-50, 400, 100, 50);
         layeredPane.add(soundB, Integer.valueOf(1));
     }
+
+    /** Method to play the sound when the game starts **/
     private void PlaySound() {
         File file = new File("sound/sound_play.wav");
         try {
