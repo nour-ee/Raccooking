@@ -43,7 +43,7 @@ public class Raccoon extends Entity {
     ********************/
     public Raccoon(Tile c, Bakery b){
         this.position = c;
-        c.RacoonArrived();
+        c.RaccoonArrived();
         this.age = 0;
         this.bakery = b;
         this.nb_bread = 0;
@@ -63,9 +63,9 @@ public class Raccoon extends Entity {
      */
     @Override
     public void move(Tile c){
-        this.position.RacoonHasLeft();
+        this.position.RaccoonHasLeft();
         this.position = c;
-        this.position.RacoonArrived();
+        this.position.RaccoonArrived();
         if(!c.isNextToBaker()){
             this.set_on_the_run(false);
         }

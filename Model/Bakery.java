@@ -130,7 +130,7 @@ public class Bakery {
     public void checkRaccoons(){
         for(int i = 0; i<raccoons.length; i++){
             if(raccoons[i].getAge() >= Raccoon.MAX_AGE){
-                raccoons[i].getPosition().RacoonHasLeft();
+                raccoons[i].getPosition().RaccoonHasLeft();
                 raccoons[i] = new Raccoon(map[this.RaccoonSpawn.getX()][this.RaccoonSpawn.getY()], this);
             }
         }

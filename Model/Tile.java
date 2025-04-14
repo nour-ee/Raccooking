@@ -26,7 +26,7 @@ public class Tile {
     public int getY() { return y; }
     public boolean isNextToBaker() { return nextToBaker; }
     public boolean hasBaker() { return hasBaker; }
-    public boolean hasRacoon() { return hasRacoon;}
+    public boolean hasRaccoon() { return hasRacoon;}
     public boolean hasOven() { //if(hasOven){System.out.println("oven found");}
         return hasOven; }
 
@@ -39,8 +39,8 @@ public class Tile {
     public void setNextToBaker(boolean b) { this.nextToBaker = b; }
     public void BakerArrived() { this.hasBaker = true; }
     public void BakerHasLeft() { this.hasBaker = false; }
-    public void RacoonArrived() { this.hasRacoon = true; }
-    public void RacoonHasLeft() { this.hasRacoon = false; }
+    public void RaccoonArrived() { this.hasRacoon = true; }
+    public void RaccoonHasLeft() { this.hasRacoon = false; }
 
     /*************************************
      *              CONSTRUCTORS
