@@ -29,7 +29,6 @@ public class RaccoonThread extends Thread{
     @Override
     public void run() {
         while (true) {
-            //SwingUtilities.invokeLater(() -> raccoonPanel.getProgressBar().setValue(Raccoon.MAX_AGE-this.raccoonPanel.getRaccoon().getAge()));
             raccoonPanel.update();
             try {
                 Thread.sleep(1500);
