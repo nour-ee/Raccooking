@@ -72,8 +72,7 @@ public class Begin extends JFrame {
             }
             Bakery b=new Bakery("levels/"+levelPanel.getCurrentLevel()+".txt");
             Display d=new Display(b);
-            EndGame end = new EndGame(d);
-            end.start();
+
         });
         playB.setBounds(BEGIN_W/2-50, 330, 100, 50);
         layeredPane.add(playB,Integer.valueOf(1));

@@ -1,8 +1,5 @@
 package View;
-import Controller.BakerMovement;
-import Controller.EntityControl;
-import Controller.RaccoonMovement;
-import Controller.RaccoonThread;
+import Controller.*;
 import Model.*;
 import View.Threads.Redraw;
 
@@ -48,6 +45,10 @@ public class Display extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         // Create a bakery
         this.bakery = bakery;
+
+        //Create EndScreen
+        EndGame end = new EndGame(this);
+        end.start();
 
         // Add the Bakerpanel to the Bakery frame
         bkPanel = new BakerPanel(bakery);

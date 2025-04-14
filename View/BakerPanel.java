@@ -356,6 +356,7 @@ public class BakerPanel extends JPanel {
 
         // create the progress bar for the time
         timeProgressBar = new JProgressBar(0, EndGame.TIME);
+        System.out.println(EndGame.TIME);
         timeProgressBar.setValue(EndGame.TIME);
         timeProgressBar.setStringPainted(true);
         timeProgressBar.setForeground(new Color(76, 175, 80));
