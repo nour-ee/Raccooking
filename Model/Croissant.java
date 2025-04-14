@@ -2,18 +2,16 @@ package Model;
 
 import java.util.HashMap;
 
-import Model.Threads.Cooking;
-
 
 public class Croissant extends BakedGoods{
 
     public static final HashMap<String, Integer> RECIPE=Croissant.init();
     public Croissant () {
-        // A croissant sells for 15 euros
+        // A croissant sells for 28 euros
         // It cooks for 12 seconds
         // It burns after 30 seconds
         // It needs 1 flour, 1 egg, 0 yeast and 2 butter
-        super(15, 12, 30);
+        super(28, 12, 30);
     }
 
     public static HashMap<String, Integer> getRecipe() {

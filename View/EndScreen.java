@@ -58,7 +58,7 @@ public class EndScreen extends JFrame {
         //if the player has more than bakery.GOAL money, show "You win !" else show "You don't have enough money... Game over :("
         if (money >= GOAL) {
             //add background image
-            JLabel winBackground = new JLabel(createBackgroundImage("win3"));
+            JLabel winBackground = new JLabel(createBackgroundImage("win"));
             winBackground.setBounds(0, 0, END_W, END_H);
             layeredPane.add(winBackground, Integer.valueOf(0));
             JLabel winLabel = new JLabel("YOU WIN !");

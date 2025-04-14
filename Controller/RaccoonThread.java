@@ -2,9 +2,6 @@ package Controller;
 
 import View.RaccoonPanel;
 
-import javax.swing.*;
-
-import Model.Raccoon;
 
 /** Thread to update the progress bar */
 public class RaccoonThread extends Thread{

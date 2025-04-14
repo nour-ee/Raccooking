@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.Bakery;
-import View.Begin;
 import View.Display;
 import View.EndScreen;
 

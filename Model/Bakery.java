@@ -33,6 +33,7 @@ public class Bakery {
     private Baker player;
     private Raccoon[] raccoons; //raccoons on the map
     private ArrayList<Oven> ovens; //ovens to cook breads
+    private Tile RaccoonSpawn; 
 
 
     /****************
@@ -90,6 +91,9 @@ public class Bakery {
                             System.out.println("Raccoon "+r+" created at "+i+" "+j);
                             r++;
                             break;
+                        case 'S':
+                            t = new Tile(i, j);
+                            this.RaccoonSpawn = t; 
                         default:
                             t = new Tile(i,j);
                     }
@@ -120,14 +124,14 @@ public class Bakery {
      ***************/
 
     /**
-     * Method that goes through the raccoons and checks if any have died (age>20)
+     * Method that goes through the raccoons and checks if any have died
      * If yes, removes them from the array and replaces them with a new raccoon
      */
     public void checkRaccoons(){
         for(int i = 0; i<raccoons.length; i++){
             if(raccoons[i].getAge() >= Raccoon.MAX_AGE){
                 raccoons[i].getPosition().RacoonHasLeft();
-                raccoons[i] = new Raccoon(map[BAKERY_H-1][BAKERY_W-1], this);
+                raccoons[i] = new Raccoon(map[this.RaccoonSpawn.getX()][this.RaccoonSpawn.getY()], this);
             }
         }
     }

@@ -27,7 +27,7 @@ public class RaccoonMovement extends Thread {
         while(true){
             Raccoon[] r = map.getRaccoons();
             for(int i =0; i<r.length; i++){
-                if(r[i].getAge() < Raccoon.MAX_AGE){
+                if(r[i].getAge() <= Raccoon.MAX_AGE){
                     Tile c = r[i].nextMove();
                     (new MovingAnimation(raccoonLabels.get(i), c, r[i].position)).start();
                     r[i].move(c);

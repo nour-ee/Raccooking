@@ -2,17 +2,15 @@ package Model;
 
 import java.util.HashMap;
 
-import Model.Threads.Cooking;
-
 public class Bread extends BakedGoods{
 
     public static final HashMap<String, Integer> RECIPE=Bread.init();
     public Bread () {
-        // A breads sells for 5 euros
+        // A breads sells for 20 euros
         // It cooks for 15 seconds
         // It burns after 30 seconds
         // It needs 1 flour, 0 egg, 1 yeast and 0 butter
-        super(5, 15, 30); 
+        super(20, 15, 30); 
         state=State.COOKING;
     }
 
