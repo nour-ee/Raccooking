@@ -97,10 +97,6 @@ public class Baker extends Entity {
                 if(money >= 3){ bought = true; ressources.put(s, ressources.get(s)+quantity); money-=4*quantity; } break;
         }
 
-        //Small debug message
-        if( bought ) {
-            System.out.println("Ressource "+s+" achetée : "+ressources.get(s));
-        }
     }
 
     /**
@@ -125,7 +121,6 @@ public class Baker extends Entity {
     public void spendRessources(HashMap<String, Integer> recipe){
         for (String ingredient : recipe.keySet()) {
             ressources.put(ingredient, ressources.get(ingredient) - recipe.get(ingredient));
-            System.out.println("Ressource "+ingredient+" : "+ressources.get(ingredient));
         }
     }
 }

@@ -181,7 +181,6 @@ public class Bakery {
     public void steal(Oven o, Raccoon r){
         if(o.isOccupied()){
             if(o.getBakedGoods().getState()== BakedGoods.State.COOKED ){
-                System.out.println("Raccoon "+r.getAge()+" stole a bread from oven ");
                 r.eatGoods(o);
             }
         }  

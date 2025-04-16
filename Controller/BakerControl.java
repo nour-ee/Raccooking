@@ -123,9 +123,7 @@ public void bake(String type){
             o.get().addBakedGoods(type);
             b.spendRessources(recipe);
         }
-        else{ System.out.println("No free oven"); }
     }
-    else{System.out.println("Not enough ressources to bake it");}
 }
 
 }
